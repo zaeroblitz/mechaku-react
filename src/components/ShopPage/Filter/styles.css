@@ -1,0 +1,59 @@
+.filter {
+  background-color: #fbfcfd;
+  border-radius: 20px;
+  box-shadow: 8px 8px 1px #e7eaf5;
+  padding: 30px 20px;
+}
+
+.filter-title h2 {
+  color: #333333;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 34px;
+  margin-bottom: 20px;
+}
+
+.filter-search input {
+  color: #333333;
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: 100%;
+  outline: none;
+  margin-bottom: 20px;
+  transition: all 0.4s;
+}
+
+.filter-search input:focus {
+  color: #333333;
+  background-color: #ffffff;
+  border: 3px solid #d7d7f8;
+  transition: all 0.4s;
+}
+
+.filter-list {
+  margin-bottom: 20px;
+}
+
+.filter-list:last-child {
+  margin-bottom: 0px;
+}
+
+.filter-list h5 {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.filter-list .filter-item input {
+  margin-right: 10px;
+}
+
+.filter-list .filter-item label {
+  color: #7e81a2;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+}

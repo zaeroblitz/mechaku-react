@@ -5,12 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from "./App";
 import "./index.css";
-import LandingPage from "./routes/LandingPage";
-import Shop from "./routes/Shop";
-import Categories from "./routes/Categories";
-import DetailPage from "./routes/DetailPage";
-import Discover from "./routes/Discover";
-import Workshop from "./routes/Workshop";
+import LandingPage from "./Pages/LandingPage";
+import Shop from "./Pages/Shop";
+import Categories from "./Pages/Categories";
+import DetailPage from "./Pages/DetailPage";
+import Discover from "./Pages/Discover";
+import Workshop from "./Pages/Workshop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,0 +1,39 @@
+.shop-keyword h2 {
+  color: #333333;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 34px;
+  margin-bottom: 20px;
+}
+
+.shop-item {
+  max-width: max-content;
+  margin-right: 40px;
+  padding: 20px 12px;
+  background-color: #f9faff;
+  border-radius: 25px;
+  box-shadow: 4px 4px 1px #e7eaf5;
+}
+
+.shop-item-content {
+  margin-top: 20px;
+}
+
+.shop-item-thumbnail img {
+  border-radius: 25px;
+}
+
+.shop-item-title {
+  color: #333;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.shop-item-price {
+  color: #333;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 0;
+}
