@@ -1,0 +1,62 @@
+.hero {
+  margin-top: 60px;
+}
+
+.hero-content {
+  margin-bottom: 32px;
+}
+
+.hero-content-title h2 {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 62px;
+}
+
+.hero-content-subtitle p {
+  color: #0c145a;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.hero-content-buttons .btn-get-started {
+  color: #fff;
+  background-color: #4d17e2;
+  margin-right: 2.5rem;
+  box-shadow: 6px 6px 1px #333;
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 500;
+  animation: ease-in;
+  transition: all 0.4s;
+}
+
+.hero-content-buttons .btn-get-started:hover {
+  background-color: #695de9;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}
+
+.hero-content-buttons .btn-learn-more {
+  color: #333;
+  background-color: #e7eaf5;
+  margin-right: 2.5rem;
+  box-shadow: 6px 6px 1px #333;
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 500;
+  animation: ease-in;
+  transition: all 0.4s;
+}
+
+.hero-content-buttons .btn-learn-more:hover {
+  background-color: #f3f3fd;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}

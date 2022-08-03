@@ -1,0 +1,39 @@
+.navbar {
+  margin-top: 12px;
+}
+
+.nav-link {
+  color: #7e8cac;
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-right: 30px;
+}
+
+.active {
+  color: #333;
+  font-weight: 500;
+  border-bottom: 3px solid #333;
+}
+
+.btn-sign-in {
+  color: #fff;
+  background-color: #22c58b;
+  box-shadow: 6px 6px 1px #333;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 1.125rem;
+  font-family: "IBM Plex Mono";
+  animation: ease-in;
+  transition: all 0.4s;
+}
+
+.btn-sign-in:hover {
+  color: #fff;
+  background-color: #139f6d;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}

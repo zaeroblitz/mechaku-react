@@ -1,0 +1,43 @@
+.learn-more {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.learn-more-title h2 {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 48px;
+}
+
+.learn-more-step {
+  margin-top: 2rem;
+}
+
+.step-card {
+  background: #f9faff;
+  border-radius: 26px;
+  padding: 30px;
+  box-shadow: 12px 12px 1px #f3f7fe;
+}
+
+.step-item-icon {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+
+.step-item-title {
+  color: #0c145a;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+  margin-top: 30px;
+}
+
+.step-item-description {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+}

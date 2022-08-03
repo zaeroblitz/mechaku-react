@@ -1,0 +1,44 @@
+.story {
+  margin-bottom: 100px;
+}
+
+.story-cover img {
+  border-radius: 50px;
+  box-shadow: 16px 16px 1px #333;
+}
+
+.story-description h5 {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  margin-bottom: 30px;
+}
+
+.story-description p {
+  color: #0c145a;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 30px;
+}
+
+.story-description a {
+  color: #333;
+  background-color: #e7eaf5;
+  margin-right: 2.5rem;
+  box-shadow: 6px 6px 1px #333;
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 500;
+  animation: ease-in;
+  transition: all 0.4s;
+}
+
+.story-description a:hover {
+  color: #333;
+  background-color: #f3f3fd;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}

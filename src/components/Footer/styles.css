@@ -1,0 +1,49 @@
+.footer {
+  color: #fff;
+  background-color: #161a2c;
+}
+
+.footer-list {
+  padding: 80px 60px 0px 60px;
+}
+
+.footer-mechaku .footer-mechaku-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
+
+.footer-mechaku .footer-mechaku-tagline {
+  color: #fff;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 30px;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-item h5 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.footer-item p {
+  color: #fff;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 6px;
+}
+
+.footer-copyright {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  padding-bottom: 60px;
+}
