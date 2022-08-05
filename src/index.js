@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from "./App";
 import "./index.css";
-import LandingPage from "./Pages/LandingPage";
 import Shop from "./Pages/Shop";
 import Categories from "./Pages/Categories";
 import DetailPage from "./Pages/DetailPage";
@@ -17,7 +16,6 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="home" element={<LandingPage />} />
       <Route path="shop" element={<Shop />} />
       <Route path="categories" element={<Categories />} />
       <Route path="detail" element={<DetailPage />} />

@@ -21,35 +21,30 @@ export default function Featured() {
         <div className="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 g-md-4">
           <FeaturedItem
             id={1}
-            key={1}
             thumbnail={featured_1}
             title="Astray Red Frame Kai"
             category="Gundam"
           />
           <FeaturedItem
             id={2}
-            key={2}
             thumbnail={featured_2}
             title="Zoids Berserk Fuhrer"
             category="Zoids"
           />
           <FeaturedItem
             id={3}
-            key={3}
             thumbnail={featured_3}
             title="Wargreymon Amplified"
             category="Digimon"
           />
           <FeaturedItem
             id={4}
-            key={4}
             thumbnail={featured_4}
             title="Victory Two Assault Buster"
             category="Gundam"
           />
           <FeaturedItem
             id={5}
-            key={5}
             thumbnail={featured_5}
             title="Epyon Ew"
             category="Gundam"

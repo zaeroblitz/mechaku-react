@@ -1,9 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ShopItemThumbnail from "../../../assets/images/shop-item.jpg";
 
 export default function ShopItem() {
+  const navigate = useNavigate();
   return (
-    <div className="shop-item d-flex flex-column">
+    <div
+      className="shop-item d-flex flex-column"
+      onClick={() => navigate("/detail")}
+    >
       <div className="shop-item-thumbnail">
         <img src={ShopItemThumbnail} className="img-fluid" alt="" />
       </div>

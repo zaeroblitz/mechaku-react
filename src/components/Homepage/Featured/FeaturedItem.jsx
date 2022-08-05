@@ -1,11 +1,11 @@
 import React from "react";
 import game_icon from "../../../assets/icons/game.svg";
 
-export default function FeaturedItem({ id, key, title, category, thumbnail }) {
+export default function FeaturedItem({ id, title, category, thumbnail }) {
   return (
     <div className="featured-item col">
       <div className="featured-item-thumbnail">
-        <img src={thumbnail} className="thumbnail img-fluid" alt="thumbnail" />
+        <img src={thumbnail} className="img-fluid" alt="thumbnail" />
       </div>
       <div className="featured-item-cover">
         <div className="d-flex flex-column justify-content-between h-100 p-2">

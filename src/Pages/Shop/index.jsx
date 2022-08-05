@@ -13,12 +13,8 @@ export default function Shop() {
       <Breadcrumb />
       <main className="container-fluid">
         <div className="shop-container row justify-content-between">
-          <div className="col-md-3">
-            <Filter />
-          </div>
-          <div className="col-md-9">
-            <ShopList />
-          </div>
+          <Filter />
+          <ShopList />
         </div>
       </main>
       <Footer />

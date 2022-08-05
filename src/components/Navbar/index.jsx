@@ -17,20 +17,20 @@ export default function Navbar({ current }) {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <Menu title="Home" route="/" isActive={current === "Home"} />
-              <Menu title="Shop" route="shop" isActive={current === "Shop"} />
+              <Menu title="Shop" route="/shop" isActive={current === "Shop"} />
               <Menu
                 title="Categories"
-                route="categories"
+                route="/categories"
                 isActive={current === "Categories"}
               />
               <Menu
                 title="Discover"
-                route="discover"
+                route="/discover"
                 isActive={current === "Discover"}
               />
               <Menu
                 title="Gunpla Tips"
-                route="workshop"
+                route="/workshop"
                 isActive={current === "Workshop"}
               />
               <Auth />
