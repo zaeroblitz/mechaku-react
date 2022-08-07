@@ -11,7 +11,7 @@ export default function ChoosePayment() {
       <p className="input-button-label">Choose Payment</p>
       <div className="input-button-group d-flex justify-content-evenly flex-wrap">
         <div className="radio-btn">
-          <input type="radio" name="courier" id="midtrans" />
+          <input type="radio" name="payment" id="midtrans" />
           <label className="radio-card" htmlFor="midtrans">
             <span>
               <BsCheck2 className="check-icon" />
@@ -21,7 +21,7 @@ export default function ChoosePayment() {
         </div>
 
         <div className="radio-btn">
-          <input type="radio" name="courier" id="master_card" />
+          <input type="radio" name="payment" id="master_card" />
           <label className="radio-card" htmlFor="master_card">
             <span>
               <BsCheck2 className="check-icon" />
@@ -31,7 +31,7 @@ export default function ChoosePayment() {
         </div>
 
         <div className="radio-btn btn-payment">
-          <input type="radio" name="courier" id="btc" />
+          <input type="radio" name="payment" id="btc" />
           <label className="radio-card" htmlFor="btc">
             <span>
               <BsCheck2 className="check-icon" />
@@ -41,7 +41,7 @@ export default function ChoosePayment() {
         </div>
 
         <div className="radio-btn btn-payment">
-          <input type="radio" name="courier" id="american_express" />
+          <input type="radio" name="payment" id="american_express" />
           <label className="radio-card" htmlFor="american_express">
             <span>
               <BsCheck2 className="check-icon" />

@@ -9,8 +9,7 @@ import Shop from "./Pages/Shop";
 import Categories from "./Pages/Categories";
 import DetailPage from "./Pages/DetailPage";
 import CartPage from "./Pages/CartPage";
-import Discover from "./Pages/Discover";
-import Workshop from "./Pages/Workshop";
+import SuccessPage from "./Pages/SuccessPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,9 +19,8 @@ root.render(
       <Route path="shop" element={<Shop />} />
       <Route path="categories" element={<Categories />} />
       <Route path="detail" element={<DetailPage />} />
-      <Route path="discover" element={<Discover />} />
-      <Route path="workshop" element={<Workshop />} />
       <Route path="cart" element={<CartPage />} />
+      <Route path="success" element={<SuccessPage />} />
       <Route
         path="*"
         element={
