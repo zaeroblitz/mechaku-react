@@ -1,4 +1,5 @@
 import React from "react";
+import Buttons from "./Buttons";
 import "./styles.css";
 
 export default function DetailContent() {
@@ -31,6 +32,7 @@ export default function DetailContent() {
             inventore libero nobis nam. Dolorum, suscipit?
           </p>
         </div>
+        <Buttons />
       </div>
     </div>
   );

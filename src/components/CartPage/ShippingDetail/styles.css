@@ -1,0 +1,107 @@
+.shipping-detail {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 8px 8px 1px #e7eaf5;
+}
+
+.shipping-detail .shipping-detail-title {
+  color: #333;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 34px;
+  margin-bottom: 30px;
+}
+
+.shipping-detail .input-text {
+  margin-bottom: 16px;
+}
+
+.shipping-detail .input-text-label {
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 8px;
+}
+
+.shipping-detail .input-text-form {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 12px 20px;
+}
+
+.input-button input {
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+.input-button .radio-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  width: 154px;
+  height: 80px;
+  transition: all 0.4s ease-in;
+  padding: 16px 12px;
+  border-radius: 12px;
+  border: 1px solid #e7eaf5;
+  transition: all 0.4s;
+}
+
+.input-button .radio-card .check-icon {
+  position: absolute;
+  color: #fff;
+  background-color: #4d17e2;
+  font-size: 20px;
+  border-radius: 50px;
+  padding: 3px;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.input-button input:checked + .radio-card {
+  border: 2px solid #6b63ac;
+  transition: all 0.4s;
+}
+
+.input-button input:checked + .radio-card .check-icon {
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.choose-payment {
+  margin-top: 16px;
+}
+
+.btn-payment {
+  margin-top: 12px;
+}
+
+.btn-checkout {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #4d17e2;
+  padding: 12px 0px;
+  border: 12px;
+  margin-top: 30px;
+  box-shadow: 6px 6px 1px #333;
+  transition: all 0.4s;
+}
+
+.btn-checkout:hover {
+  color: #fff;
+  background-color: #695de9;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}

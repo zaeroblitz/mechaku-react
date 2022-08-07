@@ -1,5 +1,5 @@
 .detail-content {
-  background-color: #fff;
+  background-color: #f9faff;
   border-radius: 24px;
   padding: 30px 60px;
   box-shadow: 12px 12px 1px #e7eaf5;
@@ -15,6 +15,7 @@
 
 .detail-content-price p {
   color: #22c58b;
+  font-family: "IBM Plex Mono";
   font-weight: 600;
   font-size: 24px;
   line-height: 31px;
@@ -50,4 +51,53 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;
+}
+
+.detail-buttons-container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.detail-buttons-container .btn-cart {
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #f3f3fd;
+  border: none;
+  border-radius: 8px;
+  width: 200px;
+  padding: 12px 0px;
+  box-shadow: 6px 6px 1px #333;
+  margin-right: 20px;
+  transition: all 0.4s;
+}
+
+.detail-buttons-container .btn-buy {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #4d17e2;
+  border: none;
+  border-radius: 8px;
+  width: 200px;
+  padding: 12px 0px;
+  box-shadow: 6px 6px 1px #333;
+  margin-left: 20px;
+  transition: all 0.4s;
+}
+
+.detail-buttons-container .btn-cart:hover {
+  background-color: #f3f3fd;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}
+
+.detail-buttons-container .btn-buy:hover {
+  background-color: #695de9;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
 }

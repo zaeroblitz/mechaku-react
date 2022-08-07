@@ -8,6 +8,7 @@ import "./index.css";
 import Shop from "./Pages/Shop";
 import Categories from "./Pages/Categories";
 import DetailPage from "./Pages/DetailPage";
+import CartPage from "./Pages/CartPage";
 import Discover from "./Pages/Discover";
 import Workshop from "./Pages/Workshop";
 
@@ -21,6 +22,7 @@ root.render(
       <Route path="detail" element={<DetailPage />} />
       <Route path="discover" element={<Discover />} />
       <Route path="workshop" element={<Workshop />} />
+      <Route path="cart" element={<CartPage />} />
       <Route
         path="*"
         element={

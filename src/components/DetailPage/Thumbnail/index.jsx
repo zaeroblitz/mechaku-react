@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import GallerySample1 from "../../../assets/images/gallery_sample_1.jpg";
-import GallerySample2 from "../../../assets/images/gallery_sample_2.jpg";
-import GallerySample3 from "../../../assets/images/gallery_sample_3.jpg";
-import GallerySample4 from "../../../assets/images/gallery_sample_4.jpg";
-import GallerySample5 from "../../../assets/images/gallery_sample_5.jpg";
+import GallerySample1 from "../../../assets/images/unicorn_gundam_1.jpg";
+import GallerySample2 from "../../../assets/images/unicorn_gundam_2.jpg";
+import GallerySample3 from "../../../assets/images/unicorn_gundam_3.jpg";
+import GallerySample4 from "../../../assets/images/unicorn_gundam_4.jpg";
+import GallerySample5 from "../../../assets/images/unicorn_gundam_5.jpg";
 import ThumbnailSample from "../../../assets/images/thumbnail_sample.jpg";
 import GalleryItem from "./GalleryItem";
 import "./styles.css";

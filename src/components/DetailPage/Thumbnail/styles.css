@@ -6,6 +6,7 @@
 .thumbnail .thumbnail-master img {
   object-fit: cover;
   border-radius: 24px;
+  height: 660px;
   margin-bottom: 30px;
 }
 
