@@ -1,0 +1,118 @@
+.sign-in-form {
+  width: 70%;
+}
+
+.sign-in-form .logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
+
+.sign-in-form .title {
+  margin-bottom: 40px;
+}
+
+.sign-in-form .title h2 {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  margin-bottom: 10px;
+}
+
+.sign-in-form .title p {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 0px;
+}
+
+.sign-in-form .form {
+  margin-bottom: 50px;
+}
+
+.sign-in-form .form .form-email {
+  margin-bottom: 30px;
+}
+
+.sign-in-form .form .form-email label,
+.sign-in-form .form .form-password label {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.sign-in-form .form .form-email input,
+.sign-in-form .form .form-password input {
+  color: #333;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+
+  background-color: #fff;
+  padding: 12px 24px;
+  border: 1px solid #0c145a;
+  border-radius: 100px;
+}
+
+.sign-in-form .form .form-email input::placeholder,
+.sign-in-form .form .form-password input::placeholder {
+  color: #ccd0dd;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.sign-in-form .buttons .btn-sign-in {
+  color: #fff;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+
+  border: none;
+  border-radius: 25px;
+  background-color: #4d17e2;
+  padding: 14px 0;
+  box-shadow: 6px 6px 1px #333;
+  margin-bottom: 30px;
+  transition: all 0.4s ease-in;
+}
+
+.sign-in-form .buttons .btn-sign-up {
+  color: #333;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+
+  border: none;
+  border-radius: 25px;
+  background-color: #e7eaf5;
+  padding: 14px 0;
+  box-shadow: 6px 6px 1px #333;
+  transition: all 0.4s ease-in;
+}
+
+.sign-in-form .buttons .btn-sign-in:hover,
+.sign-in-form .buttons .btn-sign-up:hover {
+  transform: translate(6px, 6px);
+  transition: all 0.4s ease-out;
+  box-shadow: none;
+}
+
+.sign-in-form .buttons .btn-sign-in:hover {
+  background-color: #695de9;
+}
+
+.sign-in-form .buttons .btn-sign-up:hover {
+  background-color: #f3f3fd;
+}

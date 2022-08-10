@@ -1,14 +1,15 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from "./App";
 import "./index.css";
-import Shop from "./Pages/Shop";
+import CartPage from "./Pages/CartPage";
 import Categories from "./Pages/Categories";
 import DetailPage from "./Pages/DetailPage";
-import CartPage from "./Pages/CartPage";
+import Shop from "./Pages/Shop";
+import SignInPage from "./Pages/SignInPage";
 import SuccessPage from "./Pages/SuccessPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -21,6 +22,7 @@ root.render(
       <Route path="detail" element={<DetailPage />} />
       <Route path="cart" element={<CartPage />} />
       <Route path="success" element={<SuccessPage />} />
+      <Route path="sign-in" element={<SignInPage />} />
       <Route
         path="*"
         element={
