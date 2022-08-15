@@ -5,8 +5,8 @@ import "./styles.css";
 
 export default function OverviewPage() {
   return (
-    <div className="member-overview w-100 h-100 row">
-      <Sidebar />
+    <div className="member-overview w-100 h-100 d-flex">
+      <Sidebar currentPage="overview" />
       <Overview />
     </div>
   );

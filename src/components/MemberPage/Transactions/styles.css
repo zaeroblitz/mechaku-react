@@ -1,0 +1,94 @@
+.transactions-content {
+  margin: 0 30px 0 60px;
+}
+
+.transactions-title {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.transactions-header {
+  margin-bottom: 30px;
+}
+
+.transactions-header p {
+  color: #7e8cac;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 6px;
+}
+
+.transactions-header h2 {
+  color: #0c145a;
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 55px;
+  margin-bottom: 0;
+}
+
+.transactions-status-selector {
+  margin-bottom: 40px;
+}
+
+.transactions-status-selector .status-selector {
+  background-color: #e7eaf5;
+  width: 120px;
+  margin-right: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  transition: all 0.4s;
+}
+
+.transactions-status-selector .status-selector:hover {
+  cursor: pointer;
+  background-color: #f3f3fd;
+  transition: all 0.4s;
+}
+
+.transactions-status-selector .status-selector p {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.transactions-status-selector .status-selector-active {
+  background-color: #2b2467;
+  transition: all 0.4s;
+}
+
+.transactions-status-selector .status-selector-active:hover {
+  cursor: pointer;
+  background-color: #564d9c;
+  transition: all 0.4s;
+}
+
+.transactions-status-selector .status-selector-active p {
+  color: #fff;
+}
+
+.btn-detail-transactions {
+  background-color: #e7eaf5;
+  width: 100px;
+  margin-right: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  transition: all 0.4s;
+}
+
+.btn-detail-transactions:hover {
+  cursor: pointer;
+  background-color: #f3f3fd;
+  transition: all 0.4s;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 
-export default function SidebarItem({ icon, label, isActive }) {
+export default function SidebarItem({ icon, label, isActive, href }) {
   const sidebarItemClass = cx({
     "sidebar-member-item": true,
     "sidebar-member-active": isActive,
@@ -9,7 +9,7 @@ export default function SidebarItem({ icon, label, isActive }) {
 
   return (
     <div className={sidebarItemClass}>
-      <a href="member" style={{ textDecoration: "none" }}>
+      <a href={href} style={{ textDecoration: "none" }}>
         <div className="d-flex">
           <div className="sidebar-member-item-icon">{icon}</div>
           <div className="sidebar-member-item-label">
