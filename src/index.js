@@ -8,6 +8,7 @@ import "./index.css";
 import CartPage from "./Pages/CartPage";
 import Categories from "./Pages/Categories";
 import DetailPage from "./Pages/DetailPage";
+import OverviewPage from "./Pages/MemberPage/OverviewPage";
 import Shop from "./Pages/Shop";
 import SignInPage from "./Pages/SignInPage";
 import SignUpPage from "./Pages/SignUpPage";
@@ -25,6 +26,9 @@ root.render(
       <Route path="success" element={<SuccessPage />} />
       <Route path="sign-in" element={<SignInPage />} />
       <Route path="sign-up" element={<SignUpPage />} />
+
+      <Route path="member" element={<OverviewPage />} />
+
       <Route
         path="*"
         element={

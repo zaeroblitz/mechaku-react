@@ -1,0 +1,139 @@
+.overview-content {
+  margin: 0 30px 0 60px;
+}
+
+.overview-title {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.overview-total-spent {
+  width: 360px;
+  background-color: #ffffff;
+  padding: 30px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
+  margin-bottom: 50px;
+}
+
+.total-spent-header {
+  margin-bottom: 24px;
+}
+
+.total-spent-header img {
+  width: 60px;
+  height: 60px;
+  margin-right: 12px;
+}
+
+.total-spent-header h4 {
+  color: #333333;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+}
+
+.total-spent-value p {
+  color: #7e8cac;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 2px;
+}
+
+.total-spent-value h4 {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.overview-transactions {
+  margin-bottom: 80px;
+}
+
+.overview-transactions h2 {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 29px;
+  margin-bottom: 20px;
+}
+
+.overview-transactions-table {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
+}
+
+.overview-transactions-table:hover {
+  cursor: pointer;
+}
+
+.overview-transactions-table thead {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.overview-transactions-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: none;
+  border-radius: 16px;
+  margin-right: 20px;
+}
+
+.overview-transactions-product .product-name {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 4px;
+}
+
+.overview-transactions-product .product-category {
+  color: #7e8cac;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 0;
+}
+
+.overview-transactions-table .product-grade,
+.product-price,
+.product-status-text {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 0px;
+}
+
+.product-status .product-status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+.product-status .pending {
+  background: #febd57;
+}
+
+.product-status .success {
+  background: #22c58b;
+}
+
+.product-status .failed {
+  background: #ff3eb2;
+}
