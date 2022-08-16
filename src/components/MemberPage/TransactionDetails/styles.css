@@ -1,0 +1,137 @@
+.transaction-detail-container {
+  margin: 0 30px 0 60px;
+}
+
+.transaction-detail-header h2 {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.transaction-detail-content {
+  background-color: #fff;
+  padding: 50px 30px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
+}
+
+.transaction-detail-content hr {
+  color: #e7eaf5;
+  margin: 30px 0;
+}
+
+.content-header-product .product-thumbnail {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 26px;
+  margin-right: 30px;
+}
+
+.content-header-product .product-name {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  margin-bottom: 8px;
+}
+
+.content-header-product .product-category {
+  color: #7e8cac;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 4px;
+}
+
+.content-header-product .product-grade {
+  color: #7e8cac;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 0;
+}
+
+.content-header-status-pending {
+  background-color: #ffeed3;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 50px;
+
+  color: #febd57;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.content-shipping {
+  margin-bottom: 30px;
+}
+
+.content-shipping-header,
+.content-payment-header {
+  color: #0c145a;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  margin-bottom: 24px;
+}
+
+.content-shipping-value,
+.content-payment-value {
+  margin-bottom: 20px;
+}
+
+.content-shipping-value .label,
+.content-payment-value .label {
+  color: #0c145a;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 0px;
+}
+
+.content-shipping-value .value,
+.content-payment-value .value {
+  color: #0c145a;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 0px;
+}
+
+.content-shipping-value .address {
+  text-align: end;
+  max-width: 320px;
+}
+
+.content-payment-value .price {
+  color: #22c58b;
+}
+
+.transaction-detail-content .btn-chat {
+  color: #fff;
+  background-color: #4d17e2;
+  padding: 14px 64px;
+  margin-right: 2.5rem;
+  box-shadow: 6px 6px 1px #333;
+  border: none;
+  border-radius: 24px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  animation: ease-in;
+  transition: all 0.4s;
+}
+
+.transaction-detail-content .btn-chat:hover {
+  background-color: #695de9;
+  box-shadow: none;
+  transform: translate(6px, 6px);
+  animation: ease-out;
+  transition: all 0.4s;
+}
