@@ -11,6 +11,7 @@ import DetailPage from "./Pages/DetailPage";
 import OverviewPage from "./Pages/MemberPage/OverviewPage";
 import TransactionsPage from "./Pages/MemberPage/TransactionsPage";
 import TransactionDetailsPage from "./Pages/MemberPage/TransactionDetailsPage";
+import SettingsPage from "./Pages/MemberPage/SettingsPage";
 import Shop from "./Pages/Shop";
 import SignInPage from "./Pages/SignInPage";
 import SignUpPage from "./Pages/SignUpPage";
@@ -30,6 +31,7 @@ root.render(
       <Route path="sign-up" element={<SignUpPage />} />
 
       <Route path="member" element={<OverviewPage />} />
+      <Route path="member/settings" element={<SettingsPage />} />
       <Route path="member/transactions" element={<TransactionsPage />} />
       <Route
         path="member/transactions/detail"
