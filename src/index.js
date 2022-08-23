@@ -21,11 +21,16 @@ import TransactionsPage from "pages/member/TransactionsPage";
 import TransactionDetailsPage from "pages/member/TransactionDetailsPage";
 
 // Admin Area
+import AdminOverviewPage from "pages/admin/OverviewPage";
+import AdminBrandsPage from "pages/admin/BrandPage";
+import AdminCreateBrandsPage from "pages/admin/BrandPage/create";
+import AdminEditBrandsPage from "pages/admin/BrandPage/edit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
+      {/* User Area */}
       <Route path="/" element={<App />} />
       <Route path="shop" element={<ShopPage />} />
       <Route path="cart" element={<CartPage />} />
@@ -34,6 +39,7 @@ root.render(
       <Route path="sign-up" element={<SignUpPage />} />
       <Route path="success" element={<SuccessPage />} />
 
+      {/* User - Member Area */}
       <Route path="member" element={<OverviewPage />} />
       <Route path="member/settings" element={<SettingsPage />} />
       <Route path="member/transactions" element={<TransactionsPage />} />
@@ -42,6 +48,13 @@ root.render(
         element={<TransactionDetailsPage />}
       />
 
+      {/* Admin Area */}
+      <Route path="admin" element={<AdminOverviewPage />} />
+      <Route path="admin/brands" element={<AdminBrandsPage />} />
+      <Route path="admin/brands/create" element={<AdminCreateBrandsPage />} />
+      <Route path="admin/brands/edit/:id" element={<AdminEditBrandsPage />} />
+
+      {/* 404  */}
       <Route
         path="*"
         element={
