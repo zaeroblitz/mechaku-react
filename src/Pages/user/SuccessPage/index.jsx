@@ -1,5 +1,5 @@
 import React from "react";
-import SuccessIcon from "../../assets/icons/success-icon.png";
+import SuccessIcon from "assets/icons/success-icon.png";
 import "./styles.css";
 
 export default function SuccessPage() {

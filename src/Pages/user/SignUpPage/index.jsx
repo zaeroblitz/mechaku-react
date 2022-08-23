@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/icons/logo.svg";
+import Logo from "assets/icons/logo.svg";
 import "./styles.css";
 
 export default function SignUpPage() {
