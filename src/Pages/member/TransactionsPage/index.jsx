@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "components/MemberPage/Sidebar";
-import TransactionComponents from "components/MemberPage/Transactions";
+import Sidebar from "components/member/Sidebar";
+import TransactionComponents from "components/member/Transactions";
 import "./styles.css";
 
 export default function TransactionsPage() {

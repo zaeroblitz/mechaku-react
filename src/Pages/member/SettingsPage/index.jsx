@@ -1,6 +1,6 @@
 import React from "react";
-import SettingsComponent from "components/MemberPage/SettingsPage";
-import Sidebar from "components/MemberPage/Sidebar";
+import SettingsComponent from "components/member/SettingsPage";
+import Sidebar from "components/member/Sidebar";
 import "./styles.css";
 
 export default function SettingsPage() {

@@ -1,6 +1,6 @@
 import React from "react";
-import Overview from "components/MemberPage/Overview";
-import Sidebar from "components/MemberPage/Sidebar";
+import Overview from "components/member/Overview";
+import Sidebar from "components/member/Sidebar";
 import "./styles.css";
 
 export default function OverviewPage() {
