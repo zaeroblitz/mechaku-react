@@ -28,6 +28,9 @@ import AdminEditBrandsPage from "pages/admin/BrandPage/edit";
 import AdminCategoriesPage from "pages/admin/CategoryPage";
 import AdminCreateCategoryPage from "pages/admin/CategoryPage/create";
 import AdminEditCategoryPage from "pages/admin/CategoryPage/edit";
+import AdminGradesPage from "pages/admin/GradePage";
+import AdminCreateGradePage from "pages/admin/GradePage/create";
+import AdminEditGradePage from "pages/admin/GradePage/edit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -65,6 +68,9 @@ root.render(
         path="admin/categories/edit/:id"
         element={<AdminEditCategoryPage />}
       />
+      <Route path="admin/grades" element={<AdminGradesPage />} />
+      <Route path="admin/grades/create" element={<AdminCreateGradePage />} />
+      <Route path="admin/grades/edit/:id" element={<AdminEditGradePage />} />
 
       {/* 404  */}
       <Route

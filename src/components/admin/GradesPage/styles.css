@@ -1,8 +1,8 @@
-.categories-page-container {
+.grades-page-container {
   margin: 0 30px 0 60px;
 }
 
-.categories-page-container .title {
+.grades-page-container .title {
   color: #0c145a;
   font-weight: 700;
   font-size: 36px;
@@ -11,7 +11,7 @@
   margin-bottom: 30px;
 }
 
-.categories-page-container .categories-data-wrapper {
+.grades-page-container .grades-data-wrapper {
   background-color: #ffffff;
   border: none;
   border-radius: 16px;
@@ -19,7 +19,7 @@
   box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
 }
 
-.categories-page-container .category-thumbnail {
+.grades-page-container .grade-thumbnail {
   display: block;
   width: fit-content;
   height: 80px;
@@ -28,14 +28,14 @@
   margin-bottom: 20px;
 }
 
-.categories-page-container .categories-list-thumbnail {
+.grades-page-container .grades-list-thumbnail {
   max-width: 180px;
   max-height: 60px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.categories-page-container .btn-add-category {
+.grades-page-container .btn-add-grade {
   background-color: #4d17e2;
   color: #fff;
   padding: 12px 24px;
@@ -45,14 +45,14 @@
   transition: all 0.4s;
 }
 
-.categories-page-container .btn-add-category:hover {
+.grades-page-container .btn-add-grade:hover {
   transform: translate(6px, 6px);
   box-shadow: none;
   transition: all 0.4s;
 }
 
-.categories-page-container .btn-edit,
-.categories-page-container .btn-delete {
+.grades-page-container .btn-edit,
+.grades-page-container .btn-delete {
   color: #333;
   padding: 8px 16px;
   border: none;
@@ -61,17 +61,17 @@
   transition: all 0.4s;
 }
 
-.categories-page-container .btn-edit:hover,
-.categories-page-container .btn-delete:hover {
+.grades-page-container .btn-edit:hover,
+.grades-page-container .btn-delete:hover {
   transform: translate(4px, 4px);
   box-shadow: none;
   transition: all 0.4s;
 }
 
-.categories-page-container .btn-edit {
+.grades-page-container .btn-edit {
   background-color: #ffca2c;
 }
 
-.categories-page-container .btn-delete {
+.grades-page-container .btn-delete {
   color: #fff;
 }

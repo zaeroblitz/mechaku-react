@@ -20,7 +20,7 @@ export default function BrandsPageComponents() {
           className="btn btn-primary btn-add-brands"
           onClick={onAddNewBrandClick}
         >
-          Add New Brands
+          Add New Brand
         </button>
       </div>
       <BrandsLists />

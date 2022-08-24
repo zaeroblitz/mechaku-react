@@ -39,7 +39,7 @@ export default function Sidebar({ currentPage }) {
             icon={<FiAward className="icon" />}
             label="Grades"
             isActive={currentPage === "grades"}
-            to="/admin/brands"
+            to="/admin/grades"
           />
           <SidebarItem
             icon={<FiShoppingBag className="icon" />}

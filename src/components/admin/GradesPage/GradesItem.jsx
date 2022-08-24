@@ -1,22 +1,22 @@
-import { deleteCategoryData } from "apis/category";
+import { deleteGradeData } from "apis/grades";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./styles.css";
 
-export default function CategoryItem({ id, no, name, thumbnail }) {
-  const THUMBNAIL_URL = `http://localhost:8000/uploads/categories/${thumbnail}`;
+export default function GradesItem({ id, no, name, thumbnail }) {
+  const GRADE_THUMBNAIL_URL = "http://localhost:8000/uploads/grades";
   const navigate = useNavigate();
 
   const onEditButtonClick = (e) => {
     e.preventDefault();
-    navigate(`/admin/categories/edit/${id}`);
+    navigate(`/admin/grades/edit/${id}`);
   };
 
   const onDeleteButtonClick = async (e) => {
     e.preventDefault();
 
-    const response = await deleteCategoryData(id);
+    const response = await deleteGradeData(id);
 
     if (response.status === "success") {
       Swal.fire({
@@ -26,9 +26,22 @@ export default function CategoryItem({ id, no, name, thumbnail }) {
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
+          navigate("/admin/grades");
           window.location.reload();
         }
       });
+    }
+  };
+
+  const showGradeThumbnail = () => {
+    if (thumbnail) {
+      return (
+        <img
+          src={`${GRADE_THUMBNAIL_URL}/${thumbnail}`}
+          className="grades-list-thumbnail"
+          alt=""
+        />
+      );
     }
   };
 
@@ -36,15 +49,10 @@ export default function CategoryItem({ id, no, name, thumbnail }) {
     <tr className="align-middle">
       <td>{no}</td>
       <td>{name}</td>
-      <td>
-        <img src={THUMBNAIL_URL} className="categories-list-thumbnail" alt="" />
-      </td>
+      <td>{showGradeThumbnail()}</td>
       <td>
         <div className="d-flex align-items-center justify-content-center">
-          <button
-            className="btn btn-warning btn-edit me-4"
-            onClick={onEditButtonClick}
-          >
+          <button className="btn btn-edit me-4" onClick={onEditButtonClick}>
             Edit
           </button>
           <button

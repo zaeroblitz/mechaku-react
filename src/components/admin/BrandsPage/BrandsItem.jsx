@@ -39,7 +39,7 @@ export default function BrandsItem({ id, no, name, thumbnail }) {
   };
 
   return (
-    <tr>
+    <tr className="align-middle">
       <td>{no}</td>
       <td>{name}</td>
       <td>

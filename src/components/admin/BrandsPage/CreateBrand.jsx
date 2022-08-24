@@ -63,7 +63,7 @@ export default function CreateBrandsComponents() {
 
   return (
     <div className="brands-page-container col-lg-8">
-      <h2 className="title">Create Brands</h2>
+      <h2 className="title">Add New Brand</h2>
       <button className="btn btn-primary btn-edit mb-4" onClick={onBackRoute}>
         Back
       </button>
@@ -92,7 +92,7 @@ export default function CreateBrandsComponents() {
             onChange={onThumbnailFileChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-add-brands">
           Save Brand
         </button>
       </form>

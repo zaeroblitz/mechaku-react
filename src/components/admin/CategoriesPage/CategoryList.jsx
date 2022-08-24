@@ -32,7 +32,7 @@ export default function CategoryList() {
     <div className="categories-data-wrapper">
       <table className="table table-borderless table-hover">
         <thead>
-          <tr>
+          <tr className="align-middle">
             <th>No.</th>
             <th>Name</th>
             <th>Thumbnail</th>
