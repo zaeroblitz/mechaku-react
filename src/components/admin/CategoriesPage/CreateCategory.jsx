@@ -1,35 +1,36 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-import { createBrand } from "apis/brands";
+import { postCategoryData } from "apis/category";
 import "./styles.css";
 
-export default function CreateBrandsComponents() {
+export default function CreateCategoryComponents() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
-
   const navigate = useNavigate();
 
-  const onThumbnailFileChange = (e) => {
-    const [file] = e.target.files;
-    setImagePreview(URL.createObjectURL(file));
-    setData({
-      ...data,
-      thumbnail: file,
-    });
-  };
-
-  const onBrandNameChange = (e) => {
+  const onInputNameChange = (e) => {
     setData({
       ...data,
       name: e.target.value,
     });
   };
 
-  const showBrandThumbnail = () => {
+  const onInputThumbnailChange = (e) => {
+    const [file] = e.target.files;
+
+    setImagePreview(URL.createObjectURL(file));
+
+    setData({
+      ...data,
+      thumbnail: file,
+    });
+  };
+
+  const showCategoryThumbnail = () => {
     if (imagePreview) {
-      return <img src={imagePreview} alt="" className="brand-thumbnail" />;
+      return <img src={imagePreview} className="category-thumbnail" alt="" />;
     }
   };
 
@@ -41,59 +42,60 @@ export default function CreateBrandsComponents() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const updateData = new FormData();
-    updateData.append("name", data.name);
-    updateData.append("thumbnail", data.thumbnail);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("thumbnail", data.thumbnail);
 
-    const response = await createBrand(updateData);
+    const response = await postCategoryData(formData);
 
     if (response.status === "success") {
       Swal.fire({
-        title: "Success!",
-        text: "Berhasil menambah data brand baru",
+        title: "Success",
+        text: "Berhasil menambah data category baru",
         icon: "success",
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/admin/brands");
+          navigate("/admin/categories");
         }
       });
     }
   };
 
   return (
-    <div className="brands-page-container col-lg-8">
-      <h2 className="title">Create Brands</h2>
-      <button className="btn btn-primary btn-edit mb-4" onClick={onBackRoute}>
+    <div className="categories-page-container col-lg-8">
+      <h2 className="title">Add New Category</h2>
+      <button className="btn btn-edit mb-4" onClick={onBackRoute}>
         Back
       </button>
       <form className="categories-data-wrapper" onSubmit={onSubmit}>
         <div className="form-group mb-4">
           <label htmlFor="name" className="form-label">
-            Brand Name
+            Category Name
           </label>
           <input
             type="text"
             className="form-control"
-            id="name"
-            placeholder="Enter the name brand"
+            placeholder="Enter category name"
             required
-            onChange={onBrandNameChange}
+            id="name"
+            onChange={onInputNameChange}
           />
         </div>
         <div className="form-group mb-4">
           <label htmlFor="thumbnail" className="form-label">
             Thumbnail
           </label>
-          {showBrandThumbnail()}
+          {showCategoryThumbnail()}
           <input
             type="file"
             className="form-control"
-            onChange={onThumbnailFileChange}
+            id="thumbnail"
+            onChange={onInputThumbnailChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Save Brand
+        <button type="submit" className="btn btn-add-category">
+          Create Category
         </button>
       </form>
     </div>

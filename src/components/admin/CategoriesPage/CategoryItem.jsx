@@ -1,28 +1,22 @@
+import { deleteCategoryData } from "apis/category";
 import React from "react";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "./styles.css";
 
-import { deleteBrand } from "apis/brands";
-
-export default function BrandsItem({ id, no, name, thumbnail }) {
+export default function CategoryItem({ id, no, name, thumbnail }) {
+  const THUMBNAIL_URL = `http://localhost:8000/uploads/categories/${thumbnail}`;
   const navigate = useNavigate();
 
-  const onHandleEdit = (e) => {
-    e.prenventDefault();
-    const brandsData = {
-      id: id,
-      no: no,
-      name: name,
-      thumbnail: thumbnail,
-    };
-
-    localStorage.setItem("edit-brands-data", JSON.stringify(brandsData));
-    navigate(`/admin/brands/edit/${id}`);
+  const onEditButtonClick = (e) => {
+    e.preventDefault();
+    navigate(`/admin/categories/edit/${id}`);
   };
 
-  const onHandleDelete = async (e) => {
-    e.prenventDefault();
-    const response = await deleteBrand(id);
+  const onDeleteButtonClick = async (e) => {
+    e.preventDefault();
+
+    const response = await deleteCategoryData(id);
 
     if (response.status === "success") {
       Swal.fire({
@@ -43,23 +37,19 @@ export default function BrandsItem({ id, no, name, thumbnail }) {
       <td>{no}</td>
       <td>{name}</td>
       <td>
-        <img
-          src={`http://localhost:8000/uploads/brands/${thumbnail}`}
-          className="brand-list-thumbnail"
-          alt=""
-        />
+        <img src={THUMBNAIL_URL} className="categories-list-thumbnail" alt="" />
       </td>
       <td>
         <div className="d-flex align-items-center justify-content-center">
           <button
             className="btn btn-warning btn-edit me-4"
-            onClick={() => onHandleEdit()}
+            onClick={onEditButtonClick}
           >
             Edit
           </button>
           <button
             className="btn btn-danger btn-delete"
-            onClick={() => onHandleDelete()}
+            onClick={onDeleteButtonClick}
           >
             Delete
           </button>

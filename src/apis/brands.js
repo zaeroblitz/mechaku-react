@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const BRAND_URL = "http://localhost:8000/api/brand";
+
 export async function createBrand(data) {
   try {
     const response = await axios({
       method: "post",
-      url: "http://localhost:8000/api/brand",
+      url: `${BRAND_URL}`,
       data: data,
       headers: {
         "Content-Type": `multipart/form-data`,
@@ -19,7 +21,7 @@ export async function createBrand(data) {
 
 export async function getBrands() {
   try {
-    const response = await axios.get("http://localhost:8000/api/brand");
+    const response = await axios.get(`${BRAND_URL}`);
 
     return response.data;
   } catch (err) {
@@ -31,7 +33,7 @@ export async function updateBrand(id, data) {
   try {
     const response = await axios({
       method: "put",
-      url: `http://localhost:8000/api/brand/${id}`,
+      url: `${BRAND_URL}/${id}`,
       data: data,
       headers: {
         "Content-Type": `multipart/form-data`,
@@ -48,7 +50,7 @@ export async function deleteBrand(id) {
   try {
     const response = await axios({
       method: "delete",
-      url: `http://localhost:8000/api/brand/${id}`,
+      url: `${BRAND_URL}/${id}`,
     });
 
     return response.data;

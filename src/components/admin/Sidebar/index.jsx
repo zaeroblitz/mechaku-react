@@ -33,7 +33,7 @@ export default function Sidebar({ currentPage }) {
             icon={<FiTrello className="icon" />}
             label="Categories"
             isActive={currentPage === "categories"}
-            to="/admin/brands"
+            to="/admin/categories"
           />
           <SidebarItem
             icon={<FiAward className="icon" />}
