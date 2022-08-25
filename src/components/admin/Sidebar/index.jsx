@@ -45,7 +45,7 @@ export default function Sidebar({ currentPage }) {
             icon={<FiShoppingBag className="icon" />}
             label="Products"
             isActive={currentPage === "products"}
-            to="/admin/brands"
+            to="/admin/products"
           />
           <SidebarItem
             icon={<FiUsers className="icon" />}
@@ -59,14 +59,12 @@ export default function Sidebar({ currentPage }) {
             isActive={currentPage === "transactions"}
             to="/admin/brands"
           />
-          <div className="logout">
-            <div className="d-flex">
-              <div className="sidebar-member-item-icon logout-icon">
-                <FiPower className="icon" />
-              </div>
-              <div className="sidebar-member-item-label logout-label">
-                <p>Logout</p>
-              </div>
+          <div className="d-flex">
+            <div className="sidebar-member-item-icon">
+              <FiPower className="icon" />
+            </div>
+            <div className="sidebar-member-item-label">
+              <p>Logout</p>
             </div>
           </div>
         </div>

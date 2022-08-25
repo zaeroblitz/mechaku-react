@@ -15,8 +15,6 @@ export default function GradesList() {
     getGradesData();
   }, []);
 
-  console.log(data);
-
   const renderedGradeList = () => {
     return data.map((grade, index) => (
       <GradesItem
