@@ -34,6 +34,7 @@ import AdminEditGradePage from "pages/admin/GradePage/edit";
 import AdminProductPage from "pages/admin/ProductPage";
 import AdminCreateProductPage from "pages/admin/ProductPage/create";
 import AdminEditProductPage from "pages/admin/ProductPage/edit";
+import AdminUserPage from "pages/admin/UserPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -83,6 +84,7 @@ root.render(
         path="admin/products/edit/:id"
         element={<AdminEditProductPage />}
       />
+      <Route path="admin/users" element={<AdminUserPage />} />
 
       {/* 404  */}
       <Route
