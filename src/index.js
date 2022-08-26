@@ -44,7 +44,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="shop" element={<ShopPage />} />
       <Route path="cart" element={<CartPage />} />
-      <Route path="detail" element={<DetailPage />} />
+      <Route path="detail/:id" element={<DetailPage />} />
       <Route path="sign-in" element={<SignInPage />} />
       <Route path="sign-up" element={<SignUpPage />} />
       <Route path="success" element={<SuccessPage />} />

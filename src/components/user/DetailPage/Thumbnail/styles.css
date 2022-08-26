@@ -4,9 +4,9 @@
 }
 
 .thumbnail .thumbnail-master img {
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 24px;
-  height: 660px;
+  max-height: 660px;
   margin-bottom: 30px;
 }
 

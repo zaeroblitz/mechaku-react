@@ -1,36 +1,45 @@
 import React from "react";
 import Buttons from "./Buttons";
+import NumberFormat from "react-number-format";
 import "./styles.css";
 
-export default function DetailContent() {
+export default function DetailContent({
+  name,
+  price,
+  category,
+  grade,
+  brand,
+  description,
+}) {
   return (
     <div className="col-md-6">
       <div className="detail-content">
         <div className="detail-content-title">
-          <h2>UNICORN GUNDAM PERFECTIBILITY</h2>
+          <h2>{name}</h2>
         </div>
         <div className="detail-content-price">
-          <p>IDR 12.000.000</p>
+          <p>
+            <NumberFormat
+              displayType="text"
+              prefix="Rp. "
+              decimalSeparator=","
+              thousandSeparator="."
+              value={price}
+            />
+          </p>
         </div>
         <div className="detail-content-category">
-          <p>Category: Gundam</p>
+          <p>Category: {category}</p>
         </div>
         <div className="detail-content-grade">
-          <p>Grade: Real Grade (RG)</p>
+          <p>Grade: {grade}</p>
+        </div>
+        <div className="detail-content-grade">
+          <p>Brand: {brand}</p>
         </div>
         <div className="detail-content-about">
           <p className="detail-content-about-title">About the product</p>
-          <p className="detail-content-about-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A et illo
-            neque, obcaecati adipisci tempore facilis voluptas quasi dicta.
-            Exercitationem nostrum eveniet odio. Ipsam, ut voluptatum sed
-            reiciendis accusantium error. <br />
-            <br />
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et
-            laboriosam veniam labore similique aspernatur voluptates, officiis
-            nihil placeat porro exercitationem soluta dolor, id, corrupti
-            inventore libero nobis nam. Dolorum, suscipit?
-          </p>
+          <p className="detail-content-about-description">{description}</p>
         </div>
         <Buttons />
       </div>

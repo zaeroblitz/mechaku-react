@@ -1,9 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import game_icon from "assets/icons/game.svg";
 
 export default function FeaturedItem({ id, title, category, thumbnail }) {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
-    <div className="featured-item col">
+    <div className="featured-item col" onClick={onClick}>
       <div className="featured-item-thumbnail">
         <img src={thumbnail} className="img-fluid" alt="thumbnail" />
       </div>

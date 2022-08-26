@@ -26,6 +26,7 @@
 .featured-item-thumbnail img {
   object-fit: cover;
   transition: all 0.4s;
+  height: 270px;
   border-radius: 1.625rem;
 }
 
