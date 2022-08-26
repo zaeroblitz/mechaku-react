@@ -11,3 +11,20 @@ export async function getAllUser() {
     console.log(err.message);
   }
 }
+
+export async function postUserData(data) {
+  try {
+    const response = await axios({
+      method: "post",
+      url: USER_URL,
+      data: data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}

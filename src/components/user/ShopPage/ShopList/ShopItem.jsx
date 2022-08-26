@@ -1,20 +1,36 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 import { useNavigate } from "react-router-dom";
-import ShopItemThumbnail from "assets/images/shop-item.jpg";
 
-export default function ShopItem() {
+export default function ShopItem({ id, name, thumbnail, price }) {
   const navigate = useNavigate();
+  const THUMBAIL_URL = "http://localhost:8000/uploads/products";
+
   return (
     <div
       className="shop-item d-flex flex-column"
-      onClick={() => navigate("/detail")}
+      onClick={() => navigate(`/detail/${id}`)}
     >
       <div className="shop-item-thumbnail">
-        <img src={ShopItemThumbnail} className="img-fluid" alt="" />
+        <img
+          src={`${THUMBAIL_URL}/${thumbnail}`}
+          className="img-fluid"
+          alt=""
+        />
       </div>
       <div className="shop-item-content">
-        <h5 className="shop-item-title">Astray Red</h5>
-        <p className="shop-item-price"> IDR 1.275K</p>
+        <div className="shop-item-title">
+          <p>{name}</p>
+        </div>
+        <p className="shop-item-price">
+          <NumberFormat
+            displayType="text"
+            prefix="Rp. "
+            value={price}
+            decimalSeparator=","
+            thousandSeparator="."
+          />
+        </p>
       </div>
     </div>
   );

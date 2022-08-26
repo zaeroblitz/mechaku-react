@@ -13,6 +13,7 @@ import DetailPage from "pages/user/DetailPage";
 import SignInPage from "pages/user/SignInPage";
 import SignUpPage from "pages/user/SignUpPage";
 import SuccessPage from "pages/user/SuccessPage";
+import SignUpPhotoPage from "pages/user/SignUpPhotoPage";
 
 // User Member/Setting Area
 import SettingsPage from "pages/member/SettingsPage";
@@ -47,6 +48,7 @@ root.render(
       <Route path="detail/:id" element={<DetailPage />} />
       <Route path="sign-in" element={<SignInPage />} />
       <Route path="sign-up" element={<SignUpPage />} />
+      <Route path="sign-up-photo" element={<SignUpPhotoPage />} />
       <Route path="success" element={<SuccessPage />} />
 
       {/* User - Member Area */}

@@ -24,10 +24,26 @@
 }
 
 .shop-item-thumbnail img {
+  width: 152px;
+  height: 168px;
   border-radius: 25px;
+  object-fit: cover;
+  background-position: center;
 }
 
 .shop-item-title {
+  display: -webkit-box;
+  max-width: 150px;
+  max-height: 46px;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  margin-bottom: 4px;
+}
+
+.shop-item-title p {
   color: #333;
   font-weight: 600;
   font-size: 18px;
@@ -36,6 +52,7 @@
 
 .shop-item-price {
   color: #333;
+  font-family: "IBM Plex Mono";
   font-weight: 400;
   font-size: 16px;
   line-height: 21px;
