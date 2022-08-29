@@ -94,7 +94,7 @@ export default function EditPaymentComponents() {
               type="text"
               id="name"
               className="form-control"
-              placeholder="Enter payemnt name..."
+              placeholder="Enter payment name..."
               required
               value={data.name}
               onChange={onInputNameChange}

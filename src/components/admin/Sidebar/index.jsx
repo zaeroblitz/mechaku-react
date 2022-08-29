@@ -77,8 +77,8 @@ export default function Sidebar({ currentPage }) {
           <SidebarItem
             icon={<FaOpencart className="icon" />}
             label="Transaction Status"
-            isActive={currentPage === "grades"}
-            to="/admin/grades"
+            isActive={currentPage === "transaction-status"}
+            to="/admin/transaction-status"
           />
           <div className="d-flex">
             <div className="sidebar-member-item-icon">

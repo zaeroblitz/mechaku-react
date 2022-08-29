@@ -46,8 +46,13 @@ import AdminEditCourierPage from "pages/admin/CourierPage/edit";
 
 // Payments
 import AdminPaymentPage from "pages/admin/PaymentPage";
-import AdminCreatePaymentrPage from "pages/admin/PaymentPage/create";
+import AdminCreatePaymentPage from "pages/admin/PaymentPage/create";
 import AdminEditPaymentPage from "pages/admin/PaymentPage/edit";
+
+// Transaction Status
+import AdminTransactionStatusPage from "pages/admin/TransactionStatusPage";
+import AdminCreateTransactionStatusPage from "pages/admin/TransactionStatusPage/create";
+import AdminEditTransactionStatusPage from "pages/admin/TransactionStatusPage/edit";
 
 // Products
 import AdminProductPage from "pages/admin/ProductPage";
@@ -119,11 +124,25 @@ root.render(
       <Route path="admin/payments" element={<AdminPaymentPage />} />
       <Route
         path="admin/payments/create"
-        element={<AdminCreatePaymentrPage />}
+        element={<AdminCreatePaymentPage />}
       />
       <Route
         path="admin/payments/edit/:id"
         element={<AdminEditPaymentPage />}
+      />
+
+      {/* Transaction Status */}
+      <Route
+        path="admin/transaction-status"
+        element={<AdminTransactionStatusPage />}
+      />
+      <Route
+        path="admin/transaction-status/create"
+        element={<AdminCreateTransactionStatusPage />}
+      />
+      <Route
+        path="admin/transaction-status/edit/:id"
+        element={<AdminEditTransactionStatusPage />}
       />
 
       {/* Products */}
