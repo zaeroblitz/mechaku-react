@@ -44,6 +44,11 @@ import AdminCouriersPage from "pages/admin/CourierPage";
 import AdminCreateCourierPage from "pages/admin/CourierPage/create";
 import AdminEditCourierPage from "pages/admin/CourierPage/edit";
 
+// Payments
+import AdminPaymentPage from "pages/admin/PaymentPage";
+import AdminCreatePaymentrPage from "pages/admin/PaymentPage/create";
+import AdminEditPaymentPage from "pages/admin/PaymentPage/edit";
+
 // Products
 import AdminProductPage from "pages/admin/ProductPage";
 import AdminCreateProductPage from "pages/admin/ProductPage/create";
@@ -108,6 +113,17 @@ root.render(
       <Route
         path="admin/couriers/edit/:id"
         element={<AdminEditCourierPage />}
+      />
+
+      {/* Courier */}
+      <Route path="admin/payments" element={<AdminPaymentPage />} />
+      <Route
+        path="admin/payments/create"
+        element={<AdminCreatePaymentrPage />}
+      />
+      <Route
+        path="admin/payments/edit/:id"
+        element={<AdminEditPaymentPage />}
       />
 
       {/* Products */}

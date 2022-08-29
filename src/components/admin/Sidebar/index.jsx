@@ -53,8 +53,8 @@ export default function Sidebar({ currentPage }) {
           <SidebarItem
             icon={<FiCreditCard className="icon" />}
             label="Payments"
-            isActive={currentPage === "grades"}
-            to="/admin/grades"
+            isActive={currentPage === "payments"}
+            to="/admin/payments"
           />
           <SidebarItem
             icon={<FiShoppingBag className="icon" />}
