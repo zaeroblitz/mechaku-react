@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
+import { postUserData } from "apis/user";
 import Logo from "assets/icons/logo.svg";
 import "./styles.css";
-import { postUserData } from "apis/user";
-import Swal from "sweetalert2";
 
 export default function SignUpPage() {
   const [data, setData] = useState({});

@@ -23,18 +23,33 @@ import TransactionDetailsPage from "pages/member/TransactionDetailsPage";
 
 // Admin Area
 import AdminOverviewPage from "pages/admin/OverviewPage";
+
+// Brands
 import AdminBrandsPage from "pages/admin/BrandPage";
 import AdminCreateBrandsPage from "pages/admin/BrandPage/create";
 import AdminEditBrandsPage from "pages/admin/BrandPage/edit";
+
+// Categories
 import AdminCategoriesPage from "pages/admin/CategoryPage";
 import AdminCreateCategoryPage from "pages/admin/CategoryPage/create";
 import AdminEditCategoryPage from "pages/admin/CategoryPage/edit";
+
+// Grades
 import AdminGradesPage from "pages/admin/GradePage";
 import AdminCreateGradePage from "pages/admin/GradePage/create";
 import AdminEditGradePage from "pages/admin/GradePage/edit";
+
+// Couriers
+import AdminCouriersPage from "pages/admin/CourierPage";
+import AdminCreateCourierPage from "pages/admin/CourierPage/create";
+import AdminEditCourierPage from "pages/admin/CourierPage/edit";
+
+// Products
 import AdminProductPage from "pages/admin/ProductPage";
 import AdminCreateProductPage from "pages/admin/ProductPage/create";
 import AdminEditProductPage from "pages/admin/ProductPage/edit";
+
+// Users
 import AdminUserPage from "pages/admin/UserPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -62,9 +77,13 @@ root.render(
 
       {/* Admin Area */}
       <Route path="admin" element={<AdminOverviewPage />} />
+
+      {/* Brands */}
       <Route path="admin/brands" element={<AdminBrandsPage />} />
       <Route path="admin/brands/create" element={<AdminCreateBrandsPage />} />
       <Route path="admin/brands/edit/:id" element={<AdminEditBrandsPage />} />
+
+      {/* Categories */}
       <Route path="admin/categories" element={<AdminCategoriesPage />} />
       <Route
         path="admin/categories/create"
@@ -74,9 +93,24 @@ root.render(
         path="admin/categories/edit/:id"
         element={<AdminEditCategoryPage />}
       />
+
+      {/* Grades */}
       <Route path="admin/grades" element={<AdminGradesPage />} />
       <Route path="admin/grades/create" element={<AdminCreateGradePage />} />
       <Route path="admin/grades/edit/:id" element={<AdminEditGradePage />} />
+
+      {/* Courier */}
+      <Route path="admin/couriers" element={<AdminCouriersPage />} />
+      <Route
+        path="admin/couriers/create"
+        element={<AdminCreateCourierPage />}
+      />
+      <Route
+        path="admin/couriers/edit/:id"
+        element={<AdminEditCourierPage />}
+      />
+
+      {/* Products */}
       <Route path="admin/products" element={<AdminProductPage />} />
       <Route
         path="admin/products/create"
@@ -86,6 +120,8 @@ root.render(
         path="admin/products/edit/:id"
         element={<AdminEditProductPage />}
       />
+
+      {/* Users */}
       <Route path="admin/users" element={<AdminUserPage />} />
 
       {/* 404  */}

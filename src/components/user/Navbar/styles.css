@@ -15,6 +15,31 @@
   border-bottom: 3px solid #333;
 }
 
+.navbar .dropdown {
+  padding-left: 30px;
+  border-left: 1px solid #e7eaf5;
+}
+
+.navbar .dropdown-toggle::after {
+  content: none;
+}
+
+.navbar .dropdown-menu {
+  border: none;
+  margin-top: 12px;
+  background: #ffffff;
+  box-shadow: -8px 8px 58px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  color: #7e8cac;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  cursor: pointer;
+}
+
 .navbar .btn-sign-in {
   color: #fff;
   background-color: #22c58b;

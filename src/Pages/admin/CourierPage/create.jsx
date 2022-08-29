@@ -4,13 +4,13 @@ import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 import Sidebar from "components/admin/Sidebar";
-import ProductPageComponents from "components/admin/ProductPage";
+import CreateCourierComponents from "components/admin/CourierPage/CreateCourier";
 import "./styles.css";
 
-export default function AdminProductPage() {
+export default function AdminCreateCourierPage() {
   const navigate = useNavigate();
   useEffect(() => {
-    document.title = "Mechaku Admin | Products";
+    document.title = "Mechaku Admin | Couriers";
     const tokenBase64 = Cookies.get("token");
 
     if (tokenBase64) {
@@ -26,9 +26,9 @@ export default function AdminProductPage() {
   }, [navigate]);
 
   return (
-    <div className="admin-products w-100 h-100 d-flex">
-      <Sidebar currentPage="products" />
-      <ProductPageComponents />
+    <div className="admin-courier-page w-100 h-100 d-flex">
+      <Sidebar currentPage="couriers" />
+      <CreateCourierComponents />
     </div>
   );
 }

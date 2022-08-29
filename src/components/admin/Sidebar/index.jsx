@@ -1,13 +1,16 @@
 import React from "react";
 import {
   FiTag,
+  FiTruck,
   FiUsers,
   FiAward,
   FiPower,
   FiTrello,
   FiCreditCard,
   FiShoppingBag,
+  FiShoppingCart,
 } from "react-icons/fi";
+import { FaOpencart } from "react-icons/fa";
 
 import SidebarItem from "./SidebarItem";
 import SampleAvatar from "../../../assets/images/pic.png";
@@ -42,6 +45,18 @@ export default function Sidebar({ currentPage }) {
             to="/admin/grades"
           />
           <SidebarItem
+            icon={<FiTruck className="icon" />}
+            label="Couriers"
+            isActive={currentPage === "couriers"}
+            to="/admin/couriers"
+          />
+          <SidebarItem
+            icon={<FiCreditCard className="icon" />}
+            label="Payments"
+            isActive={currentPage === "grades"}
+            to="/admin/grades"
+          />
+          <SidebarItem
             icon={<FiShoppingBag className="icon" />}
             label="Products"
             isActive={currentPage === "products"}
@@ -54,10 +69,16 @@ export default function Sidebar({ currentPage }) {
             to="/admin/users"
           />
           <SidebarItem
-            icon={<FiCreditCard className="icon" />}
+            icon={<FiShoppingCart className="icon" />}
             label="Transactions"
             isActive={currentPage === "transactions"}
             to="/admin/brands"
+          />
+          <SidebarItem
+            icon={<FaOpencart className="icon" />}
+            label="Transaction Status"
+            isActive={currentPage === "grades"}
+            to="/admin/grades"
           />
           <div className="d-flex">
             <div className="sidebar-member-item-icon">
