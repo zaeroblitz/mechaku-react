@@ -68,3 +68,29 @@
   line-height: 14px;
   margin-bottom: 0px;
 }
+
+.table-item .quantity-action {
+  margin-right: 12px;
+  border-radius: 12px;
+  color: #333;
+  background-color: #e7eaf5;
+  width: fit-content;
+}
+
+.table-item .quantity-action .icon {
+  width: 36px;
+}
+
+.table-item .quantity-action .icon:hover {
+  cursor: pointer;
+  background-color: #f3f3fd;
+}
+
+.table-item .quantity-action p {
+  margin-bottom: 0;
+  text-align: center;
+  width: 36px;
+  font-size: 18px;
+  color: #333;
+  background-color: #fff;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiTag,
   FiTruck,
@@ -11,20 +11,47 @@ import {
   FiShoppingCart,
 } from "react-icons/fi";
 import { FaOpencart } from "react-icons/fa";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 import SidebarItem from "./SidebarItem";
-import SampleAvatar from "../../../assets/images/pic.png";
 import "./styles.css";
 
 export default function Sidebar({ currentPage }) {
+  const [user, setUser] = useState({});
+  const tokenBase64 = Cookies.get("token");
+  const navigate = useNavigate();
+  const AVATAR_URL = "http://localhost:8000/uploads/users";
+
+  useEffect(() => {
+    if (tokenBase64) {
+      const token = atob(tokenBase64);
+      const jwt = jwtDecode(token);
+      setUser(jwt.user);
+    }
+  }, [tokenBase64]);
+
+  const onLogoutButtonClick = () => {
+    Cookies.remove("token");
+    navigate("/");
+  };
+
   return (
     <aside className="sidebar-member">
       <div className="sidebar-member-container">
-        <div className="sidebar-member-header text-center">
-          <img src={SampleAvatar} width="90" height="90" alt="" />
-          <h4>Zaero Blitz</h4>
-          <p>zaeroblitz@gmail.com</p>
-        </div>
+        {Object.keys(user).length && (
+          <div className="sidebar-member-header text-center">
+            <img
+              src={`${AVATAR_URL}/${user.avatar}`}
+              width="90"
+              height="90"
+              alt=""
+            />
+            <h4>{user.name}</h4>
+            <p>{user.email}</p>
+          </div>
+        )}
         <div className="sidebar-member-list">
           <SidebarItem
             icon={<FiTag className="icon" />}
@@ -80,7 +107,7 @@ export default function Sidebar({ currentPage }) {
             isActive={currentPage === "transaction-status"}
             to="/admin/transaction-status"
           />
-          <div className="d-flex">
+          <div className="d-flex" onClick={onLogoutButtonClick}>
             <div className="sidebar-member-item-icon">
               <FiPower className="icon" />
             </div>

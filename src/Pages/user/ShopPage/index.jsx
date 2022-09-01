@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "components/user/Footer";
 import Navbar from "components/user/Navbar";
 import Breadcrumb from "components/user/ShopPage/Breadcrumb";
@@ -7,6 +7,10 @@ import ShopList from "components/user/ShopPage/ShopList";
 import "./styles.css";
 
 export default function ShopPage() {
+  useEffect(() => {
+    document.title = "Mechaku | Shop";
+  }, []);
+
   return (
     <>
       <Navbar current="Shop" />

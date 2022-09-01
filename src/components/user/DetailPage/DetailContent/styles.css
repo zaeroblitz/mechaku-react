@@ -101,3 +101,28 @@
   animation: ease-out;
   transition: all 0.4s;
 }
+
+.detail-content-quantity .quantity-action {
+  margin-right: 12px;
+  border-radius: 12px;
+  color: #333;
+  background-color: #e7eaf5;
+}
+
+.detail-content-quantity .quantity-action .icon {
+  width: 36px;
+}
+
+.detail-content-quantity .quantity-action .icon:hover {
+  cursor: pointer;
+  background-color: #f3f3fd;
+}
+
+.detail-content-quantity .quantity-action p {
+  margin-bottom: 0;
+  text-align: center;
+  width: 36px;
+  font-size: 18px;
+  color: #333;
+  background-color: #fff;
+}

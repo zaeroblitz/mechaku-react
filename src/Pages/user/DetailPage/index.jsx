@@ -24,9 +24,11 @@ export default function DetailPage() {
     (async () => {
       getProductDetail();
     })();
+  }, [getProductDetail]);
 
+  useEffect(() => {
     if (productDetails) document.title = `Mechaku | ${productDetails.name}`;
-  }, [getProductDetail, productDetails]);
+  }, [productDetails]);
 
   return (
     <>
@@ -39,11 +41,13 @@ export default function DetailPage() {
               <>
                 <Thumbnail images={productDetails.details.images} />
                 <DetailContent
+                  id={productDetails._id}
                   name={productDetails.name}
                   price={productDetails.details.price}
                   category={productDetails.category.name}
                   grade={productDetails.grade.name}
                   brand={productDetails.brand.name}
+                  stock={productDetails.details.quantity}
                   description={productDetails.details.description}
                 />
               </>
