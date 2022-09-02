@@ -7,15 +7,17 @@ import App from "./App";
 import "./index.css";
 
 // User Area
+import Homepage from "pages/user/Homepage";
 import ShopPage from "pages/user/ShopPage";
 import CartPage from "pages/user/CartPage";
 import DetailPage from "pages/user/DetailPage";
 import SignInPage from "pages/user/SignInPage";
 import SignUpPage from "pages/user/SignUpPage";
-import SuccessPage from "pages/user/SuccessPage";
+import SuccessCheckoutPage from "pages/user/SuccessCheckoutPage";
 import SignUpPhotoPage from "pages/user/SignUpPhotoPage";
 
-// User Member/Setting Area
+// User Member Area
+import MemberPage from "pages/member/MemberPage";
 import SettingsPage from "pages/member/SettingsPage";
 import OverviewPage from "pages/member/OverviewPage";
 import TransactionsPage from "pages/member/TransactionsPage";
@@ -67,23 +69,27 @@ root.render(
   <BrowserRouter>
     <Routes>
       {/* User Area */}
-      <Route path="/" element={<App />} />
-      <Route path="shop" element={<ShopPage />} />
-      <Route path="cart" element={<CartPage />} />
-      <Route path="detail/:id" element={<DetailPage />} />
+      <Route path="/" element={<App />}>
+        <Route index element={<Homepage />} />
+        <Route path="shop" element={<ShopPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="detail/:id" element={<DetailPage />} />
+      </Route>
       <Route path="sign-in" element={<SignInPage />} />
       <Route path="sign-up" element={<SignUpPage />} />
       <Route path="sign-up-photo" element={<SignUpPhotoPage />} />
-      <Route path="success" element={<SuccessPage />} />
+      <Route path="success" element={<SuccessCheckoutPage />} />
 
       {/* User - Member Area */}
-      <Route path="member" element={<OverviewPage />} />
-      <Route path="member/settings" element={<SettingsPage />} />
-      <Route path="member/transactions" element={<TransactionsPage />} />
-      <Route
-        path="member/transactions/detail"
-        element={<TransactionDetailsPage />}
-      />
+      <Route path="member" element={<MemberPage />}>
+        <Route index element={<OverviewPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="transactions" element={<TransactionsPage />} />
+        <Route
+          path="transactions/detail"
+          element={<TransactionDetailsPage />}
+        />
+      </Route>
 
       {/* Admin Area */}
       <Route path="admin" element={<AdminOverviewPage />} />

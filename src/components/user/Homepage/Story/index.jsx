@@ -1,15 +1,17 @@
 import React from "react";
-import story_cover from "assets/images/story.jpg";
-import "./styles.css";
+import StoryIllustration from "assets/images/story.jpg";
+import "./styles.scss";
 
 export default function Story() {
   return (
-    <div className="story">
+    <section className="story">
       <div className="row align-items-center">
         <div className="col-md-7 d-none d-md-block">
-          <div className="story-cover">
-            <img src={story_cover} className="img-fluid" alt="" />
-          </div>
+          <img
+            src={StoryIllustration}
+            className="img-fluid story-illustration"
+            alt=""
+          />
         </div>
         <div className="col-12 col-md-5">
           <div className="story-description">
@@ -19,12 +21,12 @@ export default function Story() {
               facere consectetur pariatur eaque asperiores excepturi
               voluptatibus!
             </p>
-            <a className="btn btn-secondary px-4 py-2" href="/">
+            <a className="btn btn-secondary px-4 py-2" href="#learn-more">
               Read Story
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

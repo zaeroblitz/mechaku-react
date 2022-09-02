@@ -3,19 +3,19 @@ import StepItem from "./StepItem";
 import icon_1 from "assets/icons/icon.png";
 import icon_2 from "assets/icons/icon-1.png";
 import icon_3 from "assets/icons/icon-2.png";
-import "./styles.css";
+import "./styles.scss";
 
 export default function LearnMore() {
   return (
     <section className="learn-more" id="learn-more">
-      <div className="learn-more-title">
+      <div className="title">
         <h2 className="text-center">
           It's Really That
           <br />
           Easy to Get Your Mecha
         </h2>
       </div>
-      <div className="learn-more-step row gap-lg-0 gap-4">
+      <div className="items-container row gap-lg-0 gap-4">
         <StepItem
           key="1"
           icon={icon_1}

@@ -1,6 +1,6 @@
 import React from "react";
 import hero from "assets/images/hero.png";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Hero() {
   return (
@@ -20,7 +20,7 @@ export default function Hero() {
             <div className="row">
               <a
                 className="btn btn-get-started col-10 col-md-5 py-3"
-                href="#get-started"
+                href="#featured"
               >
                 Get Started
               </a>

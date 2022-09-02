@@ -1,13 +1,13 @@
-import React from "react";
+import { Helmet } from "react-helmet";
 import SettingsComponent from "components/member/SettingsPage";
-import Sidebar from "components/member/Sidebar";
-import "./styles.css";
 
 export default function SettingsPage() {
   return (
-    <div className="member-settings w-100 h-100 d-flex">
-      <Sidebar currentPage="settings" />
+    <>
+      <Helmet>
+        <title>Mechaku Member | Settings</title>
+      </Helmet>
       <SettingsComponent />
-    </div>
+    </>
   );
 }

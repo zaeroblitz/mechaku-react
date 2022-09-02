@@ -1,0 +1,50 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.story {
+    margin-bottom: 100px;
+
+    .story-illustration {
+        border-radius: 50px;
+        box-shadow: 16px 16px 1px $secondaryColor;
+    }
+
+    .story-description {
+        h5 {
+            color: $darkBlueColor;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            color: $darkBlueColor;
+            font-size: 18px;
+            line-height: 32px;
+            margin-bottom: 30px;
+        }
+
+        a {
+            color: $blackColor;
+            background-color: $secondaryColor;
+            margin-right: 2.5rem;
+            box-shadow: 6px 6px 1px $blackColor;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 500;
+            animation: ease-in;
+            transition: all 0.4s;
+
+            &:hover {
+                color: $blackColor;
+                background-color: $secondaryColorHover;
+                box-shadow: none;
+                transform: translate(6px, 6px);
+                animation: ease-out;
+                transition: all 0.4s;
+            }
+        }
+
+    }
+}

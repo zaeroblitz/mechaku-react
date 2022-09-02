@@ -1,0 +1,73 @@
+@import "../../../styles/_colors.scss";
+@import "../../../styles/global.scss";
+
+.navbar {
+  margin-top: 12px;
+
+  .nav-item {
+    .nav-link {
+      color: $greyColor;
+      font-size: 1.125rem;
+      font-weight: 400;
+      margin-right: 30px;
+    }
+
+    .active {
+      color: $blackColor;
+      font-weight: 500;
+      border-bottom: 3px solid #333;
+    }
+  }
+
+  .dropdown {
+    padding-left: 30px;
+    border-left: 1px solid $secondaryColor;
+
+    .dropdown-toggle {
+      &::after {
+        content: none;
+      }
+    }
+
+    .dropdown-menu {
+      border: none;
+      margin-top: 12px;
+      background: $whiteColor;
+      box-shadow: -8px 8px 58px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+
+      .dropdown-item {
+        color: #7e8cac;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $secondaryColor;
+          border-radius: 12px;
+        }
+      }
+    }
+  }
+
+  .btn-sign-in {
+    color: $whiteColor;
+    background-color: $primaryGreenColor;
+    box-shadow: 6px 6px 1px #333;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-size: 1.125rem;
+    font-family: $fontPlexMono;
+    animation: ease-in;
+    transition: all 0.4s;
+
+    &:hover {
+      color: $whiteColor;
+      background-color: $secondaryGreenColor;
+      box-shadow: none;
+      transform: translate(6px, 6px);
+      animation: ease-out;
+      transition: all 0.4s;
+    }
+  }
+}

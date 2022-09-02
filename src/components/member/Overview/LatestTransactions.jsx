@@ -1,4 +1,3 @@
-import React from "react";
 import ProductSample1 from "../../../assets/images/featured-1.jpg";
 import ProductSample2 from "../../../assets/images/featured-2.jpg";
 import ProductSample3 from "../../../assets/images/featured-3.jpg";
@@ -8,9 +7,9 @@ import TransactionItem from "./TransactionItem";
 
 export default function LatestTransactions() {
   return (
-    <div className="overview-transactions">
+    <section className="overview-transactions">
       <h2>Latest Transactions</h2>
-      <div className="overview-transactions-table">
+      <div className="table-transactions">
         <table className="table table-borderless table-hover">
           <thead>
             <tr>
@@ -73,6 +72,6 @@ export default function LatestTransactions() {
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   );
 }

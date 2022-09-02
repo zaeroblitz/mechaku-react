@@ -1,27 +1,20 @@
-import React, { useEffect } from "react";
-import Footer from "components/user/Footer";
-import Navbar from "components/user/Navbar";
-import Breadcrumb from "components/user/ShopPage/Breadcrumb";
+import { Helmet } from "react-helmet";
+
 import Filter from "components/user/ShopPage/Filter";
 import ShopList from "components/user/ShopPage/ShopList";
-import "./styles.css";
+import Breadcrumb from "components/user/ShopPage/Breadcrumb";
 
 export default function ShopPage() {
-  useEffect(() => {
-    document.title = "Mechaku | Shop";
-  }, []);
-
   return (
     <>
-      <Navbar current="Shop" />
+      <Helmet>
+        <title>Mechaku | Shop</title>
+      </Helmet>
       <Breadcrumb />
-      <main className="container-fluid">
-        <div className="shop-container row justify-content-between">
-          <Filter />
-          <ShopList />
-        </div>
-      </main>
-      <Footer />
+      <div className="container-fluid row justify-content-between my-5">
+        <Filter />
+        <ShopList />
+      </div>
     </>
   );
 }

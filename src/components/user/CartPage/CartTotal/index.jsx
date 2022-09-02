@@ -1,35 +1,35 @@
-import React from "react";
 import NumberFormat from "react-number-format";
 import { BsFillCheckSquareFill } from "react-icons/bs";
+import "./styles.scss";
 
 export default function CartTotal({ total, tax }) {
   return (
-    <div className="cart-total-container col-8">
+    <div className="cart-total col-5 justify-content-end">
       <div className="d-flex justify-content-between">
-        <p className="cart-total-title">Subtotals: </p>
+        <p className="label">Subtotals: </p>
         <NumberFormat
           displayType="text"
           prefix="Rp. "
           decimalSeparator=","
           thousandSeparator="."
           value={total}
-          className="cart-total-price"
+          className="price"
         />
       </div>
       <div className="d-flex justify-content-between">
-        <p className="cart-total-title">Totals (include tax): </p>
+        <p className="label">Totals (include tax): </p>
         <NumberFormat
           displayType="text"
           prefix="Rp. "
           decimalSeparator=","
           thousandSeparator="."
           value={total + tax}
-          className="cart-total-price"
+          className="price"
         />
       </div>
-      <div className="cart-total-description d-flex">
-        <BsFillCheckSquareFill className="cart-total-description-icon col-1" />
-        <p className="cart-total-description-text col-11">
+      <div className="description d-flex align-items-center">
+        <BsFillCheckSquareFill className="description-icon col-1" />
+        <p className="description-text col-10">
           Shipping & taxes calculated at checkout
         </p>
       </div>

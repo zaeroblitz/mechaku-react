@@ -1,6 +1,6 @@
 import React from "react";
 import StatItem from "./StatItem";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Stats() {
   return (

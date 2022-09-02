@@ -1,0 +1,50 @@
+@import '../../../styles/_colors.scss';
+@import '../../../styles/global.scss';
+
+.footer-user {
+    color: #fff;
+    background-color: #161a2c;
+    padding: 80px 60px 40px 60px;
+
+    .footer-mechaku {
+        .footer-mechaku-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-bottom: 30px;
+        }
+
+        .footer-mechaku-tagline {
+            color: #fff;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 32px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .footer-item {
+        display: flex;
+        flex-direction: column;
+
+        h5 {
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 32px;
+        }
+
+        p {
+            color: #fff;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 32px;
+            margin-bottom: 6px;
+        }
+    }
+
+    .footer-copyright {
+        margin-top: 50px;
+    }
+
+}

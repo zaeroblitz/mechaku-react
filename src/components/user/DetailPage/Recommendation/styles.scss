@@ -1,0 +1,50 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.recommendation {
+    padding: 100px 60px;
+    background-color: $cardColor;
+
+    .recommendation-title {
+        color: $blackColor;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 42px;
+        margin-bottom: 30px;
+    }
+
+    .recommendation-item {
+        width: fit-content;
+        padding: 30px 20px;
+        border-radius: 25px;
+        background-color: $whiteColor;
+        box-shadow: 12px 12px 1px $cardColorBorder;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .item-thumbnail {
+            object-fit: cover;
+            border-radius: 25px;
+            margin-bottom: 30px;
+        }
+
+        .item-name {
+            color: $blackColor;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 26px;
+            margin-bottom: 8px;
+        }
+
+        .item-price {
+            color: $primaryGreenColor;
+            font-family: $fontPlexMono;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 23px;
+            margin-bottom: 0;
+        }
+    }
+}

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function TransactionItem({
   thumbnail,
   name,
@@ -9,34 +7,32 @@ export default function TransactionItem({
   status,
 }) {
   return (
-    <tr className="align-middle">
-      <td>
+    <tr className="align-middle table-item">
+      <td className="product-header">
         <div className="d-flex align-items-center">
           <img
-            className="overview-transactions-thumbnail"
+            className="product-thumbnail"
             src={thumbnail}
             width="60"
             height="60"
             alt=""
           />
-          <div className="overview-transactions-product">
+          <div className="product-header-label">
             <p className="product-name">{name}</p>
             <p className="product-category">{category}</p>
           </div>
         </div>
       </td>
-      <td>
-        <p className="product-grade">{grade}</p>
+      <td className="product-grade">
+        <p>{grade}</p>
       </td>
-      <td>
-        <p className="product-price">{price}</p>
+      <td className="product-price">
+        <p>{price}</p>
       </td>
-      <td>
-        <div className="product-status d-flex align-items-center">
-          <span
-            className={`product-status-indicator ${status.toLowerCase()}`}
-          ></span>
-          <p className="product-status-text">{status}</p>
+      <td className="product-status">
+        <div className="d-flex align-items-center">
+          <span className={`status-indicator ${status.toLowerCase()}`}></span>
+          <p className="status-label">{status}</p>
         </div>
       </td>
     </tr>

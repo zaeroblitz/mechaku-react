@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Breadcrumb() {
   return (
@@ -9,9 +9,7 @@ export default function Breadcrumb() {
         <li className="breadcrumb-item">
           <Link to="/">Home</Link>
         </li>
-        <li className="breadcrumb-item active" aria-current="page">
-          Shop
-        </li>
+        <li className="breadcrumb-item active">Shop</li>
       </ol>
     </nav>
   );

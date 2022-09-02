@@ -1,12 +1,8 @@
 import { useEffect } from "react";
-import "./App.css";
+import { Outlet } from "react-router-dom";
 import Footer from "components/user/Footer";
-import Featured from "components/user/Homepage/Featured";
-import Hero from "components/user/Homepage/Hero";
-import LearnMore from "components/user/Homepage/LearnMore";
-import Stats from "components/user/Homepage/Stats";
-import Story from "components/user/Homepage/Story";
 import Navbar from "components/user/Navbar";
+import "./App.css";
 
 export default function App() {
   useEffect(() => {
@@ -15,13 +11,9 @@ export default function App() {
 
   return (
     <>
-      <Navbar current="Home" />
-      <main className="container-fluid">
-        <Hero />
-        <LearnMore />
-        <Featured />
-        <Stats />
-        <Story />
+      <Navbar page="Home" />
+      <main>
+        <Outlet />
       </main>
       <Footer />
     </>

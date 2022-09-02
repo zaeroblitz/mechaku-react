@@ -1,0 +1,84 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.cart-table {
+
+    .table-item {
+        .product-thumbnail {
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .product-name {
+            color: $blackColor;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 26px;
+            margin-bottom: 2px;
+        }
+
+        .product-category {
+            color: $greyColor;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 23px;
+        }
+
+        .product-price {
+            font-family: $fontPlexMono;
+            color: $blackColor;
+            font-size: 18px;
+            line-height: 25px;
+            margin-bottom: 0px;
+        }
+
+        .amount-buttons {
+            color: $blackColor;
+            width: fit-content;
+
+            .icon-container {
+                width: fit-content;
+                height: 32px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                background-color: $secondaryColor;
+                transition: all 0.4s;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $secondaryColorHover;
+                    transform: scale(1.1);
+                    transition: all 0.4s;
+                }
+            }
+
+            .icon {
+                width: 32px;
+            }
+
+            .value {
+                margin-bottom: 0;
+                text-align: center;
+                width: 36px;
+                font-size: 18px;
+                color: $blackColor;
+                background-color: $whiteColor;
+            }
+        }
+
+        .btn-remove {
+            color: $whiteColor;
+            border: none;
+            background-color: $primaryPinkColor;
+            transition: all 0.4s;
+
+            &:hover {
+                border: none;
+                background-color: $secondaryPinkColor;
+                transform: scale(1.05);
+                transition: all 0.4s;
+            }
+        }
+    }
+}

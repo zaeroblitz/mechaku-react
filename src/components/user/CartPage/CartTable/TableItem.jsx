@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import NumberFormat from "react-number-format";
-import { FiTrash2 } from "react-icons/fi";
-import { BiMinus, BiPlus } from "react-icons/bi";
-import { removeCartItem } from "apis/cart";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import { FiTrash2 } from "react-icons/fi";
+import NumberFormat from "react-number-format";
+import { BiMinus, BiPlus } from "react-icons/bi";
+
+import { removeCartItem } from "apis/cart";
 
 export default function TableItem({
   itemId,
@@ -61,34 +62,38 @@ export default function TableItem({
             src={`${THUMBNAIL_URL}/${thumbnail}`}
             width="90"
             height="90"
-            className="table-item-thumbnail me-3"
+            className="product-thumbnail me-3"
             alt=""
           />
           <div>
-            <p className="table-item-product-name">{name}</p>
-            <p className="table-item-product-category">{category}</p>
+            <p className="product-name">{name}</p>
+            <p className="product-category">{category}</p>
           </div>
         </div>
       </td>
-      <td className="text-center">
-        <div className="quantity-action d-flex align-items-center">
-          <BiMinus className="icon" onClick={handleMinIconClick} />
+      <td>
+        <div className="amount-buttons d-flex align-items-center">
+          <div className="icon-container" onClick={handleMinIconClick}>
+            <BiMinus className="icon" />
+          </div>
           <p className="value">{value}</p>
-          <BiPlus className="icon" onClick={handlePlusIconClick} />
+          <div className="icon-container" onClick={handlePlusIconClick}>
+            <BiPlus className="icon" />
+          </div>
         </div>
       </td>
-      <td className="text-center">
+      <td>
         <NumberFormat
           displayType="text"
           prefix="Rp."
           decimalSeparator=","
           thousandSeparator="."
           value={value > 1 ? value * price : price}
-          className="table-item-price"
+          className="product-price"
         />
       </td>
       <td className="text-center">
-        <button className="btn table-remove" onClick={handleRemoveItem}>
+        <button className="btn btn-remove" onClick={handleRemoveItem}>
           <FiTrash2 />
         </button>
       </td>

@@ -1,12 +1,13 @@
-import { addCartItem } from "apis/cart";
+import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BiMinus, BiPlus } from "react-icons/bi";
 import NumberFormat from "react-number-format";
-import Swal from "sweetalert2";
-import "./styles.css";
+import { BiMinus, BiPlus } from "react-icons/bi";
+
+import { addCartItem } from "apis/cart";
+import "./styles.scss";
 
 export default function DetailContent({
   id,
@@ -34,17 +35,6 @@ export default function DetailContent({
       setValue(value + 1);
     }
   };
-
-  useEffect(() => {
-    const tokenBase64 = Cookies.get("token");
-
-    if (tokenBase64) {
-      const convertToken = atob(tokenBase64);
-      const jwtToken = jwtDecode(convertToken);
-      setToken(convertToken);
-      setUserId(jwtToken.user.id);
-    }
-  }, []);
 
   const handleAddCartButton = async (e) => {
     e.preventDefault();
@@ -80,58 +70,52 @@ export default function DetailContent({
     }
   };
 
+  useEffect(() => {
+    const tokenBase64 = Cookies.get("token");
+
+    if (tokenBase64) {
+      const convertToken = atob(tokenBase64);
+      const jwtToken = jwtDecode(convertToken);
+      setToken(convertToken);
+      setUserId(jwtToken.user.id);
+    }
+  }, []);
+
   return (
-    <div className="col-md-6">
-      <div className="detail-content">
-        <div className="detail-content-title">
-          <h2>{name}</h2>
-        </div>
-        <div className="detail-content-price">
-          <p>
-            <NumberFormat
-              displayType="text"
-              prefix="Rp. "
-              decimalSeparator=","
-              thousandSeparator="."
-              value={price}
-            />
-          </p>
-        </div>
-        <div className="detail-content-category">
-          <p>Category: {category}</p>
-        </div>
-        <div className="detail-content-grade">
-          <p>Grade: {grade}</p>
-        </div>
-        <div className="detail-content-grade">
-          <p>Brand: {brand}</p>
-        </div>
-        <div className="detail-content-grade">
-          <p>Stock: {stock}</p>
-        </div>
-        <div className="detail-content-about">
-          <p className="detail-content-about-title">About the product</p>
-          <p className="detail-content-about-description">{description}</p>
-        </div>
-        <div className="detail-content-quantity d-flex align-items-center">
-          <div className="quantity-action d-flex align-items-center">
-            <BiMinus className="icon" onClick={handleMinIconClick} />
-            <p className="value">{value}</p>
-            <BiPlus className="icon" onClick={handlePlusIconClick} />
-          </div>
-          <div className="quantity-label">{stock} left</div>
-        </div>
-        <div className="detail-buttons-container">
-          <div className="d-flex justify-content-center">
-            <button className="btn btn-cart" onClick={handleAddCartButton}>
-              Add to Cart
-            </button>
-            <button className="btn btn-buy" href="/cart">
-              Buy Now
-            </button>
-          </div>
-        </div>
+    <section className="product-detail-card col-md-6">
+      <h2 className="product-name">{name}</h2>
+      <NumberFormat
+        displayType="text"
+        prefix="Rp. "
+        decimalSeparator=","
+        thousandSeparator="."
+        value={price}
+        className="product-price"
+      />
+      <p className="product-detail">Category: {category}</p>
+      <p className="product-detail">Grade: {grade}</p>
+      <p className="product-detail">Brand: {brand}</p>
+      <p className="product-detail">Stock: {stock}</p>
+      <div className="product-description">
+        <p className="title">About the product</p>
+        <p className="description">{description}</p>
       </div>
-    </div>
+      <div className="product-stock d-flex align-items-center">
+        <div className="stock-buttons d-flex align-items-center">
+          <BiMinus className="icon" onClick={handleMinIconClick} />
+          <p className="value">{value}</p>
+          <BiPlus className="icon" onClick={handlePlusIconClick} />
+        </div>
+        <div className="stock-label">{stock} left</div>
+      </div>
+      <div className="product-buttons d-flex justify-content-center">
+        <button className="btn btn-cart" onClick={handleAddCartButton}>
+          Add to Cart
+        </button>
+        <button className="btn btn-buy" href="/cart">
+          Buy Now
+        </button>
+      </div>
+    </section>
   );
 }

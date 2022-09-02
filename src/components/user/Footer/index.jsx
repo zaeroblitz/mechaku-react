@@ -1,11 +1,11 @@
 import React from "react";
 import logo from "assets/icons/logo_white.svg";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Footer() {
   return (
-    <div className="footer">
-      <div className="footer-list row">
+    <footer className="footer-user">
+      <div className="row">
         <div className="col-12 col-md-3 mt-3 mt-md-0">
           <div className="footer-mechaku">
             <img src={logo} className="footer-mechaku-logo" alt="" />
@@ -45,6 +45,6 @@ export default function Footer() {
       <p className="footer-copyright text-center">
         Copyright 2022. All Rights Reserved.
       </p>
-    </div>
+    </footer>
   );
 }

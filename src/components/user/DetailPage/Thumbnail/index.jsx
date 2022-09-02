@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GalleryItem from "./GalleryItem";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Thumbnail({ images }) {
   const IMAGE_URL = "http://localhost:8000/uploads/products";
@@ -31,15 +31,11 @@ export default function Thumbnail({ images }) {
   };
 
   return (
-    <div className="col-md-6 justify-content-center">
-      <div className="thumbnail">
-        <div className="thumbnail-master">
-          <img src={imageMaster} className="img-fluid" alt="" />
-        </div>
-        <div className="thumbnail-gallery">
-          <div className="row">{gallery.length && renderedGalleryItem()}</div>
-        </div>
+    <section className="thumbnail col-md-6 justify-content-center">
+      <img src={imageMaster} className="thumbnail-master img-fluid" alt="" />
+      <div className="thumbnail-gallery">
+        <div className="row">{gallery.length && renderedGalleryItem()}</div>
       </div>
-    </div>
+    </section>
   );
 }

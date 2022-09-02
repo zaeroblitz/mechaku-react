@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import FeaturedItem from "./FeaturedItem";
 import { getAllProducts } from "apis/products";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Featured() {
   const [featuredMechas, setFeaturedMechas] = useState([]);
@@ -33,15 +33,13 @@ export default function Featured() {
   };
 
   return (
-    <section className="featured">
-      <div className="featured-title">
-        <h2>
-          Our Featured
-          <br />
-          Mecha This Year
-        </h2>
-      </div>
-      <div className="featured-list">
+    <section className="featured" id="featured">
+      <h2 className="title">
+        Our Featured
+        <br />
+        Mecha This Year
+      </h2>
+      <div className="list">
         <div className="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 g-md-4">
           {featuredMechas && renderedFeaturedItems()}
         </div>

@@ -1,22 +1,20 @@
-import React from "react";
 import cx from "classnames";
+import { Link } from "react-router-dom";
 
 export default function SidebarItem({ icon, label, isActive, href }) {
   const sidebarItemClass = cx({
-    "sidebar-member-item": true,
-    "sidebar-member-active": isActive,
+    "nav-item": true,
+    "nav-active": isActive,
   });
 
   return (
     <div className={sidebarItemClass}>
-      <a href={href} style={{ textDecoration: "none" }}>
+      <Link to={href}>
         <div className="d-flex">
-          <div className="sidebar-member-item-icon">{icon}</div>
-          <div className="sidebar-member-item-label">
-            <p>{label}</p>
-          </div>
+          <div className="icon">{icon}</div>
+          <p className="label">{label}</p>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

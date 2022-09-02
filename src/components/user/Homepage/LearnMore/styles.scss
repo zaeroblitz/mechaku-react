@@ -1,0 +1,47 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.learn-more {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .title h2 {
+        color: $darkBlueColor;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 48px;
+    }
+
+    .items-container {
+        margin-top: 2rem;
+
+        .item {
+            background: $cardColor;
+            border-radius: 26px;
+            padding: 30px;
+            box-shadow: 12px 12px 1px $cardColorBorder;
+
+            .item-icon {
+                width: 5rem;
+                height: 5rem;
+                object-fit: cover;
+            }
+
+            .item-title {
+                color: $darkBlueColor;
+                font-weight: 600;
+                font-size: 22px;
+                line-height: 32px;
+                margin-top: 30px;
+            }
+
+            .item-description {
+                color: $darkBlueColor;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 32px;
+            }
+        }
+
+    }
+}

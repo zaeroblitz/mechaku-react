@@ -1,13 +1,13 @@
-import React from "react";
+import { Helmet } from "react-helmet";
 import Overview from "components/member/Overview";
-import Sidebar from "components/member/Sidebar";
-import "./styles.css";
 
 export default function OverviewPage() {
   return (
-    <div className="member-overview w-100 h-100 d-flex">
-      <Sidebar currentPage="overview" />
+    <>
+      <Helmet>
+        <title>Mechaku Member | Overview</title>
+      </Helmet>
       <Overview />
-    </div>
+    </>
   );
 }

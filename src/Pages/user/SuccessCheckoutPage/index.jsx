@@ -2,7 +2,7 @@ import React from "react";
 import SuccessIcon from "assets/icons/success-icon.png";
 import "./styles.css";
 
-export default function SuccessPage() {
+export default function SuccessCheckoutPage() {
   return (
     <div className="success-container">
       <div className="success-content">

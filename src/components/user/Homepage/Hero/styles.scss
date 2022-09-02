@@ -1,0 +1,68 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.hero {
+    margin-top: 60px;
+
+    .hero-content {
+        margin-bottom: 32px;
+
+        .hero-content-title h2 {
+            color: $darkBlueColor;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 62px;
+        }
+
+        .hero-content-subtitle p {
+            color: $darkBlueColor;
+            font-family: $fontPlexMono;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 32px;
+        }
+
+        .hero-content-buttons {
+            .btn-get-started {
+                color: $whiteColor;
+                background-color: $primaryColor;
+                margin-right: 2.5rem;
+                box-shadow: 6px 6px 1px $blackColor;
+                border: none;
+                font-size: 1.125rem;
+                font-weight: 500;
+                animation: ease-in;
+                transition: all 0.4s;
+
+                &:hover {
+                    background-color: $primaryColorHover;
+                    box-shadow: none;
+                    transform: translate(6px, 6px);
+                    animation: ease-out;
+                    transition: all 0.4s;
+                }
+            }
+
+            .btn-learn-more {
+                color: $blackColor;
+                background-color: $secondaryColor;
+                margin-right: 2.5rem;
+                box-shadow: 6px 6px 1px #333;
+                border: none;
+                font-size: 1.125rem;
+                font-weight: 500;
+                animation: ease-in;
+                transition: all 0.4s;
+
+                &:hover {
+                    background-color: $secondaryColorHover;
+                    box-shadow: none;
+                    transform: translate(6px, 6px);
+                    animation: ease-out;
+                    transition: all 0.4s;
+                }
+            }
+        }
+    }
+
+}

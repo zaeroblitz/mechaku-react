@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RecommendationItem({ image, name, price }) {
@@ -9,18 +8,10 @@ export default function RecommendationItem({ image, name, price }) {
   };
 
   return (
-    <div className="col" onClick={() => onItemClick()}>
-      <div className="recommendation-item">
-        <div className="recommendation-item-thumbnail">
-          <img src={image} className="img-fluid" alt="" />
-        </div>
-        <div className="recommendation-item-name">
-          <p>{name}</p>
-        </div>
-        <div className="recommendation-item-price">
-          <p>{price}</p>
-        </div>
-      </div>
+    <div className="col recommendation-item" onClick={() => onItemClick()}>
+      <img src={image} className="item-thumbnail img-fluid" alt="" />
+      <p className="item-name">{name}</p>
+      <p className="item-price">{price}</p>
     </div>
   );
 }

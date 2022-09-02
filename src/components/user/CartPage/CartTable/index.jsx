@@ -1,6 +1,5 @@
-import React from "react";
 import TableItem from "./TableItem";
-import "./styles.css";
+import "./styles.scss";
 
 export default function CartTable({ token, userId, cartItems }) {
   const renderedCartItems = () => {
@@ -28,8 +27,8 @@ export default function CartTable({ token, userId, cartItems }) {
         <tr>
           <th></th>
           <th>Product</th>
-          <th className="">Amount</th>
-          <th className="text-center">Price</th>
+          <th>Amount</th>
+          <th>Price</th>
           <th className="text-center">Action</th>
         </tr>
       </thead>

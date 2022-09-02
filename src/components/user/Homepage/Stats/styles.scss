@@ -1,0 +1,21 @@
+@import '../../../../styles/_colors.scss';
+@import '../../../../styles/global.scss';
+
+.stats {
+    margin-bottom: 100px;
+
+    .stat-title {
+        color: $darkBlueColor;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .stat-label {
+        color: $greyColor;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 32px;
+    }
+
+}

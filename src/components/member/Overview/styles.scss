@@ -1,0 +1,159 @@
+@import '../../../styles/_colors.scss';
+
+.overview-content {
+    margin: 0 30px 0 60px;
+
+    .overview-title {
+        color: $darkBlueColor;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 47px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .overview-total-spent {
+        width: 360px;
+        background-color: $whiteColor;
+        padding: 30px;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
+        margin-bottom: 50px;
+
+        .header {
+            margin-bottom: 24px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                margin-right: 12px;
+            }
+
+            h4 {
+                color: #333333;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 31px;
+            }
+        }
+
+        .value {
+            p {
+                color: $greyColor;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 21px;
+                margin-bottom: 2px;
+            }
+
+            h4 {
+                color: $darkBlueColor;
+                font-weight: 500;
+                font-size: 22px;
+                line-height: 33px;
+            }
+        }
+    }
+
+    .overview-transactions {
+        margin-bottom: 80px;
+
+        h2 {
+            color: $darkBlueColor;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 29px;
+            margin-bottom: 20px;
+        }
+
+        .table-transactions {
+            background-color: $whiteColor;
+            border: none;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            thead {
+                color: $darkBlueColor;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 23px;
+            }
+
+            .table-item {
+                .product-header {
+                    .product-thumbnail {
+                        width: 60px;
+                        height: 60px;
+                        object-fit: cover;
+                        border: none;
+                        border-radius: 16px;
+                        margin-right: 20px;
+                    }
+
+                    .product-header-label {
+                        .product-name {
+                            color: $darkBlueColor;
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 21px;
+                            margin-bottom: 4px;
+                        }
+
+                        .product-category {
+                            color: $greyColor;
+                            font-weight: 400;
+                            font-size: 12px;
+                            line-height: 16px;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+
+                .product-grade p,
+                .product-price p {
+                    color: $darkBlueColor;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 21px;
+                    margin-bottom: 0px;
+                }
+
+                .product-status {
+                    .status-indicator {
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 3px;
+                        margin-right: 6px;
+                    }
+
+                    .pending {
+                        background-color: $primaryOrangeColor;
+                    }
+
+                    .success {
+                        background-color: $primaryGreenColor;
+                    }
+
+                    .failed {
+                        background-color: $primaryPinkColor;
+                    }
+
+                    .status-label {
+                        color: $darkBlueColor;
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 21px;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
