@@ -35,9 +35,7 @@ export default function Auth() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      getCartAmountData();
-    })();
+    getCartAmountData();
   }, [getCartAmountData]);
 
   const onLogout = () => {

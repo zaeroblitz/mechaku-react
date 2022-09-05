@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
-import Sidebar from "components/admin/Sidebar";
-import "./styles.css";
 
 export default function AdminOverviewPage() {
   const navigate = useNavigate();
@@ -24,10 +21,5 @@ export default function AdminOverviewPage() {
     }
   }, [navigate]);
 
-  return (
-    <div className="admin-overview w-100 h-100 d-flex">
-      <Sidebar currentPage="overview" />
-      <h4>Admin Overview Page</h4>
-    </div>
-  );
+  return <h4>Admin Overview Page</h4>;
 }

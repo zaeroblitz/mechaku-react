@@ -20,9 +20,7 @@ export default function DetailPage() {
   }, [id]);
 
   useEffect(() => {
-    (async () => {
-      getProductDetail();
-    })();
+    getProductDetail();
   }, [getProductDetail]);
 
   return (

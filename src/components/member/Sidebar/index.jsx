@@ -1,17 +1,24 @@
-import { useLocation } from "react-router-dom";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TbCreditCard, TbLayoutGrid } from "react-icons/tb";
 import { FiMessageCircle, FiPower, FiSettings } from "react-icons/fi";
 
 import SampleAvatar from "../../../assets/images/pic.png";
 import SidebarItem from "./SidebarItem";
 import "./styles.scss";
+import Cookies from "js-cookie";
 
 export default function Sidebar({ user }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const AVATAR_URL = "http://localhost:8000/uploads/users";
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    navigate("/");
+  };
 
   return (
     <aside className="sidebar-member">
@@ -72,11 +79,9 @@ export default function Sidebar({ user }) {
             isActive={path === "/member/settings"}
             href="settings"
           />
-          <div className="nav-item">
+          <div className="nav-item nav-logout" onClick={handleLogout}>
             <div className="d-flex">
-              <div className="icon">
-                <FiPower />
-              </div>
+              <FiPower className="icon" />
               <p className="label">Logout</p>
             </div>
           </div>

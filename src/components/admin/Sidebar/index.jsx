@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
+import { FaOpencart } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   FiTag,
   FiTruck,
@@ -10,18 +14,16 @@ import {
   FiShoppingBag,
   FiShoppingCart,
 } from "react-icons/fi";
-import { FaOpencart } from "react-icons/fa";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 
 import SidebarItem from "./SidebarItem";
 import "./styles.css";
 
-export default function Sidebar({ currentPage }) {
+export default function Sidebar() {
+  const location = useLocation();
+  const path = location.pathname;
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const tokenBase64 = Cookies.get("token");
-  const navigate = useNavigate();
   const AVATAR_URL = "http://localhost:8000/uploads/users";
 
   useEffect(() => {
@@ -56,55 +58,55 @@ export default function Sidebar({ currentPage }) {
           <SidebarItem
             icon={<FiTag className="icon" />}
             label="Brands"
-            isActive={currentPage === "brands"}
+            isActive={path.includes("/admin/brands")}
             to="/admin/brands"
           />
           <SidebarItem
             icon={<FiTrello className="icon" />}
             label="Categories"
-            isActive={currentPage === "categories"}
+            isActive={path.includes("/admin/categories")}
             to="/admin/categories"
           />
           <SidebarItem
             icon={<FiAward className="icon" />}
             label="Grades"
-            isActive={currentPage === "grades"}
+            isActive={path.includes("/admin/grades")}
             to="/admin/grades"
           />
           <SidebarItem
             icon={<FiTruck className="icon" />}
             label="Couriers"
-            isActive={currentPage === "couriers"}
+            isActive={path.includes("/admin/couriers")}
             to="/admin/couriers"
           />
           <SidebarItem
             icon={<FiCreditCard className="icon" />}
             label="Payments"
-            isActive={currentPage === "payments"}
+            isActive={path.includes("/admin/payments")}
             to="/admin/payments"
           />
           <SidebarItem
             icon={<FiShoppingBag className="icon" />}
             label="Products"
-            isActive={currentPage === "products"}
+            isActive={path.includes("/admin/products")}
             to="/admin/products"
           />
           <SidebarItem
             icon={<FiUsers className="icon" />}
             label="Users"
-            isActive={currentPage === "users"}
+            isActive={path.includes("/admin/users")}
             to="/admin/users"
           />
           <SidebarItem
             icon={<FiShoppingCart className="icon" />}
             label="Transactions"
-            isActive={currentPage === "transactions"}
+            isActive={path.includes("/admin/transactions")}
             to="/admin/brands"
           />
           <SidebarItem
             icon={<FaOpencart className="icon" />}
             label="Transaction Status"
-            isActive={currentPage === "transaction-status"}
+            isActive={path.includes("/admin/transaction-status")}
             to="/admin/transaction-status"
           />
           <div className="d-flex" onClick={onLogoutButtonClick}>

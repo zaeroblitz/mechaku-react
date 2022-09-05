@@ -24,44 +24,45 @@ import TransactionsPage from "pages/member/TransactionsPage";
 import TransactionDetailsPage from "pages/member/TransactionDetailsPage";
 
 // Admin Area
+import AdminPage from "pages/admin/AdminPage";
 import AdminOverviewPage from "pages/admin/OverviewPage";
 
-// Brands
+// Admin - Brands
 import AdminBrandsPage from "pages/admin/BrandPage";
 import AdminCreateBrandsPage from "pages/admin/BrandPage/create";
 import AdminEditBrandsPage from "pages/admin/BrandPage/edit";
 
-// Categories
+// Admin - Categories
 import AdminCategoriesPage from "pages/admin/CategoryPage";
 import AdminCreateCategoryPage from "pages/admin/CategoryPage/create";
 import AdminEditCategoryPage from "pages/admin/CategoryPage/edit";
 
-// Grades
+// Admin - Grades
 import AdminGradesPage from "pages/admin/GradePage";
 import AdminCreateGradePage from "pages/admin/GradePage/create";
 import AdminEditGradePage from "pages/admin/GradePage/edit";
 
-// Couriers
+// Admin - Couriers
 import AdminCouriersPage from "pages/admin/CourierPage";
 import AdminCreateCourierPage from "pages/admin/CourierPage/create";
 import AdminEditCourierPage from "pages/admin/CourierPage/edit";
 
-// Payments
+// Admin -Payments
 import AdminPaymentPage from "pages/admin/PaymentPage";
 import AdminCreatePaymentPage from "pages/admin/PaymentPage/create";
 import AdminEditPaymentPage from "pages/admin/PaymentPage/edit";
 
-// Transaction Status
+// Admin - Transaction Status
 import AdminTransactionStatusPage from "pages/admin/TransactionStatusPage";
 import AdminCreateTransactionStatusPage from "pages/admin/TransactionStatusPage/create";
 import AdminEditTransactionStatusPage from "pages/admin/TransactionStatusPage/edit";
 
-// Products
+// Admin - Products
 import AdminProductPage from "pages/admin/ProductPage";
 import AdminCreateProductPage from "pages/admin/ProductPage/create";
 import AdminEditProductPage from "pages/admin/ProductPage/edit";
 
-// Users
+// Admin - Users
 import AdminUserPage from "pages/admin/UserPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -92,78 +93,56 @@ root.render(
       </Route>
 
       {/* Admin Area */}
-      <Route path="admin" element={<AdminOverviewPage />} />
+      <Route path="admin" element={<AdminPage />}>
+        <Route index element={<AdminOverviewPage />} />
 
-      {/* Brands */}
-      <Route path="admin/brands" element={<AdminBrandsPage />} />
-      <Route path="admin/brands/create" element={<AdminCreateBrandsPage />} />
-      <Route path="admin/brands/edit/:id" element={<AdminEditBrandsPage />} />
+        {/* Brands   */}
+        <Route path="brands" element={<AdminBrandsPage />} />
+        <Route path="brands/create" element={<AdminCreateBrandsPage />} />
+        <Route path="brands/edit/:id" element={<AdminEditBrandsPage />} />
 
-      {/* Categories */}
-      <Route path="admin/categories" element={<AdminCategoriesPage />} />
-      <Route
-        path="admin/categories/create"
-        element={<AdminCreateCategoryPage />}
-      />
-      <Route
-        path="admin/categories/edit/:id"
-        element={<AdminEditCategoryPage />}
-      />
+        {/* Categories */}
+        <Route path="categories" element={<AdminCategoriesPage />} />
+        <Route path="categories/create" element={<AdminCreateCategoryPage />} />
+        <Route path="categories/edit/:id" element={<AdminEditCategoryPage />} />
 
-      {/* Grades */}
-      <Route path="admin/grades" element={<AdminGradesPage />} />
-      <Route path="admin/grades/create" element={<AdminCreateGradePage />} />
-      <Route path="admin/grades/edit/:id" element={<AdminEditGradePage />} />
+        {/* Grades */}
+        <Route path="grades" element={<AdminGradesPage />} />
+        <Route path="grades/create" element={<AdminCreateGradePage />} />
+        <Route path="grades/edit/:id" element={<AdminEditGradePage />} />
 
-      {/* Courier */}
-      <Route path="admin/couriers" element={<AdminCouriersPage />} />
-      <Route
-        path="admin/couriers/create"
-        element={<AdminCreateCourierPage />}
-      />
-      <Route
-        path="admin/couriers/edit/:id"
-        element={<AdminEditCourierPage />}
-      />
+        {/* Courier */}
+        <Route path="couriers" element={<AdminCouriersPage />} />
+        <Route path="couriers/create" element={<AdminCreateCourierPage />} />
+        <Route path="couriers/edit/:id" element={<AdminEditCourierPage />} />
 
-      {/* Courier */}
-      <Route path="admin/payments" element={<AdminPaymentPage />} />
-      <Route
-        path="admin/payments/create"
-        element={<AdminCreatePaymentPage />}
-      />
-      <Route
-        path="admin/payments/edit/:id"
-        element={<AdminEditPaymentPage />}
-      />
+        {/* Payments */}
+        <Route path="payments" element={<AdminPaymentPage />} />
+        <Route path="payments/create" element={<AdminCreatePaymentPage />} />
+        <Route path="payments/edit/:id" element={<AdminEditPaymentPage />} />
 
-      {/* Transaction Status */}
-      <Route
-        path="admin/transaction-status"
-        element={<AdminTransactionStatusPage />}
-      />
-      <Route
-        path="admin/transaction-status/create"
-        element={<AdminCreateTransactionStatusPage />}
-      />
-      <Route
-        path="admin/transaction-status/edit/:id"
-        element={<AdminEditTransactionStatusPage />}
-      />
+        {/* Products */}
+        <Route path="products" element={<AdminProductPage />} />
+        <Route path="products/create" element={<AdminCreateProductPage />} />
+        <Route path="products/edit/:id" element={<AdminEditProductPage />} />
 
-      {/* Products */}
-      <Route path="admin/products" element={<AdminProductPage />} />
-      <Route
-        path="admin/products/create"
-        element={<AdminCreateProductPage />}
-      />
-      <Route
-        path="admin/products/edit/:id"
-        element={<AdminEditProductPage />}
-      />
+        {/* Users */}
+        <Route path="users" element={<AdminUserPage />} />
 
-      {/* Users */}
-      <Route path="admin/users" element={<AdminUserPage />} />
+        {/* Transaction Status */}
+        <Route
+          path="transaction-status"
+          element={<AdminTransactionStatusPage />}
+        />
+        <Route
+          path="transaction-status/create"
+          element={<AdminCreateTransactionStatusPage />}
+        />
+        <Route
+          path="transaction-status/edit/:id"
+          element={<AdminEditTransactionStatusPage />}
+        />
+      </Route>
 
       {/* 404  */}
       <Route

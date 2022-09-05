@@ -1,34 +1,59 @@
-import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
 
-import Sidebar from "components/admin/Sidebar";
-import CourierPageComponents from "components/admin/CourierPage";
-import "./styles.css";
+import "components/admin/styles.scss";
+import { getAllCouriersData } from "apis/couriers";
+import CouriersOverview from "components/admin/CourierPage/Overview";
 
 export default function AdminCourierPage() {
+  const [couriersData, setCouriersData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    document.title = "Mechaku Admin | Couriers";
-    const tokenBase64 = Cookies.get("token");
+  const tokenBase64 = Cookies.get("token");
 
+  useEffect(() => {
     if (tokenBase64) {
       const token = atob(tokenBase64);
-
       const jwt = jwtDecode(token);
+
       if (jwt.user.role !== "ADMIN") {
         navigate("/");
       }
     } else {
       navigate("/");
     }
-  }, [navigate]);
+  }, [tokenBase64, navigate]);
+
+  const getCouriersData = useCallback(async () => {
+    const response = await getAllCouriersData();
+
+    setCouriersData(response.data);
+  }, []);
+
+  useEffect(() => {
+    getCouriersData();
+  }, [getCouriersData]);
+
+  const handleNewCourierButton = (e) => {
+    e.preventDefault();
+
+    navigate("/admin/couriers/create");
+  };
 
   return (
-    <div className="admin-courier-page w-100 h-100 d-flex">
-      <Sidebar currentPage="couriers" />
-      <CourierPageComponents />
-    </div>
+    <>
+      <Helmet>
+        <title>Mechaku Admin | Couriers</title>
+      </Helmet>
+      <main className="main-container col-lg-8">
+        <h2 className="title">Couriers</h2>
+        <button className="btn btn-add" onClick={handleNewCourierButton}>
+          Add New Courier
+        </button>
+        <CouriersOverview couriersData={couriersData} />
+      </main>
+    </>
   );
 }

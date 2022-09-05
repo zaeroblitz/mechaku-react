@@ -14,9 +14,7 @@ export default function ShopList() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      getProducts();
-    })();
+    getProducts();
   }, [getProducts]);
 
   const renderedShopItems = () => {

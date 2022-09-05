@@ -16,22 +16,6 @@ export default function CartPage() {
   const [items, setItems] = useState([]);
   const tokenBase64 = Cookies.get("token");
 
-  console.log(user);
-
-  const getCartItemsData = useCallback(async () => {
-    if (token) {
-      const response = await getCartItemByUser(token, user.id);
-
-      setItems(response.data.items);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    (async () => {
-      getCartItemsData();
-    })();
-  }, [getCartItemsData]);
-
   useEffect(() => {
     let totalPrice = 0;
 
@@ -42,16 +26,22 @@ export default function CartPage() {
       setToken(convertToken);
       setUser(jwtToken.user);
 
-      if (items) {
-        items.map((item) => {
-          return (totalPrice += item.amount * item.product.details.price);
-        });
-      }
-
       setTotal(totalPrice);
       setTax(0.1 * totalPrice);
     }
-  }, [tokenBase64, items]);
+  }, [tokenBase64]);
+
+  const getCartItemsData = useCallback(async () => {
+    if (token && user) {
+      const response = await getCartItemByUser(token, user.id);
+
+      setItems(response.data.items);
+    }
+  }, [token, user]);
+
+  useEffect(() => {
+    getCartItemsData();
+  }, [getCartItemsData]);
 
   return (
     <>

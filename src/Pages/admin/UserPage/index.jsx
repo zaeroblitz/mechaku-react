@@ -1,34 +1,49 @@
-import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
 
-import Sidebar from "components/admin/Sidebar";
-import UserPageComponents from "components/admin/UserPage";
-import "./styles.css";
+import "components/admin/styles.scss";
+import { getAllUser } from "apis/user";
+import UsersOverview from "components/admin/UserPage";
 
-export default function AdminUserPage() {
+export default function AdminProductPage() {
+  const [usersData, setUsersData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    document.title = "Mechaku Admin | Users";
-    const tokenBase64 = Cookies.get("token");
+  const tokenBase64 = Cookies.get("token");
 
+  useEffect(() => {
     if (tokenBase64) {
       const token = atob(tokenBase64);
-
       const jwt = jwtDecode(token);
+
       if (jwt.user.role !== "ADMIN") {
         navigate("/");
       }
     } else {
       navigate("/");
     }
-  }, [navigate]);
+  }, [tokenBase64, navigate]);
 
+  const getUsersData = useCallback(async () => {
+    const response = await getAllUser();
+
+    setUsersData(response.data);
+  }, []);
+
+  useEffect(() => {
+    getUsersData();
+  }, [getUsersData]);
   return (
-    <div className="admin-users w-100 h-100 d-flex">
-      <Sidebar currentPage={"users"} />
-      <UserPageComponents />
-    </div>
+    <>
+      <Helmet>
+        <title>Mechaku Admin | Users</title>
+      </Helmet>
+      <main className="main-container col-lg-8">
+        <h2 className="title">Users</h2>
+        <UsersOverview usersData={usersData} />
+      </main>
+    </>
   );
 }

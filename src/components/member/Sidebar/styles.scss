@@ -83,6 +83,25 @@
                     color: $whiteColor;
                 }
             }
+
+            .nav-logout {
+                transition: all 0.4s ease-in;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $primaryPinkColor;
+                    padding: 12px 16px;
+                    border: none;
+                    border-radius: 16px;
+                    box-shadow: 0px 0px 8px $secondaryPinkColor;
+                    transition: all 0.4s ease-out;
+
+                    .icon,
+                    .label {
+                        color: $whiteColor;
+                    }
+                }
+            }
         }
     }
 }

@@ -14,9 +14,7 @@ export default function Featured() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      getFeaturedMecha();
-    })();
+    getFeaturedMecha();
   }, [getFeaturedMecha]);
 
   const renderedFeaturedItems = () => {

@@ -3,7 +3,7 @@ import "./styles.scss";
 
 export default function CartTable({ token, userId, cartItems }) {
   const renderedCartItems = () => {
-    if (cartItems.length) {
+    if (cartItems.length !== 0) {
       return cartItems.map((item) => (
         <TableItem
           key={item._id}
@@ -32,7 +32,7 @@ export default function CartTable({ token, userId, cartItems }) {
           <th className="text-center">Action</th>
         </tr>
       </thead>
-      <tbody>{renderedCartItems()}</tbody>
+      <tbody>{cartItems.length !== 0 && renderedCartItems()}</tbody>
     </table>
   );
 }
