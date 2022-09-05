@@ -1,7 +1,13 @@
 import TableItem from "./TableItem";
 import "./styles.scss";
 
-export default function CartTable({ token, userId, cartItems }) {
+export default function CartTable({
+  token,
+  userId,
+  cartItems,
+  onCheckItemChange,
+  onPriceItemChange,
+}) {
   const renderedCartItems = () => {
     if (cartItems.length !== 0) {
       return cartItems.map((item) => (
@@ -16,6 +22,8 @@ export default function CartTable({ token, userId, cartItems }) {
           stock={item.product.details.quantity}
           token={token}
           userId={userId}
+          onCheckItemChange={onCheckItemChange}
+          onPriceItemChange={onPriceItemChange}
         />
       ));
     }

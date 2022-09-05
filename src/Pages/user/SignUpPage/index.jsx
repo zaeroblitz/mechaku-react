@@ -1,38 +1,38 @@
-import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { postUserData } from "apis/user";
 import Logo from "assets/icons/logo.svg";
-import "./styles.css";
+import "./styles.scss";
 
 export default function SignUpPage() {
   const [data, setData] = useState({});
   const [avatarPreview, setAvatarPreview] = useState();
   const navigate = useNavigate();
 
-  const onInputNameChange = (e) => {
+  const handleNameChange = (e) => {
     setData({
       ...data,
       name: e.target.value,
     });
   };
 
-  const onInputEmailChange = (e) => {
+  const handleEmailChange = (e) => {
     setData({
       ...data,
       email: e.target.value,
     });
   };
 
-  const onInputPasswordChage = (e) => {
+  const handlePasswordChange = (e) => {
     setData({
       ...data,
       password: e.target.value,
     });
   };
 
-  const onInputAvatarChange = (e) => {
+  const handleAvatarChange = (e) => {
     const [file] = e.target.files;
 
     setAvatarPreview(URL.createObjectURL(file));
@@ -56,7 +56,13 @@ export default function SignUpPage() {
     }
   };
 
-  const onContineButtonClick = async (e) => {
+  const handleSignInButton = (e) => {
+    e.preventDefault();
+
+    navigate("/sign-in");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -75,7 +81,7 @@ export default function SignUpPage() {
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/");
+          navigate("/sign-in");
         }
       });
     }
@@ -90,7 +96,7 @@ export default function SignUpPage() {
         <h2>Sign Up</h2>
         <p>Daftar dan bergabung dengan kami</p>
       </div>
-      <div className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-name">
           <label htmlFor="name">Full Name</label>
           <input
@@ -99,7 +105,8 @@ export default function SignUpPage() {
             id="name"
             className="form-control"
             placeholder="Write your name"
-            onChange={onInputNameChange}
+            onChange={handleNameChange}
+            required
           />
         </div>
         <div className="form-email">
@@ -110,7 +117,8 @@ export default function SignUpPage() {
             id="email"
             className="form-control"
             placeholder="Enter your email address"
-            onChange={onInputEmailChange}
+            onChange={handleEmailChange}
+            required
           />
         </div>
         <div className="form-password">
@@ -121,7 +129,8 @@ export default function SignUpPage() {
             id="password"
             className="form-control"
             placeholder="Your password"
-            onChange={onInputPasswordChage}
+            onChange={handlePasswordChange}
+            required
           />
         </div>
         <div className="form-group mb-5">
@@ -134,22 +143,22 @@ export default function SignUpPage() {
             name="avatar"
             id="avatar"
             className="form-control"
-            onChange={onInputAvatarChange}
+            onChange={handleAvatarChange}
           />
         </div>
-      </div>
 
-      <div className="buttons">
-        <button
-          className="btn btn-continue d-block"
-          onClick={onContineButtonClick}
-        >
-          Continue
-        </button>
-        <a href="/sign-in" className="btn btn-sign-in d-block">
-          Sign In
-        </a>
-      </div>
+        <div className="buttons">
+          <button type="submit" className="btn btn-continue d-block">
+            Complete Sign Up
+          </button>
+          <button
+            className="btn btn-sign-in d-block"
+            onClick={handleSignInButton}
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

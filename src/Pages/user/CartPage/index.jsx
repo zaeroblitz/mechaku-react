@@ -14,22 +14,63 @@ export default function CartPage() {
   const [total, setTotal] = useState(0);
   const [token, setToken] = useState("");
   const [items, setItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [priceItems, setPriceItems] = useState([]);
   const tokenBase64 = Cookies.get("token");
 
-  useEffect(() => {
-    let totalPrice = 0;
+  const onCheckItemChange = (itemId, itemPrice) => {
+    if (checkedItems.includes(itemId)) {
+      const index = checkedItems.indexOf(itemId);
+      const items = [
+        ...checkedItems.slice(0, index),
+        ...checkedItems.slice(index + 1),
+      ];
+      const prices = [
+        ...priceItems.slice(0, index),
+        ...priceItems.slice(index + 1),
+      ];
 
+      setCheckedItems(items);
+      setPriceItems(prices);
+    } else {
+      setCheckedItems([...checkedItems, itemId]);
+      setPriceItems([...priceItems, itemPrice]);
+    }
+  };
+
+  const onPriceItemChange = (itemId, value) => {
+    if (checkedItems.includes(itemId)) {
+      const index = checkedItems.indexOf(itemId);
+      const prices = [
+        ...priceItems.slice(0, index),
+        value,
+        ...priceItems.slice(index + 1),
+      ];
+      setPriceItems(prices);
+    }
+  };
+
+  useEffect(() => {
     if (tokenBase64) {
       const convertToken = atob(tokenBase64);
       const jwtToken = jwtDecode(convertToken);
 
       setToken(convertToken);
       setUser(jwtToken.user);
+    }
+  }, [tokenBase64]);
+
+  useEffect(() => {
+    let totalPrice = 0;
+    if (priceItems) {
+      priceItems.forEach((price) => {
+        totalPrice += parseInt(price);
+      });
 
       setTotal(totalPrice);
       setTax(0.1 * totalPrice);
     }
-  }, [tokenBase64]);
+  }, [priceItems]);
 
   const getCartItemsData = useCallback(async () => {
     if (token && user) {
@@ -51,7 +92,13 @@ export default function CartPage() {
       <Breadcrumb />
       <div className="cart-container my-5">
         <div className="d-flex flex-column container-fluid">
-          <CartTable token={token} cartItems={items} userId={user.id} />
+          <CartTable
+            token={token}
+            cartItems={items}
+            userId={user.id}
+            onCheckItemChange={onCheckItemChange}
+            onPriceItemChange={onPriceItemChange}
+          />
           <CartTotal total={total} tax={tax} />
         </div>
       </div>

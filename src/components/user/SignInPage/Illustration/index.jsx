@@ -1,6 +1,4 @@
-import React from "react";
 import SignInIllustrationImage from "assets/images/sign_in_illustration.jpg";
-import "./styles.css";
 
 export default function SignInIllustration() {
   return (

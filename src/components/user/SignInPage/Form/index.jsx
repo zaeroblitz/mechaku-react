@@ -1,36 +1,37 @@
-import React, { useState } from "react";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { setSignIn } from "apis/user";
 import Logo from "assets/icons/logo.svg";
-import Cookies from "js-cookie";
-import "./styles.css";
+import "./styles.scss";
 
 export default function SignInForm() {
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
-  const onInputEmailChange = (e) => {
+  const handleEmailChange = (e) => {
     setData({
       ...data,
       email: e.target.value,
     });
   };
 
-  const onInputPasswordChange = (e) => {
+  const handlePasswordChange = (e) => {
     setData({
       ...data,
       password: e.target.value,
     });
   };
 
-  const onSignUpButtonClick = (e) => {
+  const handleSignUpButton = (e) => {
     e.preventDefault();
 
     navigate("/sign-up");
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await setSignIn(data);
@@ -63,7 +64,7 @@ export default function SignInForm() {
   return (
     <div className="col-lg-6 d-flex">
       <div className="sign-in-form">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="logo">
             <img src={Logo} width="60" height="60" alt="" />
           </div>
@@ -79,7 +80,8 @@ export default function SignInForm() {
                 id="email"
                 className="form-control"
                 placeholder="Enter Your Email Address"
-                onChange={onInputEmailChange}
+                onChange={handleEmailChange}
+                required
               />
             </div>
             <div className="form-password">
@@ -89,7 +91,8 @@ export default function SignInForm() {
                 id="password"
                 className="form-control"
                 placeholder="Your Password"
-                onChange={onInputPasswordChange}
+                onChange={handlePasswordChange}
+                required
               />
             </div>
           </div>
@@ -99,7 +102,7 @@ export default function SignInForm() {
             </button>
             <button
               className="btn btn-sign-up w-100"
-              onClick={onSignUpButtonClick}
+              onClick={handleSignUpButton}
             >
               Sign Up
             </button>

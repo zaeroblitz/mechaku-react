@@ -16,9 +16,32 @@ export default function TableItem({
   stock,
   token,
   userId,
+  onCheckItemChange,
+  onPriceItemChange,
 }) {
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
   const [value, setValue] = useState(amount);
+  const [itemPrice, setItemPrice] = useState(price);
+  const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+
+  const handleCheckItem = (e) => {
+    onCheckItemChange(e.target.id, e.target.value);
+  };
+
+  const handleMinIconClick = () => {
+    if (value !== 1) {
+      setValue(value - 1);
+      setItemPrice((value - 1) * price);
+      onPriceItemChange(itemId, (value - 1) * price);
+    }
+  };
+
+  const handlePlusIconClick = () => {
+    if (value < stock) {
+      setValue(value + 1);
+      setItemPrice((value + 1) * price);
+      onPriceItemChange(itemId, (value + 1) * price);
+    }
+  };
 
   const handleRemoveItem = async (e) => {
     e.preventDefault();
@@ -39,22 +62,16 @@ export default function TableItem({
     }
   };
 
-  const handleMinIconClick = () => {
-    if (value !== 1) {
-      setValue(value - 1);
-    }
-  };
-
-  const handlePlusIconClick = () => {
-    if (value < stock) {
-      setValue(value + 1);
-    }
-  };
-
   return (
     <tr className="table-item align-items-center">
       <td>
-        <input type="checkbox" name="itemCheck" id="itemCheck" />
+        <input
+          type="checkbox"
+          name="itemCheck"
+          id={itemId}
+          value={itemPrice}
+          onChange={handleCheckItem}
+        />
       </td>
       <td>
         <div className="d-flex align-items-center">
@@ -88,7 +105,7 @@ export default function TableItem({
           prefix="Rp."
           decimalSeparator=","
           thousandSeparator="."
-          value={value > 1 ? value * price : price}
+          value={itemPrice}
           className="product-price"
         />
       </td>

@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar page="Home" />
+      <Navbar />
       <main>
         <Outlet />
       </main>

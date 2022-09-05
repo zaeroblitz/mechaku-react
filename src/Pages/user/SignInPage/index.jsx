@@ -1,7 +1,6 @@
-import React from "react";
-import SignInIllustration from "components/user/SignInPage/Illustration";
 import SignInForm from "components/user/SignInPage/Form";
-import "./styles.css";
+import SignInIllustration from "components/user/SignInPage/Illustration";
+import "./styles.scss";
 
 export default function SignInPage() {
   return (

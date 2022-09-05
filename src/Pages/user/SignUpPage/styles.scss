@@ -1,0 +1,122 @@
+@import "../../../styles/_colors.scss";
+
+.sign-up-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+
+    .logo {
+        margin-bottom: 30px;
+
+        img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+    }
+
+    .title {
+        color: $darkBlueColor;
+        text-align: center;
+        margin-bottom: 50px;
+
+        h2 {
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 47px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 32px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .form {
+        margin-bottom: 40px;
+
+        label {
+            color: $darkBlueColor;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            display: block;
+            width: 420px;
+            padding: 12px 24px;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 26px;
+            border: 1px solid $darkBlueColor;
+            border-radius: 25px;
+
+            &::placeholder {
+                color: $secondaryBGColor;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+
+        .buttons {
+            .btn-continue {
+                color: $whiteColor;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 26px;
+                text-align: center;
+
+                width: 420px;
+                border: none;
+                border-radius: 25px;
+                background-color: $primaryColor;
+                padding: 14px 0;
+                box-shadow: 6px 6px 1px #333;
+                margin-bottom: 30px;
+                transition: all 0.4s ease-in;
+
+                &:hover {
+                    background-color: $primaryColorHover;
+                    transform: translate(6px, 6px);
+                    transition: all 0.4s ease-out;
+                    box-shadow: none;
+                }
+            }
+
+            .btn-sign-in {
+                color: #333;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 26px;
+                text-align: center;
+
+                width: 420px;
+                border: none;
+                border-radius: 25px;
+                background-color: $secondaryColor;
+                padding: 14px 0;
+                box-shadow: 6px 6px 1px #333;
+                transition: all 0.4s ease-in;
+
+                &:hover {
+                    background-color: $secondaryColorHover;
+                    transform: translate(6px, 6px);
+                    transition: all 0.4s ease-out;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+
+}

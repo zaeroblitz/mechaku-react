@@ -1,0 +1,152 @@
+@import "../../../../styles/_colors.scss";
+@import "../../../../styles/global.scss";
+
+.sign-in-form {
+    width: 70%;
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        margin-bottom: 30px;
+    }
+
+    .title {
+        margin-bottom: 40px;
+
+        h2 {
+            color: $darkBlueColor;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 47px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: $darkBlueColor;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 32px;
+            margin-bottom: 0px;
+        }
+    }
+
+    .form {
+        margin-bottom: 50px;
+
+        .form-email {
+            margin-bottom: 30px;
+
+            label {
+                color: $darkBlueColor;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 26px;
+                margin-bottom: 10px;
+            }
+
+            input {
+                color: $blackColor;
+                font-family: "IBM Plex Sans";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 26px;
+
+                background-color: $whiteColor;
+                padding: 12px 24px;
+                border: 1px solid $darkBlueColor;
+                border-radius: 100px;
+
+                &::placeholder {
+                    color: $secondaryBGColor;
+                    font-family: "IBM Plex Sans";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 26px;
+                }
+            }
+        }
+
+        .form-password {
+            label {
+                color: $darkBlueColor;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 26px;
+                margin-bottom: 10px;
+            }
+
+            input {
+                color: $blackColor;
+                font-family: "IBM Plex Sans";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 26px;
+
+                background-color: $whiteColor;
+                padding: 12px 24px;
+                border: 1px solid $darkBlueColor;
+                border-radius: 100px;
+
+                &::placeholder {
+                    color: $secondaryBGColor;
+                    font-family: "IBM Plex Sans";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+
+    .buttons {
+        .btn-sign-in {
+            color: $whiteColor;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            text-align: center;
+
+            border: none;
+            border-radius: 25px;
+            background-color: $primaryColor;
+            padding: 14px 0;
+            box-shadow: 6px 6px 1px $blackColor;
+            margin-bottom: 30px;
+            transition: all 0.4s ease-in;
+
+            &:hover {
+                background-color: $primaryColorHover;
+                transform: translate(6px, 6px);
+                transition: all 0.4s ease-out;
+                box-shadow: none;
+            }
+        }
+
+        .btn-sign-up {
+            color: $blackColor;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            text-align: center;
+
+            border: none;
+            border-radius: 25px;
+            background-color: $secondaryColor;
+            padding: 14px 0;
+            box-shadow: 6px 6px 1px $blackColor;
+            transition: all 0.4s ease-in;
+
+            &:hover {
+                background-color: $secondaryColorHover;
+                transform: translate(6px, 6px);
+                transition: all 0.4s ease-out;
+                box-shadow: none;
+            }
+        }
+    }
+}
