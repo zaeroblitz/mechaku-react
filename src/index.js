@@ -13,8 +13,9 @@ import CartPage from "pages/user/CartPage";
 import DetailPage from "pages/user/DetailPage";
 import SignInPage from "pages/user/SignInPage";
 import SignUpPage from "pages/user/SignUpPage";
-import SuccessCheckoutPage from "pages/user/SuccessCheckoutPage";
+import CheckoutPage from "pages/user/CheckoutPage";
 import SignUpPhotoPage from "pages/user/SignUpPhotoPage";
+import SuccessCheckoutPage from "pages/user/SuccessCheckoutPage";
 
 // User Member Area
 import MemberPage from "pages/member/MemberPage";
@@ -29,18 +30,18 @@ import AdminOverviewPage from "pages/admin/OverviewPage";
 
 // Admin - Brands
 import AdminBrandsPage from "pages/admin/BrandPage";
-import AdminCreateBrandsPage from "pages/admin/BrandPage/create";
 import AdminEditBrandsPage from "pages/admin/BrandPage/edit";
+import AdminCreateBrandsPage from "pages/admin/BrandPage/create";
 
 // Admin - Categories
 import AdminCategoriesPage from "pages/admin/CategoryPage";
-import AdminCreateCategoryPage from "pages/admin/CategoryPage/create";
 import AdminEditCategoryPage from "pages/admin/CategoryPage/edit";
+import AdminCreateCategoryPage from "pages/admin/CategoryPage/create";
 
 // Admin - Grades
 import AdminGradesPage from "pages/admin/GradePage";
-import AdminCreateGradePage from "pages/admin/GradePage/create";
 import AdminEditGradePage from "pages/admin/GradePage/edit";
+import AdminCreateGradePage from "pages/admin/GradePage/create";
 
 // Admin - Couriers
 import AdminCouriersPage from "pages/admin/CourierPage";
@@ -54,13 +55,13 @@ import AdminEditPaymentPage from "pages/admin/PaymentPage/edit";
 
 // Admin - Transaction Status
 import AdminTransactionStatusPage from "pages/admin/TransactionStatusPage";
-import AdminCreateTransactionStatusPage from "pages/admin/TransactionStatusPage/create";
 import AdminEditTransactionStatusPage from "pages/admin/TransactionStatusPage/edit";
+import AdminCreateTransactionStatusPage from "pages/admin/TransactionStatusPage/create";
 
 // Admin - Products
 import AdminProductPage from "pages/admin/ProductPage";
-import AdminCreateProductPage from "pages/admin/ProductPage/create";
 import AdminEditProductPage from "pages/admin/ProductPage/edit";
+import AdminCreateProductPage from "pages/admin/ProductPage/create";
 
 // Admin - Users
 import AdminUserPage from "pages/admin/UserPage";
@@ -75,6 +76,7 @@ root.render(
         <Route path="shop" element={<ShopPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="detail/:id" element={<DetailPage />} />
+        <Route path="checkout" element={<CheckoutPage />} />
       </Route>
       <Route path="sign-in" element={<SignInPage />} />
       <Route path="sign-up" element={<SignUpPage />} />

@@ -19,9 +19,9 @@ export async function createBrand(data) {
   }
 }
 
-export async function getBrands() {
+export async function getBrandById(id) {
   try {
-    const response = await axios.get(BRAND_API);
+    const response = await axios.get(`${BRAND_API}/${id}`);
 
     return response.data;
   } catch (err) {
@@ -29,9 +29,9 @@ export async function getBrands() {
   }
 }
 
-export async function getBrandById(id) {
+export async function getBrands() {
   try {
-    const response = await axios.get(`${BRAND_API}/${id}`);
+    const response = await axios.get(BRAND_API);
 
     return response.data;
   } catch (err) {

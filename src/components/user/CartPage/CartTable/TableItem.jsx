@@ -1,10 +1,15 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { BiMinus, BiPlus } from "react-icons/bi";
 
-import { removeCartItem } from "apis/cart";
+import {
+  decrementCartItem,
+  incrementCartItem,
+  removeCartItem,
+} from "apis/cart";
 
 export default function TableItem({
   itemId,
@@ -21,25 +26,28 @@ export default function TableItem({
 }) {
   const [value, setValue] = useState(amount);
   const [itemPrice, setItemPrice] = useState(price);
+  const navigate = useNavigate();
   const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
 
   const handleCheckItem = (e) => {
     onCheckItemChange(e.target.id, e.target.value);
   };
 
-  const handleMinIconClick = () => {
+  const handleMinIconClick = async () => {
     if (value !== 1) {
       setValue(value - 1);
       setItemPrice((value - 1) * price);
       onPriceItemChange(itemId, (value - 1) * price);
+      await decrementCartItem(token, itemId);
     }
   };
 
-  const handlePlusIconClick = () => {
+  const handlePlusIconClick = async () => {
     if (value < stock) {
       setValue(value + 1);
       setItemPrice((value + 1) * price);
       onPriceItemChange(itemId, (value + 1) * price);
+      await incrementCartItem(token, itemId);
     }
   };
 
@@ -58,6 +66,10 @@ export default function TableItem({
         text: "Success remove item from cart",
         icon: "success",
         confirmButtonText: "OK!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(0);
+        }
       });
     }
   };

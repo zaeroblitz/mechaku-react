@@ -1,0 +1,27 @@
+@import "../../../styles/_colors.scss";
+
+.cart-container {
+    .btn-checkout {
+        color: $whiteColor;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+        text-align: center;
+
+        width: 320px;
+        border: none;
+        border-radius: 25px;
+        background-color: $primaryColor;
+        padding: 14px 0;
+        box-shadow: 6px 6px 1px #333;
+        margin-bottom: 30px;
+        transition: all 0.4s ease-in;
+
+        &:hover {
+            background-color: $primaryColorHover;
+            transform: translate(6px, 6px);
+            transition: all 0.4s ease-out;
+            box-shadow: none;
+        }
+    }
+}

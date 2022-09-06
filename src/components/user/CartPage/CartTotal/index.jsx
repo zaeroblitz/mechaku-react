@@ -4,7 +4,7 @@ import "./styles.scss";
 
 export default function CartTotal({ total, tax }) {
   return (
-    <div className="cart-total col-5 justify-content-end">
+    <div className="cart-total justify-content-end">
       <div className="d-flex justify-content-between">
         <p className="label">Subtotals: </p>
         <NumberFormat
@@ -17,7 +17,7 @@ export default function CartTotal({ total, tax }) {
         />
       </div>
       <div className="d-flex justify-content-between">
-        <p className="label">Totals (include tax): </p>
+        <p className="label">Grand Total (include tax): </p>
         <NumberFormat
           displayType="text"
           prefix="Rp. "

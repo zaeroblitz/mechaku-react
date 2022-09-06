@@ -1,0 +1,70 @@
+@import "../../../../styles/_colors.scss";
+
+.choose-courier {
+    margin-bottom: 50px;
+
+    .title {
+        color: $blackColor;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 24px;
+    }
+
+    .card {
+        background-color: $whiteColor;
+        padding: 36px;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.1);
+
+        .radio-btn-group {
+            input {
+                margin: 0;
+                padding: 0;
+                display: none;
+            }
+
+            .radio-card {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+                width: 154px;
+                height: 80px;
+                transition: all 0.4s ease-in;
+                padding: 16px 12px;
+                border-radius: 12px;
+                border: 1px solid #e7eaf5;
+                transition: all 0.4s;
+
+                .check-icon {
+                    position: absolute;
+                    color: #fff;
+                    background-color: #4d17e2;
+                    font-size: 20px;
+                    border-radius: 50px;
+                    padding: 3px;
+                    top: -10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: all 0.4s;
+                }
+            }
+
+            input:checked+.radio-card {
+                border: 2px solid #6b63ac;
+                transition: all 0.4s;
+            }
+
+            input:checked+.radio-card .check-icon {
+                opacity: 1;
+                transition: all 0.4s;
+            }
+        }
+    }
+
+
+}

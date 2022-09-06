@@ -1,0 +1,16 @@
+.breadcrumb-checkout {
+    background-color: #f9faff;
+    padding: 40px 100px;
+
+    .breadcrumb-item {
+        a {
+            color: #333;
+            font-weight: 300;
+            text-decoration: none;
+        }
+    }
+
+    .active {
+        font-weight: 700;
+    }
+}

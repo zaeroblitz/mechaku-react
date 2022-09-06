@@ -1,0 +1,26 @@
+@import "../../../../styles/_colors.scss";
+
+.btn-complete-checkout {
+    color: $whiteColor;
+    background-color: $primaryColor;
+    width: 420px;
+    padding: 12px 16px;
+    margin-right: 2.5rem;
+    box-shadow: 6px 6px 1px $blackColor;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    animation: ease-in;
+    margin-bottom: 100px;
+    transition: all 0.4s;
+
+    &:hover {
+        color: $whiteColor;
+        background-color: $primaryColorHover;
+        box-shadow: none;
+        transform: translate(6px, 6px);
+        animation: ease-out;
+        transition: all 0.4s;
+    }
+}

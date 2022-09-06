@@ -35,6 +35,38 @@ export async function getCartItemByUser(token, userId) {
   }
 }
 
+export async function incrementCartItem(token, itemId) {
+  try {
+    const response = await axios({
+      method: "put",
+      url: `${CART_API}/inc/${itemId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+export async function decrementCartItem(token, itemId) {
+  try {
+    const response = await axios({
+      method: "put",
+      url: `${CART_API}/dec/${itemId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 export async function removeCartItem(token, userId, data) {
   try {
     const response = await axios({
