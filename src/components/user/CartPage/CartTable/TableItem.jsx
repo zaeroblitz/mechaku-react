@@ -1,15 +1,19 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { BiMinus, BiPlus } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
-  decrementCartItem,
-  incrementCartItem,
-  removeCartItem,
-} from "apis/cart";
+  fetchDecrementCartItem,
+  fetchIncrementCartItem,
+  fetchRemoveCartItem,
+} from "features/cart/cartSlice";
+import {
+  checkedItemCart,
+  uncheckedItemCart,
+} from "features/cart/cartTotalSlice";
 
 export default function TableItem({
   itemId,
@@ -19,26 +23,31 @@ export default function TableItem({
   amount,
   price,
   stock,
-  token,
-  userId,
-  onCheckItemChange,
-  onPriceItemChange,
 }) {
   const [value, setValue] = useState(amount);
-  const [itemPrice, setItemPrice] = useState(price);
-  const navigate = useNavigate();
+  const [itemPrice, setItemPrice] = useState(amount * price);
+  const dispatch = useDispatch();
   const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const auth = useSelector((state) => state.auth);
+  const data = {
+    token: auth.token,
+    itemId: itemId,
+  };
 
   const handleCheckItem = (e) => {
-    onCheckItemChange(e.target.id, e.target.value);
+    if (e.target.checked) {
+      dispatch(checkedItemCart(parseInt(e.target.value)));
+    } else {
+      dispatch(uncheckedItemCart(parseFloat(e.target.value)));
+    }
   };
 
   const handleMinIconClick = async () => {
     if (value !== 1) {
       setValue(value - 1);
       setItemPrice((value - 1) * price);
-      onPriceItemChange(itemId, (value - 1) * price);
-      await decrementCartItem(token, itemId);
+
+      dispatch(fetchDecrementCartItem(data));
     }
   };
 
@@ -46,32 +55,33 @@ export default function TableItem({
     if (value < stock) {
       setValue(value + 1);
       setItemPrice((value + 1) * price);
-      onPriceItemChange(itemId, (value + 1) * price);
-      await incrementCartItem(token, itemId);
+
+      dispatch(fetchIncrementCartItem(data));
     }
   };
 
-  const handleRemoveItem = async (e) => {
-    e.preventDefault();
+  const handleRemoveItem = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Selected item will be removed from your carts",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4d17e2",
+      cancelButtonColor: "#e4345f",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const removeItemData = {
+          token: auth.token,
+          userId: auth.user.id,
+          data: {
+            item: itemId,
+          },
+        };
 
-    const data = {
-      item: itemId,
-    };
-
-    const response = await removeCartItem(token, userId, data);
-
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success",
-        text: "Success remove item from cart",
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate(0);
-        }
-      });
-    }
+        dispatch(fetchRemoveCartItem(removeItemData));
+      }
+    });
   };
 
   return (

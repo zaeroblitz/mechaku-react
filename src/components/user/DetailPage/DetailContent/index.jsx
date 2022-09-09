@@ -1,12 +1,9 @@
 import Swal from "sweetalert2";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import NumberFormat from "react-number-format";
 import { BiMinus, BiPlus } from "react-icons/bi";
-
-import { addCartItem } from "apis/cart";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAddCartItem } from "features/cart/cartSlice";
 import "./styles.scss";
 
 export default function DetailContent({
@@ -19,10 +16,10 @@ export default function DetailContent({
   stock,
   description,
 }) {
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState({});
   const [value, setValue] = useState(1);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const auth = useSelector((state) => state.auth);
 
   const handleMinIconClick = () => {
     if (value !== 1) {
@@ -36,50 +33,20 @@ export default function DetailContent({
     }
   };
 
-  const handleAddCartButton = async (e) => {
-    e.preventDefault();
+  const handleAddCartButton = async () => {
+    const cartItemData = {
+      token: auth.token,
+      data: { user: auth.user.id, product: id, amount: value },
+    };
 
-    if (token) {
-      const data = {
-        user: userId,
-        product: id,
-        amount: value,
-      };
+    dispatch(fetchAddCartItem(cartItemData));
 
-      const response = await addCartItem(token, data);
-
-      if (response.status === "success") {
-        Swal.fire({
-          title: "Success",
-          text: "Success add to cart",
-          icon: "success",
-          confirmButtonText: "OK!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate(0);
-          }
-        });
-      }
-    } else {
-      Swal.fire({
-        title: "Failed!",
-        text: "Please login first to checkout",
-        icon: "warning",
-        confirmButtonText: "OK!",
-      });
-    }
+    Swal.fire({
+      title: "Success!",
+      text: "Successfully added item to cart!",
+      icon: "success",
+    });
   };
-
-  useEffect(() => {
-    const tokenBase64 = Cookies.get("token");
-
-    if (tokenBase64) {
-      const convertToken = atob(tokenBase64);
-      const jwtToken = jwtDecode(convertToken);
-      setToken(convertToken);
-      setUserId(jwtToken.user.id);
-    }
-  }, []);
 
   return (
     <section className="product-detail-card col-md-6">

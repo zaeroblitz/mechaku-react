@@ -1,15 +1,17 @@
 import Swal from "sweetalert2";
-import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "features/auth/authSlice";
 
-import { setSignIn } from "apis/user";
 import Logo from "assets/icons/logo.svg";
 import "./styles.scss";
 
 export default function SignInForm() {
   const [data, setData] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   const handleEmailChange = (e) => {
     setData({
@@ -34,16 +36,14 @@ export default function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await setSignIn(data);
+    dispatch(fetchUser(data));
+  };
 
-    if (response.status === "success") {
-      const token = response.data.token;
-      const tokenBase64 = btoa(token);
-
-      Cookies.set("token", tokenBase64, { expires: 1 });
+  useEffect(() => {
+    if (auth.isLogin) {
       Swal.fire({
         title: "Success!",
-        text: "Login berhasil",
+        text: "Login Success",
         icon: "success",
         confirmButtonText: "OK!",
       }).then((result) => {
@@ -51,15 +51,15 @@ export default function SignInForm() {
           navigate("/");
         }
       });
-    } else {
+    } else if (!auth.isLogin && auth.error) {
       Swal.fire({
-        title: "Failed!",
-        text: response.message,
+        title: "Error!",
+        text: `Login Failed: ${auth.error}`,
         icon: "error",
         confirmButtonText: "OK!",
       });
     }
-  };
+  }, [auth, navigate]);
 
   return (
     <div className="col-lg-6 d-flex">

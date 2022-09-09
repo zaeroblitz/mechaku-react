@@ -3,6 +3,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./app/store";
 import App from "./App";
 import "./index.css";
 
@@ -68,93 +70,101 @@ import AdminUserPage from "pages/admin/UserPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      {/* User Area */}
-      <Route path="/" element={<App />}>
-        <Route index element={<Homepage />} />
-        <Route path="shop" element={<ShopPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="detail/:id" element={<DetailPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
-      </Route>
-      <Route path="sign-in" element={<SignInPage />} />
-      <Route path="sign-up" element={<SignUpPage />} />
-      <Route path="sign-up-photo" element={<SignUpPhotoPage />} />
-      <Route path="success" element={<SuccessCheckoutPage />} />
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        {/* User Area */}
+        <Route path="/" element={<App />}>
+          <Route index element={<Homepage />} />
+          <Route path="shop" element={<ShopPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="detail/:id" element={<DetailPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+        </Route>
+        <Route path="sign-in" element={<SignInPage />} />
+        <Route path="sign-up" element={<SignUpPage />} />
+        <Route path="sign-up-photo" element={<SignUpPhotoPage />} />
+        <Route path="success" element={<SuccessCheckoutPage />} />
 
-      {/* User - Member Area */}
-      <Route path="member" element={<MemberPage />}>
-        <Route index element={<OverviewPage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="transactions" element={<TransactionsPage />} />
+        {/* User - Member Area */}
+        <Route path="member" element={<MemberPage />}>
+          <Route index element={<OverviewPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="transactions" element={<TransactionsPage />} />
+          <Route
+            path="transactions/detail"
+            element={<TransactionDetailsPage />}
+          />
+        </Route>
+
+        {/* Admin Area */}
+        <Route path="admin" element={<AdminPage />}>
+          <Route index element={<AdminOverviewPage />} />
+
+          {/* Brands   */}
+          <Route path="brands" element={<AdminBrandsPage />} />
+          <Route path="brands/create" element={<AdminCreateBrandsPage />} />
+          <Route path="brands/edit/:id" element={<AdminEditBrandsPage />} />
+
+          {/* Categories */}
+          <Route path="categories" element={<AdminCategoriesPage />} />
+          <Route
+            path="categories/create"
+            element={<AdminCreateCategoryPage />}
+          />
+          <Route
+            path="categories/edit/:id"
+            element={<AdminEditCategoryPage />}
+          />
+
+          {/* Grades */}
+          <Route path="grades" element={<AdminGradesPage />} />
+          <Route path="grades/create" element={<AdminCreateGradePage />} />
+          <Route path="grades/edit/:id" element={<AdminEditGradePage />} />
+
+          {/* Courier */}
+          <Route path="couriers" element={<AdminCouriersPage />} />
+          <Route path="couriers/create" element={<AdminCreateCourierPage />} />
+          <Route path="couriers/edit/:id" element={<AdminEditCourierPage />} />
+
+          {/* Payments */}
+          <Route path="payments" element={<AdminPaymentPage />} />
+          <Route path="payments/create" element={<AdminCreatePaymentPage />} />
+          <Route path="payments/edit/:id" element={<AdminEditPaymentPage />} />
+
+          {/* Products */}
+          <Route path="products" element={<AdminProductPage />} />
+          <Route path="products/create" element={<AdminCreateProductPage />} />
+          <Route path="products/edit/:id" element={<AdminEditProductPage />} />
+
+          {/* Users */}
+          <Route path="users" element={<AdminUserPage />} />
+
+          {/* Transaction Status */}
+          <Route
+            path="transaction-status"
+            element={<AdminTransactionStatusPage />}
+          />
+          <Route
+            path="transaction-status/create"
+            element={<AdminCreateTransactionStatusPage />}
+          />
+          <Route
+            path="transaction-status/edit/:id"
+            element={<AdminEditTransactionStatusPage />}
+          />
+        </Route>
+
+        {/* 404  */}
         <Route
-          path="transactions/detail"
-          element={<TransactionDetailsPage />}
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
         />
-      </Route>
-
-      {/* Admin Area */}
-      <Route path="admin" element={<AdminPage />}>
-        <Route index element={<AdminOverviewPage />} />
-
-        {/* Brands   */}
-        <Route path="brands" element={<AdminBrandsPage />} />
-        <Route path="brands/create" element={<AdminCreateBrandsPage />} />
-        <Route path="brands/edit/:id" element={<AdminEditBrandsPage />} />
-
-        {/* Categories */}
-        <Route path="categories" element={<AdminCategoriesPage />} />
-        <Route path="categories/create" element={<AdminCreateCategoryPage />} />
-        <Route path="categories/edit/:id" element={<AdminEditCategoryPage />} />
-
-        {/* Grades */}
-        <Route path="grades" element={<AdminGradesPage />} />
-        <Route path="grades/create" element={<AdminCreateGradePage />} />
-        <Route path="grades/edit/:id" element={<AdminEditGradePage />} />
-
-        {/* Courier */}
-        <Route path="couriers" element={<AdminCouriersPage />} />
-        <Route path="couriers/create" element={<AdminCreateCourierPage />} />
-        <Route path="couriers/edit/:id" element={<AdminEditCourierPage />} />
-
-        {/* Payments */}
-        <Route path="payments" element={<AdminPaymentPage />} />
-        <Route path="payments/create" element={<AdminCreatePaymentPage />} />
-        <Route path="payments/edit/:id" element={<AdminEditPaymentPage />} />
-
-        {/* Products */}
-        <Route path="products" element={<AdminProductPage />} />
-        <Route path="products/create" element={<AdminCreateProductPage />} />
-        <Route path="products/edit/:id" element={<AdminEditProductPage />} />
-
-        {/* Users */}
-        <Route path="users" element={<AdminUserPage />} />
-
-        {/* Transaction Status */}
-        <Route
-          path="transaction-status"
-          element={<AdminTransactionStatusPage />}
-        />
-        <Route
-          path="transaction-status/create"
-          element={<AdminCreateTransactionStatusPage />}
-        />
-        <Route
-          path="transaction-status/edit/:id"
-          element={<AdminEditTransactionStatusPage />}
-        />
-      </Route>
-
-      {/* 404  */}
-      <Route
-        path="*"
-        element={
-          <main style={{ padding: "1rem" }}>
-            <p>There's nothing here!</p>
-          </main>
-        }
-      />
-    </Routes>
-  </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );

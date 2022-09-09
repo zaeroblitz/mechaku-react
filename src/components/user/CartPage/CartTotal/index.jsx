@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import "./styles.scss";
 
-export default function CartTotal({ total, tax }) {
+export default function CartTotal() {
+  const cartTotal = useSelector((state) => state.cartTotal);
+
   return (
     <div className="cart-total justify-content-end">
       <div className="d-flex justify-content-between">
@@ -12,7 +15,7 @@ export default function CartTotal({ total, tax }) {
           prefix="Rp. "
           decimalSeparator=","
           thousandSeparator="."
-          value={total}
+          value={cartTotal.total}
           className="price"
         />
       </div>
@@ -23,7 +26,7 @@ export default function CartTotal({ total, tax }) {
           prefix="Rp. "
           decimalSeparator=","
           thousandSeparator="."
-          value={total + tax}
+          value={cartTotal.grandTotal}
           className="price"
         />
       </div>

@@ -1,24 +1,22 @@
-import React, { useCallback, useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFeaturedProducts } from "features/product/featuredProductSlice";
+
 import FeaturedItem from "./FeaturedItem";
-import { getAllProducts } from "apis/products";
 import "./styles.scss";
 
 export default function Featured() {
-  const [featuredMechas, setFeaturedMechas] = useState([]);
+  const dispatch = useDispatch();
+  const featuredProducts = useSelector((state) => state.featuredProducts);
   const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
 
-  const getFeaturedMecha = useCallback(async () => {
-    const response = await getAllProducts();
-
-    setFeaturedMechas(response.data);
-  }, []);
-
   useEffect(() => {
-    getFeaturedMecha();
-  }, [getFeaturedMecha]);
+    dispatch(fetchFeaturedProducts());
+  }, [dispatch]);
 
   const renderedFeaturedItems = () => {
-    if (featuredMechas.length)
+    if (!featuredProducts.loading && featuredProducts.products.length) {
+      const featuredMechas = featuredProducts.products;
       return featuredMechas.map((mecha) => (
         <FeaturedItem
           key={mecha._id}
@@ -28,6 +26,7 @@ export default function Featured() {
           category={mecha.category.name}
         />
       ));
+    }
   };
 
   return (
@@ -39,7 +38,7 @@ export default function Featured() {
       </h2>
       <div className="list">
         <div className="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3 g-md-4">
-          {featuredMechas && renderedFeaturedItems()}
+          {renderedFeaturedItems()}
         </div>
       </div>
     </section>
