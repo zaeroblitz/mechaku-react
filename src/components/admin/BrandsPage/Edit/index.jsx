@@ -1,28 +1,25 @@
 import Swal from "sweetalert2";
-import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { GridLoader } from "react-spinners";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { getBrandById, updateBrand } from "apis/brands";
 import ThumbnailDefault from "assets/images/pic.png";
+import { updateSelectedBrandData } from "features/brand/brandSlice";
 
 export default function EditBrand() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const getBrandData = useCallback(async () => {
-    if (id) {
-      const response = await getBrandById(id);
-
-      setData(response.data);
-    }
-  }, [id]);
+  const dispatch = useDispatch();
+  const selectedBrand = useSelector((state) => state.selectedBrand);
 
   useEffect(() => {
-    getBrandData();
-  }, [getBrandData]);
+    if (!selectedBrand.loading && Object.keys(selectedBrand.data).length) {
+      setData(selectedBrand.data);
+    }
+  }, [selectedBrand]);
 
   const handleThumbnailChange = (e) => {
     const [file] = e.target.files;
@@ -38,6 +35,37 @@ export default function EditBrand() {
       ...data,
       name: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updateData = new FormData();
+    updateData.append("name", data.name);
+    updateData.append("thumbnail", data.thumbnail);
+
+    dispatch(updateSelectedBrandData({ id, updateData }));
+
+    Swal.fire({
+      title: "Success",
+      text: "Successfully updated brand data",
+      icon: "success",
+      confirmButtonText: "OK!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/admin/brands");
+      }
+    });
+  };
+
+  const showLoadingSpinner = () => {
+    if (selectedBrand.loading && !Object.keys(selectedBrand.data).length) {
+      return (
+        <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+          <GridLoader color="#333333" />
+        </div>
+      );
+    }
   };
 
   const showBrandThumbnail = () => {
@@ -58,61 +86,41 @@ export default function EditBrand() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const updateData = new FormData();
-    updateData.append("name", data.name);
-    updateData.append("thumbnail", data.thumbnail);
-
-    const response = await updateBrand(id, updateData);
-
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success!",
-        text: response.message,
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/admin/brands");
-        }
-      });
-    }
-  };
-
   return (
-    <section className="data-container">
-      {Object.keys(data).length !== 0 && (
-        <form onSubmit={handleSubmit}>
-          <div className="form-group mb-4">
-            <label htmlFor="name" className="form-label">
-              Brand Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              value={data.name}
-              onChange={handleNameChange}
-            />
-          </div>
-          <div className="form-group mb-4">
-            <label htmlFor="thumbnail" className="form-label">
-              Thumbnail
-            </label>
-            {showBrandThumbnail()}
-            <input
-              type="file"
-              className="form-control"
-              onChange={handleThumbnailChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-add">
-            Save Changes
-          </button>
-        </form>
+    <>
+      {showLoadingSpinner()}
+      {!selectedBrand.loading && Object.keys(selectedBrand.data).length !== 0 && (
+        <section className="data-container">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group mb-4">
+              <label htmlFor="name" className="form-label">
+                Brand Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={data.name}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className="form-group mb-4">
+              <label htmlFor="thumbnail" className="form-label">
+                Thumbnail
+              </label>
+              {showBrandThumbnail()}
+              <input
+                type="file"
+                className="form-control"
+                onChange={handleThumbnailChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-add">
+              Save Changes
+            </button>
+          </form>
+        </section>
       )}
-    </section>
+    </>
   );
 }

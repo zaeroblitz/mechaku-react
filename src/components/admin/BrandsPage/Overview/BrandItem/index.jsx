@@ -1,33 +1,32 @@
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteBrand } from "apis/brands";
+import { removeSelectedBrandData } from "features/brand/brandSlice";
 
 export default function BrandItem({ id, no, name, thumbnail }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleEditButton = (e) => {
-    e.preventDefault();
-
+  const handleEditButton = () => {
     navigate(`/admin/brands/edit/${id}`);
   };
 
-  const handleDeleteButton = async (e) => {
-    e.preventDefault();
+  const handleDeleteButton = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Selected brand will be removed!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4d17e2",
+      cancelButtonColor: "#e4345f",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeSelectedBrandData(id));
 
-    const response = await deleteBrand(id);
-
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success!",
-        text: response.message,
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload();
-        }
-      });
-    }
+        Swal.fire("Deleted!", "Selected brand has been deleted.", "success");
+      }
+    });
   };
 
   return (

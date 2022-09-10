@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUpdateProfile } from "features/auth/authSlice";
 import pic from "../../../assets/images/pic.png";
@@ -11,7 +10,6 @@ export default function SettingsComponent() {
   const [imagePreview, setImagePreview] = useState();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   const AVATAR_URL = "http://localhost:8000/uploads/users";
 

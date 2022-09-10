@@ -1,13 +1,14 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { createBrand } from "apis/brands";
+import { createNewBrandData } from "features/brand/brandSlice";
 
 export default function CreateBrand() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleThumbnailChange = (e) => {
     const [file] = e.target.files;
@@ -25,12 +26,6 @@ export default function CreateBrand() {
     });
   };
 
-  const showBrandThumbnail = () => {
-    if (imagePreview) {
-      return <img src={imagePreview} alt="" className="preview-thumbnail" />;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,19 +33,23 @@ export default function CreateBrand() {
     updateData.append("name", data.name);
     updateData.append("thumbnail", data.thumbnail);
 
-    const response = await createBrand(updateData);
+    dispatch(createNewBrandData(updateData));
 
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success!",
-        text: "Berhasil menambah data brand baru",
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/admin/brands");
-        }
-      });
+    Swal.fire({
+      title: "Success!",
+      text: "Berhasil menambah data brand baru",
+      icon: "success",
+      confirmButtonText: "OK!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/admin/brands");
+      }
+    });
+  };
+
+  const showBrandThumbnail = () => {
+    if (imagePreview) {
+      return <img src={imagePreview} alt="" className="preview-thumbnail" />;
     }
   };
 

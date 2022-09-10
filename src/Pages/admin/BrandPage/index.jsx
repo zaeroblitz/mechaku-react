@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getBrands } from "apis/brands";
+import { fetchBrandsData } from "features/brand/brandSlice";
 import BrandsOverview from "components/admin/BrandsPage/Overview";
 
 export default function AdminBrandsPage() {
-  const [brandsData, setBrandsData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchBrandsData());
     }
-  }, [tokenBase64, navigate]);
-
-  const getBrandsData = useCallback(async () => {
-    const brandsData = await getBrands();
-
-    const data = brandsData.data;
-    setBrandsData(data);
-  }, []);
-
-  useEffect(() => {
-    getBrandsData();
-  }, [getBrandsData]);
+  }, [auth, navigate, dispatch]);
 
   const handleNewBrandButton = (e) => {
-    e.preventDefault();
     navigate("/admin/brands/create");
   };
 
@@ -52,7 +34,7 @@ export default function AdminBrandsPage() {
         <button className="btn btn-add" onClick={handleNewBrandButton}>
           Add New Brand
         </button>
-        <BrandsOverview brandsData={brandsData} />
+        <BrandsOverview />
       </main>
     </>
   );

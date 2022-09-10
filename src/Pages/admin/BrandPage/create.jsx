@@ -1,7 +1,6 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import "components/admin/styles.scss";
@@ -9,24 +8,15 @@ import CreateBrand from "components/admin/BrandsPage/Create";
 
 export default function AdminCreateBrandsPage() {
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate]);
 
-  const handleBackButton = (e) => {
-    e.preventDefault();
-
+  const handleBackButton = () => {
     navigate("/admin/brands");
   };
 

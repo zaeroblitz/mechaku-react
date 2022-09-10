@@ -1,32 +1,34 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
 import EditBrand from "components/admin/BrandsPage/Edit";
+import {
+  cleanedUp,
+  fetchSelectedBrandData,
+} from "features/brand/selectedBrandSlice";
 
 export default function AdminEditBrandsPage() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchSelectedBrandData(id));
     }
-  }, [tokenBase64, navigate]);
 
-  const handleBackButton = (e) => {
-    e.preventDefault();
+    return () => {
+      dispatch(cleanedUp());
+    };
+  }, [auth, navigate, dispatch, id]);
 
+  const handleBackButton = () => {
     navigate("/admin/brands");
   };
 

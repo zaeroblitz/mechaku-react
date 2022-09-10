@@ -1,25 +1,24 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
+import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminOverviewPage() {
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
   useEffect(() => {
-    document.title = "Mechaku Admin | Overview";
-    const tokenBase64 = Cookies.get("token");
-
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-
-      const jwt = jwtDecode(token);
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
     }
-  }, [navigate]);
+  }, [auth, navigate]);
 
-  return <h4>Admin Overview Page</h4>;
+  return (
+    <>
+      <Helmet>
+        <title>Mechaku Admin | Overview</title>
+      </Helmet>
+      <h4 className="mt-5 ms-5">Admin Overview Page</h4>
+    </>
+  );
 }
