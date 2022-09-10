@@ -1,33 +1,25 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SettingsComponent from "components/member/SettingsPage";
 
 export default function SettingsPage() {
-  const [user, setUser] = useState({});
-  const [token, setToken] = useState("");
-  const tokenBase64 = Cookies.get("token");
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const convertToken = atob(tokenBase64);
-      const jwtToken = jwtDecode(convertToken);
-      setToken(convertToken);
-      setUser(jwtToken.user);
-    } else {
+    if (!auth.isLogin && !auth.token) {
       navigate("/");
     }
-  }, []);
+  }, [auth, navigate]);
 
   return (
     <>
       <Helmet>
         <title>Mechaku Member | Settings</title>
       </Helmet>
-      <SettingsComponent user={user} />
+      <SettingsComponent />
     </>
   );
 }

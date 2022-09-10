@@ -1,23 +1,25 @@
 import Swal from "sweetalert2";
-import { useState } from "react";
-import { putUserData } from "apis/user";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUpdateProfile } from "features/auth/authSlice";
 import pic from "../../../assets/images/pic.png";
 import "./styles.scss";
-import { useEffect } from "react";
 
-export default function SettingsComponent({ user }) {
+export default function SettingsComponent() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
-  const AVATAR_URL = "http://localhost:8000/uploads/users";
-  const navigate = useNavigate();
 
-  console.log(data);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  const AVATAR_URL = "http://localhost:8000/uploads/users";
 
   useEffect(() => {
-    setData(user);
-  }, [user]);
+    if (auth.isLogin && auth.token && Object.keys(auth.user).length) {
+      setData(auth.user);
+    }
+  }, [auth]);
 
   const handleInputAvatar = (e) => {
     const [file] = e.target.files;
@@ -54,10 +56,10 @@ export default function SettingsComponent({ user }) {
     if (imagePreview) {
       return <img src={imagePreview} width="90" height="90" alt="" />;
     } else {
-      if (user.avatar) {
+      if (auth.user.avatar) {
         return (
           <img
-            src={`${AVATAR_URL}/${user.avatar}`}
+            src={`${AVATAR_URL}/${auth.user.avatar}`}
             width="90"
             height="90"
             alt=""
@@ -78,26 +80,25 @@ export default function SettingsComponent({ user }) {
     formData.append("phone_number", data.phone_number);
     formData.append("avatar", data.avatar);
 
-    const response = await putUserData(user.id, formData);
+    const profileData = {
+      id: data.id,
+      data: formData,
+    };
 
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success",
-        text: "Success your profile data",
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate(0);
-        }
-      });
-    }
+    dispatch(fetchUpdateProfile(profileData));
+
+    Swal.fire({
+      title: "Success",
+      text: "Successfully updated your profile",
+      icon: "success",
+      confirmButtonText: "OK!",
+    });
   };
 
   return (
     <div className="settings-container col-lg-5">
       <h2 className="settings-header">Settings</h2>
-      {data && (
+      {Object.keys(data).length !== 0 && (
         <form className="settings-form" onSubmit={handleSubmit}>
           <div className="form-avatar">{showAvatarOrPreview()}</div>
           <div className="form-upload">

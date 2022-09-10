@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { setSignIn } from "apis/user";
+import { putUserData, setSignIn } from "apis/user";
 
 let initialState = {
   loading: false,
@@ -29,6 +29,14 @@ export const fetchUser = createAsyncThunk("user/signIn", async (data) => {
   const response = await setSignIn(data);
   return response.data.token;
 });
+
+export const fetchUpdateProfile = createAsyncThunk(
+  "user/updateProfile",
+  async ({ id, data }) => {
+    const response = await putUserData(id, data);
+    return response.data;
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -64,6 +72,28 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(fetchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(fetchUpdateProfile.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchUpdateProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload.avatar) {
+        state.user.avatar = action.payload.avatar;
+      }
+
+      if (action.payload.name) {
+        state.user.name = action.payload.name;
+      }
+
+      if (action.payload.phone_number) {
+        state.user.phone_number = action.payload.phone_number;
+      }
+    });
+    builder.addCase(fetchUpdateProfile.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error.message;
     });
   },
