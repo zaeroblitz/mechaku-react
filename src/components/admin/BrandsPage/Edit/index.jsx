@@ -1,18 +1,22 @@
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
 import { GridLoader } from "react-spinners";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import ThumbnailDefault from "assets/images/pic.png";
 import { updateSelectedBrandData } from "features/brand/brandSlice";
 
 export default function EditBrand() {
-  const [data, setData] = useState({});
-  const [imagePreview, setImagePreview] = useState();
+  const [data, setData] = useState({
+    name: "",
+    thumbnail: "",
+  });
+  const [imagePreview, setImagePreview] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const brands = useSelector((state) => state.brands);
   const selectedBrand = useSelector((state) => state.selectedBrand);
 
   useEffect(() => {
@@ -45,17 +49,6 @@ export default function EditBrand() {
     updateData.append("thumbnail", data.thumbnail);
 
     dispatch(updateSelectedBrandData({ id, updateData }));
-
-    Swal.fire({
-      title: "Success",
-      text: "Successfully updated brand data",
-      icon: "success",
-      confirmButtonText: "OK!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/admin/brands");
-      }
-    });
   };
 
   const showLoadingSpinner = () => {
@@ -86,10 +79,49 @@ export default function EditBrand() {
     }
   };
 
+  const showSweetAlert = () => {
+    // Loading
+    if (brands.loading && !brands.error && brands.response === "loading") {
+      Swal.fire({
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!brands.loading && !brands.error && brands.response === "202") {
+      Swal.fire({
+        title: "Success",
+        text: "Successfully updated brand data",
+        icon: "success",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "OK!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/admin/brands");
+        }
+      });
+    }
+
+    // Error
+    if (!brands.loading && brands.error && brands.response === "error") {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "OK!",
+      });
+    }
+  };
+
   return (
     <>
       {showLoadingSpinner()}
-      {!selectedBrand.loading && Object.keys(selectedBrand.data).length !== 0 && (
+      {!selectedBrand.loading && Object.keys(selectedBrand.data).length && (
         <section className="data-container">
           <form onSubmit={handleSubmit}>
             <div className="form-group mb-4">
@@ -121,6 +153,7 @@ export default function EditBrand() {
           </form>
         </section>
       )}
+      {showSweetAlert()}
     </>
   );
 }

@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createBrand, deleteBrand, getBrands, updateBrand } from "apis/brands";
+import {
+  deleteCategoryData,
+  getAllCategories,
+  postCategoryData,
+  putCategoryData,
+} from "apis/category";
 
 const initialState = {
   loading: false,
@@ -8,41 +13,41 @@ const initialState = {
   response: "",
 };
 
-export const fetchBrandsData = createAsyncThunk(
-  "brand/fetchBrands",
+export const fetchCategoriesData = createAsyncThunk(
+  "category/fetchCategories",
   async () => {
-    const response = await getBrands();
+    const response = await getAllCategories();
     return response.data;
   }
 );
 
-export const createNewBrandData = createAsyncThunk(
-  "brand/createNewBrand",
+export const createCategoryData = createAsyncThunk(
+  "category/createCategory",
   async (data) => {
-    const response = await createBrand(data);
+    const response = await postCategoryData(data);
     return response.data;
   }
 );
 
-export const updateSelectedBrandData = createAsyncThunk(
-  "brand/updateBrand",
-  async ({ id, updateData }) => {
-    const response = await updateBrand(id, updateData);
+export const updateCategoryData = createAsyncThunk(
+  "category/updateCategory",
+  async ({ id, data }) => {
+    const response = await putCategoryData(id, data);
     const responseData = response.data;
     return { id, responseData };
   }
 );
 
-export const removeSelectedBrandData = createAsyncThunk(
-  "brand/removeBrand",
+export const removeCategoryData = createAsyncThunk(
+  "category/removeCategory",
   async (id) => {
-    await deleteBrand(id);
+    await deleteCategoryData(id);
     return id;
   }
 );
 
-const brandSlice = createSlice({
-  name: "brand",
+const categoySlice = createSlice({
+  name: "category",
   initialState,
   reducers: {
     cleanedUp: (state) => {
@@ -50,84 +55,84 @@ const brandSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Fetch All Brand Data
-    builder.addCase(fetchBrandsData.pending, (state) => {
+    // Fetch Data
+    builder.addCase(fetchCategoriesData.pending, (state) => {
       state.loading = true;
       state.response = "loading";
     });
-    builder.addCase(fetchBrandsData.fulfilled, (state, action) => {
+    builder.addCase(fetchCategoriesData.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.error = "";
       state.response = "200";
     });
-    builder.addCase(fetchBrandsData.rejected, (state, action) => {
+    builder.addCase(fetchCategoriesData.rejected, (state, action) => {
       state.loading = false;
       state.data = [];
       state.error = action.error.message;
       state.response = "error";
     });
 
-    // Create New Brand Data
-    builder.addCase(createNewBrandData.pending, (state) => {
+    // Create Data
+    builder.addCase(createCategoryData.pending, (state) => {
       state.loading = true;
       state.response = "loading";
     });
-    builder.addCase(createNewBrandData.fulfilled, (state, action) => {
+    builder.addCase(createCategoryData.fulfilled, (state, action) => {
       state.loading = false;
       state.data.push(action.payload);
       state.error = "";
       state.response = "201";
     });
-    builder.addCase(createNewBrandData.rejected, (state, action) => {
+    builder.addCase(createCategoryData.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
     });
 
-    // Update Brand Data
-    builder.addCase(updateSelectedBrandData.pending, (state) => {
+    // Update Data
+    builder.addCase(updateCategoryData.pending, (state) => {
       state.loading = true;
       state.response = "loading";
     });
-    builder.addCase(updateSelectedBrandData.fulfilled, (state, action) => {
+    builder.addCase(updateCategoryData.fulfilled, (state, action) => {
       state.loading = false;
       state.error = "";
       state.response = "202";
 
-      const selectedBrand = state.data.find(
+      const selectedCategory = state.data.find(
         (item) => item._id === action.payload.id
       );
 
-      if (selectedBrand) {
+      if (selectedCategory) {
         if (action.payload.name) {
-          selectedBrand.name = action.payload.name;
+          selectedCategory.name = action.payload.name;
         }
 
         if (action.payload.thumbnail) {
-          selectedBrand.thumbnail = action.payload.thumbnail;
+          selectedCategory.thumbnail = action.payload.thumbnail;
         }
       }
     });
-    builder.addCase(updateSelectedBrandData.rejected, (state, action) => {
+    builder.addCase(updateCategoryData.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
     });
 
-    // Remove Brand Data
-    builder.addCase(removeSelectedBrandData.pending, (state) => {
+    // Remove Data
+    builder.addCase(removeCategoryData.pending, (state) => {
       state.loading = true;
       state.error = "";
       state.response = "loading";
     });
-    builder.addCase(removeSelectedBrandData.fulfilled, (state, action) => {
+    builder.addCase(removeCategoryData.fulfilled, (state, action) => {
       state.loading = false;
       state.data = state.data.filter((item) => item._id !== action.payload);
       state.error = "";
       state.response = "200-d";
     });
-    builder.addCase(removeSelectedBrandData.rejected, (state, action) => {
+    builder.addCase(removeCategoryData.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
@@ -135,5 +140,5 @@ const brandSlice = createSlice({
   },
 });
 
-export default brandSlice.reducer;
-export const { cleanedUp } = brandSlice.actions;
+export default categoySlice.reducer;
+export const { cleanedUp } = categoySlice.actions;

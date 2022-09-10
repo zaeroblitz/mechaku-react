@@ -1,43 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllCategories } from "apis/category";
+import { fetchCategoriesData } from "features/category/categorySlice";
 import CategoriesOverview from "components/admin/CategoriesPage/Overview";
 
 export default function AdminCategoriesPage() {
-  const [categoriesData, setCategoriesData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchCategoriesData());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const getCategoriesData = useCallback(async () => {
-    const categoriesData = await getAllCategories();
-    setCategoriesData(categoriesData.data);
-  }, []);
-
-  useEffect(() => {
-    getCategoriesData();
-  }, [getCategoriesData]);
-
-  const handleNewCategoryButton = (e) => {
-    e.preventDefault();
-
+  const handleNewCategoryButton = () => {
     navigate("/admin/categories/create");
   };
 
@@ -51,7 +34,7 @@ export default function AdminCategoriesPage() {
         <button className="btn btn-add" onClick={handleNewCategoryButton}>
           Add New Category
         </button>
-        <CategoriesOverview categoriesData={categoriesData} />
+        <CategoriesOverview />
       </main>
     </>
   );

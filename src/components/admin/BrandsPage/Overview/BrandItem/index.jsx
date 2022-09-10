@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeSelectedBrandData } from "features/brand/brandSlice";
+import { cleanedUp, removeSelectedBrandData } from "features/brand/brandSlice";
 
 export default function BrandItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const brands = useSelector((state) => state.brands);
 
   const handleEditButton = () => {
     navigate(`/admin/brands/edit/${id}`);
@@ -23,33 +24,71 @@ export default function BrandItem({ id, no, name, thumbnail }) {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeSelectedBrandData(id));
-
-        Swal.fire("Deleted!", "Selected brand has been deleted.", "success");
       }
     });
   };
 
+  const showDeletedAlert = () => {
+    // Loading
+    if (brands.loading && !brands.error && brands.response === "loading") {
+      Swal.fire({
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!brands.loading && !brands.error && brands.response === "200-d") {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Successfully remove selected category data",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "OK!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(cleanedUp());
+        }
+      });
+    }
+
+    // Error
+    if (!brands.loading && brands.error && brands.response === "error") {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong",
+        confirmButtonText: "OK!",
+      });
+    }
+  };
+
   return (
-    <tr className="align-middle">
-      <td>{no}</td>
-      <td>{name}</td>
-      <td>
-        <img
-          src={`http://localhost:8000/uploads/brands/${thumbnail}`}
-          className="data-thumbnail"
-          alt=""
-        />
-      </td>
-      <td>
-        <div className="d-flex align-items-center justify-content-center">
-          <button className="btn btn-edit me-4" onClick={handleEditButton}>
-            Edit
-          </button>
-          <button className="btn btn-delete" onClick={handleDeleteButton}>
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
+    <>
+      {showDeletedAlert()}
+      <tr className="align-middle">
+        <td>{no}</td>
+        <td>{name}</td>
+        <td>
+          <img
+            src={`http://localhost:8000/uploads/brands/${thumbnail}`}
+            className="data-thumbnail"
+            alt=""
+          />
+        </td>
+        <td>
+          <div className="d-flex align-items-center justify-content-center">
+            <button className="btn btn-edit me-4" onClick={handleEditButton}>
+              Edit
+            </button>
+            <button className="btn btn-delete" onClick={handleDeleteButton}>
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </>
   );
 }
