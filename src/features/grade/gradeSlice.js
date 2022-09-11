@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  deleteCategoryData,
-  getAllCategories,
-  postCategoryData,
-  putCategoryData,
-} from "apis/category";
+  deleteGradeData,
+  getAllGrades,
+  postGradeData,
+  putGradeData,
+} from "apis/grades";
 
 const initialState = {
   loading: false,
@@ -13,60 +13,61 @@ const initialState = {
   response: "",
 };
 
-export const fetchCategoriesData = createAsyncThunk(
-  "category/fetchCategories",
+export const fetchGradesData = createAsyncThunk(
+  "grade/fetchGradesData",
   async () => {
-    const response = await getAllCategories();
+    const response = await getAllGrades();
     return response.data;
   }
 );
 
-export const createCategoryData = createAsyncThunk(
-  "category/createCategory",
+export const createNewGrade = createAsyncThunk(
+  "grade/createNewGrade",
   async (data) => {
-    const response = await postCategoryData(data);
+    const response = await postGradeData(data);
     return response.data;
   }
 );
 
-export const updateCategoryData = createAsyncThunk(
-  "category/updateCategory",
+export const updateSelectedGrade = createAsyncThunk(
+  "grade/updateSelectedGrade",
   async ({ id, data }) => {
-    const response = await putCategoryData(id, data);
+    const response = await putGradeData(id, data);
     const responseData = response.data;
     return { id, responseData };
   }
 );
 
-export const removeCategoryData = createAsyncThunk(
-  "category/removeCategory",
+export const removeSelectedGrade = createAsyncThunk(
+  "grade/removeSelectedGrade",
   async (id) => {
-    await deleteCategoryData(id);
+    await deleteGradeData(id);
     return id;
   }
 );
 
-const categoySlice = createSlice({
-  name: "category",
+const gradeSlice = createSlice({
+  name: "grade",
   initialState,
   reducers: {
-    cleanAfterSuccessRemoveCategory: (state) => {
+    cleanAfterSuccessRemoveGrade: (state) => {
       state.response = "200";
     },
   },
   extraReducers: (builder) => {
     // Fetch Data
-    builder.addCase(fetchCategoriesData.pending, (state) => {
+    builder.addCase(fetchGradesData.pending, (state) => {
       state.loading = true;
+      state.error = "";
       state.response = "loading";
     });
-    builder.addCase(fetchCategoriesData.fulfilled, (state, action) => {
+    builder.addCase(fetchGradesData.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.error = "";
       state.response = "200";
     });
-    builder.addCase(fetchCategoriesData.rejected, (state, action) => {
+    builder.addCase(fetchGradesData.rejected, (state, action) => {
       state.loading = false;
       state.data = [];
       state.error = action.error.message;
@@ -74,65 +75,63 @@ const categoySlice = createSlice({
     });
 
     // Create Data
-    builder.addCase(createCategoryData.pending, (state) => {
+    builder.addCase(createNewGrade.pending, (state) => {
       state.loading = true;
       state.response = "loading";
     });
-    builder.addCase(createCategoryData.fulfilled, (state, action) => {
+    builder.addCase(createNewGrade.fulfilled, (state, action) => {
       state.loading = false;
       state.data.push(action.payload);
       state.error = "";
       state.response = "201";
     });
-    builder.addCase(createCategoryData.rejected, (state, action) => {
+    builder.addCase(createNewGrade.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
     });
 
     // Update Data
-    builder.addCase(updateCategoryData.pending, (state) => {
+    builder.addCase(updateSelectedGrade.pending, (state) => {
       state.loading = true;
       state.response = "loading";
     });
-    builder.addCase(updateCategoryData.fulfilled, (state, action) => {
+    builder.addCase(updateSelectedGrade.fulfilled, (state, action) => {
       state.loading = false;
       state.error = "";
       state.response = "202";
-
-      const selectedCategory = state.data.find(
+      const selectedGrade = state.data.find(
         (item) => item._id === action.payload.id
       );
 
-      if (selectedCategory) {
+      if (selectedGrade) {
         if (action.payload.name) {
-          selectedCategory.name = action.payload.name;
+          selectedGrade.name = action.payload.name;
         }
 
         if (action.payload.thumbnail) {
-          selectedCategory.thumbnail = action.payload.thumbnail;
+          selectedGrade.thumbnail = action.payload.thumbnail;
         }
       }
     });
-    builder.addCase(updateCategoryData.rejected, (state, action) => {
+    builder.addCase(updateSelectedGrade.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
     });
 
     // Remove Data
-    builder.addCase(removeCategoryData.pending, (state) => {
+    builder.addCase(removeSelectedGrade.pending, (state) => {
       state.loading = true;
-      state.error = "";
       state.response = "loading";
     });
-    builder.addCase(removeCategoryData.fulfilled, (state, action) => {
+    builder.addCase(removeSelectedGrade.fulfilled, (state, action) => {
       state.loading = false;
       state.data = state.data.filter((item) => item._id !== action.payload);
       state.error = "";
       state.response = "200-d";
     });
-    builder.addCase(removeCategoryData.rejected, (state, action) => {
+    builder.addCase(removeSelectedGrade.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
       state.response = "error";
@@ -140,5 +139,5 @@ const categoySlice = createSlice({
   },
 });
 
-export default categoySlice.reducer;
-export const { cleanAfterSuccessRemoveCategory } = categoySlice.actions;
+export default gradeSlice.reducer;
+export const { cleanAfterSuccessRemoveGrade } = gradeSlice.actions;

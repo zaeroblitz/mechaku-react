@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllGrades } from "apis/grades";
+import { fetchGradesData } from "features/grade/gradeSlice";
 import GradesOverview from "components/admin/GradesPage/Overview";
 
 export default function AdminGradesPage() {
-  const [gradesData, setGradesData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchGradesData());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const getGradesData = useCallback(async () => {
-    const response = await getAllGrades();
-
-    setGradesData(response.data);
-  }, []);
-
-  useEffect(() => {
-    getGradesData();
-  }, [getGradesData]);
-
-  const handleNewGradeButton = (e) => {
-    e.preventDefault();
-
+  const handleNewGradeButton = () => {
     navigate("/admin/grades/create");
   };
 
@@ -52,7 +34,7 @@ export default function AdminGradesPage() {
         <button className="btn btn-add" onClick={handleNewGradeButton}>
           Add New Grade
         </button>
-        <GradesOverview gradesData={gradesData} />
+        <GradesOverview />
       </main>
     </>
   );

@@ -6,7 +6,7 @@ export default function BrandsOverview() {
   const brands = useSelector((state) => state.brands);
 
   const showLoadingSpinner = () => {
-    if (brands.loading && !brands.data.length) {
+    if (brands.loading && brands.response === "loading") {
       return (
         <div className="w-100 h-100 d-flex align-items-center justify-content-center">
           <GridLoader color="#333333" />

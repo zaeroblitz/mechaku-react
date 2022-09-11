@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { GridLoader } from "react-spinners";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -122,8 +123,22 @@ export default function EditCategory() {
     }
   };
 
+  const showLoadingSpinner = () => {
+    if (
+      selectedCategory.loading &&
+      !Object.keys(selectedCategory.data).length
+    ) {
+      return (
+        <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+          <GridLoader color="#333333" />
+        </div>
+      );
+    }
+  };
+
   return (
     <>
+      {showLoadingSpinner()}
       {showSweetAlert()}
       {!selectedCategory.loading &&
         !selectedCategory.error &&

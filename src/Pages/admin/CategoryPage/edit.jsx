@@ -5,7 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
 import EditCategory from "components/admin/CategoriesPage/Edit";
-import { fetchSelectedCategory } from "features/category/selectedCategorySlice";
+import {
+  cleanedUp,
+  fetchSelectedCategory,
+} from "features/category/selectedCategorySlice";
 
 export default function AdminEditCategoryPage() {
   const { id } = useParams();
@@ -19,6 +22,10 @@ export default function AdminEditCategoryPage() {
     } else {
       dispatch(fetchSelectedCategory(id));
     }
+
+    return () => {
+      dispatch(cleanedUp());
+    };
   }, [auth, navigate, dispatch, id]);
 
   const handleBackButton = () => {

@@ -121,6 +121,7 @@ export default function EditBrand() {
   return (
     <>
       {showLoadingSpinner()}
+      {showSweetAlert()}
       {!selectedBrand.loading && Object.keys(selectedBrand.data).length && (
         <section className="data-container">
           <form onSubmit={handleSubmit}>
@@ -153,7 +154,6 @@ export default function EditBrand() {
           </form>
         </section>
       )}
-      {showSweetAlert()}
     </>
   );
 }

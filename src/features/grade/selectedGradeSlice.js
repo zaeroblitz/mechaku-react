@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCategoryById } from "apis/category";
+import { getGradeById } from "apis/grades";
 
 const initialState = {
   loading: false,
@@ -7,15 +7,15 @@ const initialState = {
   error: "",
 };
 
-export const fetchSelectedCategory = createAsyncThunk(
-  "selectedCategory/fetchData",
+export const fetchSelectedGrade = createAsyncThunk(
+  "selectedGrade/fetch",
   async (id) => {
-    const response = await getCategoryById(id);
+    const response = await getGradeById(id);
     return response.data;
   }
 );
 
-const selectedCategorySlice = createSlice({
+const selectedGradeSlice = createSlice({
   name: "selectedCategory",
   initialState,
   reducers: {
@@ -26,21 +26,21 @@ const selectedCategorySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSelectedCategory.pending, (state) => {
+    builder.addCase(fetchSelectedGrade.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchSelectedCategory.fulfilled, (state, action) => {
+    builder.addCase(fetchSelectedGrade.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.error = "";
     });
-    builder.addCase(fetchSelectedCategory.rejected, (state, action) => {
+    builder.addCase(fetchSelectedGrade.rejected, (state, action) => {
       state.loading = false;
-      state.data = [];
+      state.data = {};
       state.error = action.error.message;
     });
   },
 });
 
-export default selectedCategorySlice.reducer;
-export const { cleanedUp } = selectedCategorySlice.actions;
+export default selectedGradeSlice.reducer;
+export const { cleanedUp } = selectedGradeSlice.actions;

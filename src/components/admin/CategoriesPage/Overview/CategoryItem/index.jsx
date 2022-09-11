@@ -1,7 +1,10 @@
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cleanedUp, removeCategoryData } from "features/category/categorySlice";
+import {
+  cleanAfterSuccessRemoveCategory,
+  removeCategoryData,
+} from "features/category/categorySlice";
 
 export default function CategoryItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
@@ -43,7 +46,7 @@ export default function CategoryItem({ id, no, name, thumbnail }) {
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
-          dispatch(cleanedUp());
+          dispatch(cleanAfterSuccessRemoveCategory());
         }
       });
     }
