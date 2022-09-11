@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getGradeById } from "apis/grades";
+import { getCourierById } from "apis/couriers";
 
 const initialState = {
   loading: false,
@@ -7,16 +7,16 @@ const initialState = {
   error: "",
 };
 
-export const fetchSelectedGrade = createAsyncThunk(
-  "selectedGrade/fetch",
+export const fetchSelectedCourier = createAsyncThunk(
+  "selectedCourier/fetch",
   async (id) => {
-    const response = await getGradeById(id);
+    const response = await getCourierById(id);
     return response.data;
   }
 );
 
-const selectedGradeSlice = createSlice({
-  name: "selectedGrade",
+const selectedCourierSlice = createSlice({
+  name: "selectedCourier",
   initialState,
   reducers: {
     cleanedUp: (state) => {
@@ -26,15 +26,15 @@ const selectedGradeSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSelectedGrade.pending, (state) => {
+    builder.addCase(fetchSelectedCourier.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchSelectedGrade.fulfilled, (state, action) => {
+    builder.addCase(fetchSelectedCourier.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.error = "";
     });
-    builder.addCase(fetchSelectedGrade.rejected, (state, action) => {
+    builder.addCase(fetchSelectedCourier.rejected, (state, action) => {
       state.loading = false;
       state.data = {};
       state.error = action.error.message;
@@ -42,5 +42,5 @@ const selectedGradeSlice = createSlice({
   },
 });
 
-export default selectedGradeSlice.reducer;
-export const { cleanedUp } = selectedGradeSlice.actions;
+export default selectedCourierSlice.reducer;
+export const { cleanedUp } = selectedCourierSlice.actions;

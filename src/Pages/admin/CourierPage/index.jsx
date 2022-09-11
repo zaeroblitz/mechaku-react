@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllCouriersData } from "apis/couriers";
+import { fetchCouriersData } from "features/courier/courierSlice";
 import CouriersOverview from "components/admin/CourierPage/Overview";
 
 export default function AdminCourierPage() {
-  const [couriersData, setCouriersData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchCouriersData());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const getCouriersData = useCallback(async () => {
-    const response = await getAllCouriersData();
-
-    setCouriersData(response.data);
-  }, []);
-
-  useEffect(() => {
-    getCouriersData();
-  }, [getCouriersData]);
-
-  const handleNewCourierButton = (e) => {
-    e.preventDefault();
-
+  const handleNewCourierButton = () => {
     navigate("/admin/couriers/create");
   };
 
@@ -52,7 +34,7 @@ export default function AdminCourierPage() {
         <button className="btn btn-add" onClick={handleNewCourierButton}>
           Add New Courier
         </button>
-        <CouriersOverview couriersData={couriersData} />
+        <CouriersOverview />
       </main>
     </>
   );

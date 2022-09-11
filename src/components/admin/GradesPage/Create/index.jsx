@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { postGradeData } from "apis/grades";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewGrade } from "features/grade/gradeSlice";
@@ -61,7 +60,7 @@ export default function CreateGradeComponents() {
     if (!grades.loading && !grades.error && grades.response === "201") {
       Swal.fire({
         title: "Success!",
-        text: "Berhasil menambah data brand baru",
+        text: "Successfully add a new grade data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

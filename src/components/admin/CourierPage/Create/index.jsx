@@ -1,12 +1,15 @@
 import Swal from "sweetalert2";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postCourierData } from "apis/couriers";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewCourier } from "features/courier/courierSlice";
 
 export default function CreateCourierComponents() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const couriers = useSelector((state) => state.couriers);
 
   const handleNameChange = (e) => {
     setData({
@@ -28,7 +31,7 @@ export default function CreateCourierComponents() {
 
   const showCourierThumbnail = () => {
     if (imagePreview) {
-      return <img src={imagePreview} className="data-thumbnail" alt="" />;
+      return <img src={imagePreview} className="preview-thumbnail" alt="" />;
     }
   };
 
@@ -39,13 +42,33 @@ export default function CreateCourierComponents() {
     formData.append("name", data.name);
     formData.append("thumbnail", data.thumbnail);
 
-    const response = await postCourierData(formData);
+    dispatch(createNewCourier(formData));
+  };
 
-    if (response.status === "success") {
+  const showSweetAlert = () => {
+    // Loading
+    if (
+      couriers.loading &&
+      !couriers.error &&
+      couriers.response === "loading"
+    ) {
       Swal.fire({
-        title: "Success",
-        text: response.message,
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!couriers.loading && !couriers.error && couriers.response === "201") {
+      Swal.fire({
+        title: "Success!",
+        text: "Successfully add a new grade data",
         icon: "success",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -53,40 +76,53 @@ export default function CreateCourierComponents() {
         }
       });
     }
+
+    // Error
+    if (!couriers.loading && couriers.error && couriers.response === "error") {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "OK!",
+      });
+    }
   };
 
   return (
-    <section className="data-container">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group mb-4">
-          <label htmlFor="name" className="form-label">
-            Courier Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter courier name"
-            required
-            id="name"
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className="form-group mb-4">
-          <label htmlFor="thumbnail" className="form-label">
-            Thumbnail
-          </label>
-          {showCourierThumbnail()}
-          <input
-            type="file"
-            className="form-control"
-            id="thumbnail"
-            onChange={handleThumbnailChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-add">
-          Create New Courier
-        </button>
-      </form>
-    </section>
+    <>
+      {showSweetAlert()}
+      <section className="data-container">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-4">
+            <label htmlFor="name" className="form-label">
+              Courier Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter courier name"
+              required
+              id="name"
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label htmlFor="thumbnail" className="form-label">
+              Thumbnail
+            </label>
+            {showCourierThumbnail()}
+            <input
+              type="file"
+              className="form-control"
+              id="thumbnail"
+              onChange={handleThumbnailChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-add">
+            Create New Courier
+          </button>
+        </form>
+      </section>
+    </>
   );
 }

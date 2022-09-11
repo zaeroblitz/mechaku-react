@@ -38,6 +38,21 @@ export default function EditGradeComponents() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("thumbnail", data.thumbnail);
+
+    const updateData = {
+      id,
+      data: formData,
+    };
+
+    dispatch(updateSelectedGrade(updateData));
+  };
+
   const showThumbnail = () => {
     if (imagePreview) {
       return <img src={imagePreview} className="preview-thumbnail" alt="" />;
@@ -52,21 +67,6 @@ export default function EditGradeComponents() {
     } else {
       return null;
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("thumbnail", data.thumbnail);
-
-    const updateData = {
-      id,
-      data: formData,
-    };
-
-    dispatch(updateSelectedGrade(updateData));
   };
 
   const showLoadingSpinner = () => {

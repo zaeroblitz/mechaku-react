@@ -105,12 +105,12 @@ const gradeSlice = createSlice({
       );
 
       if (selectedGrade) {
-        if (action.payload.name) {
-          selectedGrade.name = action.payload.name;
+        if (action.payload.responseData.name) {
+          selectedGrade.name = action.payload.responseData.name;
         }
 
-        if (action.payload.thumbnail) {
-          selectedGrade.thumbnail = action.payload.thumbnail;
+        if (action.payload.responseData.thumbnail) {
+          selectedGrade.thumbnail = action.payload.responseData.thumbnail;
         }
       }
     });

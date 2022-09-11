@@ -100,12 +100,12 @@ const brandSlice = createSlice({
       );
 
       if (selectedBrand) {
-        if (action.payload.name) {
-          selectedBrand.name = action.payload.name;
+        if (action.payload.responseData.name) {
+          selectedBrand.name = action.payload.responseData.name;
         }
 
-        if (action.payload.thumbnail) {
-          selectedBrand.thumbnail = action.payload.thumbnail;
+        if (action.payload.responseData.thumbnail) {
+          selectedBrand.thumbnail = action.payload.responseData.thumbnail;
         }
       }
     });
