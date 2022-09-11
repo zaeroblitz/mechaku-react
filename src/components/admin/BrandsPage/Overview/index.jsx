@@ -16,7 +16,7 @@ export default function BrandsOverview() {
   };
 
   const showBrandItems = () => {
-    if (!brands.loading && brands.data.length) {
+    if (!brands.loading && !brands.error && brands.data.length) {
       const brandsData = brands.data;
 
       return brandsData.map((brand, index) => (
@@ -34,7 +34,7 @@ export default function BrandsOverview() {
   return (
     <>
       {showLoadingSpinner()}
-      {!brands.loading && brands.data.length && (
+      {!brands.loading && !brands.error && brands.data.length && (
         <section className="data-container">
           <table className="table table-borderless table-hover">
             <thead>

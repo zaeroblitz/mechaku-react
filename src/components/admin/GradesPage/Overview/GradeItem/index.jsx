@@ -12,8 +12,36 @@ export default function GradesItem({ id, no, name, thumbnail }) {
   const grades = useSelector((state) => state.grades);
   const GRADE_THUMBNAIL_URL = "http://localhost:8000/uploads/grades";
 
-  const onEditButtonClick = () => {
+  const handleEditButton = () => {
     navigate(`/admin/grades/edit/${id}`);
+  };
+
+  const handleDeleteButton = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Selected grade will be removed!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4d17e2",
+      cancelButtonColor: "#e4345f",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeSelectedGrade(id));
+      }
+    });
+  };
+
+  const showGradeThumbnail = () => {
+    if (thumbnail) {
+      return (
+        <img
+          src={`${GRADE_THUMBNAIL_URL}/${thumbnail}`}
+          className="data-thumbnail"
+          alt=""
+        />
+      );
+    }
   };
 
   const showDeletedAlert = () => {
@@ -53,34 +81,6 @@ export default function GradesItem({ id, no, name, thumbnail }) {
     }
   };
 
-  const onDeleteButtonClick = async () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Selected grade will be removed!`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#4d17e2",
-      cancelButtonColor: "#e4345f",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(removeSelectedGrade(id));
-      }
-    });
-  };
-
-  const showGradeThumbnail = () => {
-    if (thumbnail) {
-      return (
-        <img
-          src={`${GRADE_THUMBNAIL_URL}/${thumbnail}`}
-          className="data-thumbnail"
-          alt=""
-        />
-      );
-    }
-  };
-
   return (
     <>
       {showDeletedAlert()}
@@ -90,10 +90,10 @@ export default function GradesItem({ id, no, name, thumbnail }) {
         <td>{showGradeThumbnail()}</td>
         <td>
           <div className="d-flex align-items-center justify-content-center">
-            <button className="btn btn-edit me-4" onClick={onEditButtonClick}>
+            <button className="btn btn-edit me-4" onClick={handleEditButton}>
               Edit
             </button>
-            <button className="btn btn-delete" onClick={onDeleteButtonClick}>
+            <button className="btn btn-delete" onClick={handleDeleteButton}>
               Delete
             </button>
           </div>

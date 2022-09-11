@@ -28,7 +28,7 @@ export default function CreateGradeComponents() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();

@@ -7,7 +7,7 @@ import { createNewBrandData } from "features/brand/brandSlice";
 export default function CreateBrand() {
   const [data, setData] = useState({
     name: "",
-    thumbnail: null,
+    thumbnail: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function CreateBrand() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const updateData = new FormData();

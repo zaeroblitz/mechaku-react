@@ -1,12 +1,15 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postPaymentData } from "apis/payment";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewPayment } from "features/payment/paymentSlice";
 
 export default function CreatePaymentComponents() {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const payments = useSelector((state) => state.payments);
 
   const handleNameChange = (e) => {
     setData({
@@ -26,26 +29,46 @@ export default function CreatePaymentComponents() {
     });
   };
 
-  const showPaymentThumbnail = () => {
-    if (imagePreview) {
-      return <img src={imagePreview} className="preview-thumbnail" alt="" />;
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("thumbnail", data.thumbnail);
 
-    const response = await postPaymentData(formData);
+    dispatch(createNewPayment(formData));
+  };
 
-    if (response.status === "success") {
+  const showPaymentThumbnail = () => {
+    if (imagePreview) {
+      return <img src={imagePreview} className="preview-thumbnail" alt="" />;
+    }
+  };
+
+  const showSweetAlert = () => {
+    // Loading
+    if (
+      payments.loading &&
+      !payments.error &&
+      payments.response === "loading"
+    ) {
       Swal.fire({
-        title: "Success",
-        text: "Berhasil menambah data pembayaran baru",
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!payments.loading && !payments.error && payments.response === "201") {
+      Swal.fire({
+        title: "Success!",
+        text: "Successfully add a new grade data",
         icon: "success",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -53,40 +76,53 @@ export default function CreatePaymentComponents() {
         }
       });
     }
+
+    // Error
+    if (!payments.loading && payments.error && payments.response === "error") {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "OK!",
+      });
+    }
   };
 
   return (
-    <section className="data-container">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group mb-4">
-          <label htmlFor="name" className="form-label">
-            Payment Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter payment name"
-            required
-            id="name"
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className="form-group mb-4">
-          <label htmlFor="thumbnail" className="form-label">
-            Thumbnail
-          </label>
-          {showPaymentThumbnail()}
-          <input
-            type="file"
-            className="form-control"
-            id="thumbnail"
-            onChange={handleThumbnailChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-add">
-          Create Payment
-        </button>
-      </form>
-    </section>
+    <>
+      {showSweetAlert()}
+      <section className="data-container">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-4">
+            <label htmlFor="name" className="form-label">
+              Payment Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter payment name"
+              required
+              id="name"
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label htmlFor="thumbnail" className="form-label">
+              Thumbnail
+            </label>
+            {showPaymentThumbnail()}
+            <input
+              type="file"
+              className="form-control"
+              id="thumbnail"
+              onChange={handleThumbnailChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-add">
+            Create Payment
+          </button>
+        </form>
+      </section>
+    </>
   );
 }

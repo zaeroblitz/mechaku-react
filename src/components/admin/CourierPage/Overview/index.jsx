@@ -6,7 +6,7 @@ export default function CouriersOverview() {
   const couriers = useSelector((state) => state.couriers);
 
   const showCourierList = () => {
-    if (!couriers.loading && couriers.data.length) {
+    if (!couriers.loading && !couriers.error && couriers.data.length) {
       const couriersData = couriers.data;
       return couriersData.map((courier, index) => (
         <CourierItem
@@ -33,7 +33,7 @@ export default function CouriersOverview() {
   return (
     <>
       {showLoadingSpinner()}
-      {!couriers.loading && couriers.data.length && (
+      {!couriers.loading && !couriers.error && couriers.data.length && (
         <section className="data-container">
           <table className="table table-borderless table-hover">
             <thead>

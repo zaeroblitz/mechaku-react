@@ -29,13 +29,7 @@ export default function CreateCourierComponents() {
     });
   };
 
-  const showCourierThumbnail = () => {
-    if (imagePreview) {
-      return <img src={imagePreview} className="preview-thumbnail" alt="" />;
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -43,6 +37,12 @@ export default function CreateCourierComponents() {
     formData.append("thumbnail", data.thumbnail);
 
     dispatch(createNewCourier(formData));
+  };
+
+  const showCourierThumbnail = () => {
+    if (imagePreview) {
+      return <img src={imagePreview} className="preview-thumbnail" alt="" />;
+    }
   };
 
   const showSweetAlert = () => {

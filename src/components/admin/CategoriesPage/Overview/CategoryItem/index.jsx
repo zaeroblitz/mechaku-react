@@ -9,11 +9,39 @@ import {
 export default function CategoryItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const THUMBNAIL_URL = `http://localhost:8000/uploads/categories/${thumbnail}`;
+  const THUMBNAIL_URL = "http://localhost:8000/uploads/categories";
   const categories = useSelector((state) => state.categories);
 
   const handleEditButton = () => {
     navigate(`/admin/categories/edit/${id}`);
+  };
+
+  const handleDeleteButton = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Selected brand will be removed!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4d17e2",
+      cancelButtonColor: "#e4345f",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeCategoryData(id));
+      }
+    });
+  };
+
+  const showCategoryThumbnail = () => {
+    if (thumbnail) {
+      return (
+        <img
+          src={`${THUMBNAIL_URL}/${thumbnail}`}
+          className="data-thumbnail"
+          alt=""
+        />
+      );
+    }
   };
 
   const showDeletedAlert = () => {
@@ -65,31 +93,13 @@ export default function CategoryItem({ id, no, name, thumbnail }) {
     }
   };
 
-  const handleDeleteButton = async () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Selected brand will be removed!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#4d17e2",
-      cancelButtonColor: "#e4345f",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(removeCategoryData(id));
-      }
-    });
-  };
-
   return (
     <>
       {showDeletedAlert()}
       <tr className="align-middle">
         <td>{no}</td>
         <td>{name}</td>
-        <td>
-          <img src={THUMBNAIL_URL} className="data-thumbnail" alt="" />
-        </td>
+        <td>{showCategoryThumbnail()}</td>
         <td>
           <div className="d-flex align-items-center justify-content-center">
             <button className="btn btn-edit me-4" onClick={handleEditButton}>

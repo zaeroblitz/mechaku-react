@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllPayments } from "apis/payment";
+import { fetchPaymentsData } from "features/payment/paymentSlice";
 import PaymentsOverview from "components/admin/PaymentPage/Overview";
 
 export default function AdminPaymentPage() {
-  const [paymentsData, setPaymentsData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchPaymentsData());
     }
-  }, [tokenBase64, navigate]);
-
-  const getPaymentsData = useCallback(async () => {
-    const response = await getAllPayments();
-
-    setPaymentsData(response.data);
-  }, []);
-
-  useEffect(() => {
-    getPaymentsData();
-  }, [getPaymentsData]);
+  }, [auth, navigate, dispatch]);
 
   const handleNewCourierButton = (e) => {
-    e.preventDefault();
-
     navigate("/admin/payments/create");
   };
 
@@ -52,7 +34,7 @@ export default function AdminPaymentPage() {
         <button className="btn btn-add" onClick={handleNewCourierButton}>
           Add New Payment
         </button>
-        <PaymentsOverview paymentsData={paymentsData} />
+        <PaymentsOverview />
       </main>
     </>
   );

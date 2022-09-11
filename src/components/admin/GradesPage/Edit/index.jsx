@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSelectedGrade } from "features/grade/gradeSlice";
 
 export default function EditGradeComponents() {
-  const [data, setData] = useState({});
-  const [imagePreview, setImagePreview] = useState();
+  const [data, setData] = useState({
+    name: "",
+    thumbnail: "",
+  });
+  const [imagePreview, setImagePreview] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +19,11 @@ export default function EditGradeComponents() {
   const GRADE_THUMBNAIL_URL = "http://localhost:8000/uploads/grades";
 
   useEffect(() => {
-    if (!selectedGrade.loading && Object.keys(selectedGrade.data).length) {
+    if (
+      !selectedGrade.loading &&
+      !selectedGrade.error &&
+      Object.keys(selectedGrade.data).length !== 0
+    ) {
       setData(selectedGrade.data);
     }
   }, [selectedGrade]);
@@ -38,7 +45,7 @@ export default function EditGradeComponents() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -122,41 +129,43 @@ export default function EditGradeComponents() {
     <>
       {showLoadingSpinner()}
       {showSweetAlert()}
-      {!selectedGrade.loading && Object.keys(selectedGrade.data).length && (
-        <section className="data-container">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-4">
-              <label htmlFor="name" className="form-label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="Enter grade name..."
-                required
-                value={data.name}
-                onChange={handleNameChange}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <label htmlFor="thumbnail" className="form-label">
-                Thumbnail
-              </label>
-              {showThumbnail()}
-              <input
-                type="file"
-                id="thumbnail"
-                className="form-control"
-                onChange={handleThumbnailChange}
-              />
-            </div>
-            <button type="submit" className="btn btn-add">
-              Save Changes
-            </button>
-          </form>
-        </section>
-      )}
+      {!selectedGrade.loading &&
+        !selectedGrade.error &&
+        Object.keys(selectedGrade.data).length !== 0 && (
+          <section className="data-container">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-4">
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="form-control"
+                  placeholder="Enter grade name..."
+                  required
+                  value={data.name}
+                  onChange={handleNameChange}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label htmlFor="thumbnail" className="form-label">
+                  Thumbnail
+                </label>
+                {showThumbnail()}
+                <input
+                  type="file"
+                  id="thumbnail"
+                  className="form-control"
+                  onChange={handleThumbnailChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-add">
+                Save Changes
+              </button>
+            </form>
+          </section>
+        )}
     </>
   );
 }

@@ -6,8 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { updateSelectedCourier } from "features/courier/courierSlice";
 
 export default function EditCourierComponents() {
-  const [data, setData] = useState({});
-  const [imagePreview, setImagePreview] = useState();
+  const [data, setData] = useState({
+    name: "",
+    thumbnail: "",
+  });
+  const [imagePreview, setImagePreview] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +45,7 @@ export default function EditCourierComponents() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -126,41 +129,43 @@ export default function EditCourierComponents() {
     <>
       {showLoadingSpinner()}
       {showSweetAlert()}
-      {Object.keys(selectedCourier.data).length !== 0 && (
-        <section className="data-container">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-4">
-              <label htmlFor="name" className="form-label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="Enter courier name..."
-                required
-                value={data.name}
-                onChange={handleNameChange}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <label htmlFor="thumbnail" className="form-label">
-                Thumbnail
-              </label>
-              {showCourierThumbnail()}
-              <input
-                type="file"
-                id="thumbnail"
-                className="form-control"
-                onChange={handleThumbnailChange}
-              />
-            </div>
-            <button type="submit" className="btn btn-add">
-              Save Changes
-            </button>
-          </form>
-        </section>
-      )}
+      {!selectedCourier.loading &&
+        !selectedCourier.error &&
+        Object.keys(selectedCourier.data).length && (
+          <section className="data-container">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-4">
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="form-control"
+                  placeholder="Enter courier name..."
+                  required
+                  value={data.name}
+                  onChange={handleNameChange}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label htmlFor="thumbnail" className="form-label">
+                  Thumbnail
+                </label>
+                {showCourierThumbnail()}
+                <input
+                  type="file"
+                  id="thumbnail"
+                  className="form-control"
+                  onChange={handleThumbnailChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-add">
+                Save Changes
+              </button>
+            </form>
+          </section>
+        )}
     </>
   );
 }

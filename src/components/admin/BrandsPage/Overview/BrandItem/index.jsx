@@ -7,12 +7,13 @@ export default function BrandItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const brands = useSelector((state) => state.brands);
+  const BRAND_THUMBNAIL = "http://localhost:8000/uploads/brands";
 
   const handleEditButton = () => {
     navigate(`/admin/brands/edit/${id}`);
   };
 
-  const handleDeleteButton = async () => {
+  const handleDeleteButton = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "Selected brand will be removed!",
@@ -26,6 +27,18 @@ export default function BrandItem({ id, no, name, thumbnail }) {
         dispatch(removeSelectedBrandData(id));
       }
     });
+  };
+
+  const showBrandThumbnail = () => {
+    if (thumbnail) {
+      return (
+        <img
+          src={`${BRAND_THUMBNAIL}/${thumbnail}`}
+          className="data-thumbnail"
+          alt=""
+        />
+      );
+    }
   };
 
   const showDeletedAlert = () => {
@@ -71,13 +84,7 @@ export default function BrandItem({ id, no, name, thumbnail }) {
       <tr className="align-middle">
         <td>{no}</td>
         <td>{name}</td>
-        <td>
-          <img
-            src={`http://localhost:8000/uploads/brands/${thumbnail}`}
-            className="data-thumbnail"
-            alt=""
-          />
-        </td>
+        <td>{showBrandThumbnail()}</td>
         <td>
           <div className="d-flex align-items-center justify-content-center">
             <button className="btn btn-edit me-4" onClick={handleEditButton}>

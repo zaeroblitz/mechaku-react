@@ -1,32 +1,27 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
 import EditPaymentComponents from "components/admin/PaymentPage/Edit";
+import { fetchSelectedPayment } from "features/payment/selectedPaymentSlice";
 
 export default function AdminEditPaymentPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchSelectedPayment(id));
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch, id]);
 
-  const handleBackButton = (e) => {
-    e.preventDefault();
-
+  const handleBackButton = () => {
     navigate("/admin/payments");
   };
 

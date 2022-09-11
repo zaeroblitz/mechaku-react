@@ -22,7 +22,7 @@ export default function EditCategory() {
     if (
       !selectedCategory.loading &&
       !selectedCategory.error &&
-      Object.keys(selectedCategory.data).length
+      Object.keys(selectedCategory.data).length !== 0
     ) {
       setData(selectedCategory.data);
     }
@@ -45,7 +45,7 @@ export default function EditCategory() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -142,7 +142,7 @@ export default function EditCategory() {
       {showSweetAlert()}
       {!selectedCategory.loading &&
         !selectedCategory.error &&
-        Object.keys(selectedCategory.data).length && (
+        Object.keys(selectedCategory.data).length !== 0 && (
           <section className="data-container">
             <form onSubmit={handleSubmit}>
               <div className="form-group mb-4">

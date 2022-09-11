@@ -20,7 +20,11 @@ export default function EditBrand() {
   const selectedBrand = useSelector((state) => state.selectedBrand);
 
   useEffect(() => {
-    if (!selectedBrand.loading && Object.keys(selectedBrand.data).length) {
+    if (
+      !selectedBrand.loading &&
+      !selectedBrand.error &&
+      Object.keys(selectedBrand.data).length !== 0
+    ) {
       setData(selectedBrand.data);
     }
   }, [selectedBrand]);
@@ -41,7 +45,7 @@ export default function EditBrand() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const updateData = new FormData();
@@ -122,38 +126,40 @@ export default function EditBrand() {
     <>
       {showLoadingSpinner()}
       {showSweetAlert()}
-      {!selectedBrand.loading && Object.keys(selectedBrand.data).length && (
-        <section className="data-container">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-4">
-              <label htmlFor="name" className="form-label">
-                Brand Name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                value={data.name}
-                onChange={handleNameChange}
-              />
-            </div>
-            <div className="form-group mb-4">
-              <label htmlFor="thumbnail" className="form-label">
-                Thumbnail
-              </label>
-              {showBrandThumbnail()}
-              <input
-                type="file"
-                className="form-control"
-                onChange={handleThumbnailChange}
-              />
-            </div>
-            <button type="submit" className="btn btn-add">
-              Save Changes
-            </button>
-          </form>
-        </section>
-      )}
+      {!selectedBrand.loading &&
+        !selectedBrand.error &&
+        Object.keys(selectedBrand.data).length !== 0 && (
+          <section className="data-container">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-4">
+                <label htmlFor="name" className="form-label">
+                  Brand Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  value={data.name}
+                  onChange={handleNameChange}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label htmlFor="thumbnail" className="form-label">
+                  Thumbnail
+                </label>
+                {showBrandThumbnail()}
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={handleThumbnailChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-add">
+                Save Changes
+              </button>
+            </form>
+          </section>
+        )}
     </>
   );
 }

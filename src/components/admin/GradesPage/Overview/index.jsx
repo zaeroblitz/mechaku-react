@@ -16,7 +16,7 @@ export default function GradesOverview() {
   };
 
   const renderedGradeList = () => {
-    if (!grades.loading && grades.data.length) {
+    if (!grades.loading && !grades.error && grades.data.length !== 0) {
       const gradesData = grades.data;
 
       return gradesData.map((grade, index) => (
