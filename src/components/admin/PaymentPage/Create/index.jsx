@@ -65,7 +65,7 @@ export default function CreatePaymentComponents() {
     if (!payments.loading && !payments.error && payments.response === "201") {
       Swal.fire({
         title: "Success!",
-        text: "Successfully add a new grade data",
+        text: "Successfully added a new payment data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

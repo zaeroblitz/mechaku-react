@@ -102,7 +102,7 @@ export default function EditCourierComponents() {
     if (!couriers.loading && !couriers.error && couriers.response === "202") {
       Swal.fire({
         title: "Success",
-        text: "Successfully updated brand data",
+        text: "Successfully updated courier data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

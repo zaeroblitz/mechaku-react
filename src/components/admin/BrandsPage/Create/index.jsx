@@ -62,7 +62,7 @@ export default function CreateBrand() {
     if (!brands.loading && !brands.error && brands.response === "201") {
       Swal.fire({
         title: "Success!",
-        text: "Berhasil menambah data brand baru",
+        text: "Successfully added new brand data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

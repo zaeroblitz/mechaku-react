@@ -65,7 +65,7 @@ export default function CreateCourierComponents() {
     if (!couriers.loading && !couriers.error && couriers.response === "201") {
       Swal.fire({
         title: "Success!",
-        text: "Successfully add a new grade data",
+        text: "Successfully add a new courier data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

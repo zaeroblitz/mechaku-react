@@ -1,32 +1,34 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
-import EditTransactionStatusComponents from "components/admin/TransactionStatusPage/Edit/EditTransactionStatus";
+import EditTransactionStatusComponents from "components/admin/TransactionStatusPage/Edit";
+import {
+  cleanedUp,
+  fetchSelectedTransactionStatus,
+} from "features/transactionStatus/selectedTransactionStatusSlice";
 
 export default function AdminEditTransactionStatusPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchSelectedTransactionStatus(id));
     }
-  }, [tokenBase64, navigate]);
 
-  const handleBackButton = (e) => {
-    e.preventDefault();
+    return () => {
+      dispatch(cleanedUp());
+    };
+  }, [auth, navigate, dispatch, id]);
 
+  const handleBackButton = () => {
     navigate("/admin/transaction-status");
   };
 

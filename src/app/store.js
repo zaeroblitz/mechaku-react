@@ -15,6 +15,8 @@ import selectedPaymentReducer from "features/payment/selectedPaymentSlice";
 import selectedProductReducer from "features/product/selectedProductSlice";
 import featuredProductReducer from "features/product/featuredProductSlice";
 import selectedCategoryReducer from "features/category/selectedCategorySlice";
+import transactionStatusReducer from "features/transactionStatus/transactionStatusSlice";
+import selectedTransactionStatusReducer from "features/transactionStatus/selectedTransactionStatusSlice";
 
 const store = configureStore({
   reducer: {
@@ -34,6 +36,8 @@ const store = configureStore({
     selectedProduct: selectedProductReducer,
     selectedCategory: selectedCategoryReducer,
     featuredProducts: featuredProductReducer,
+    transactionStatus: transactionStatusReducer,
+    selectedTransactionStatus: selectedTransactionStatusReducer,
   },
 });
 

@@ -98,7 +98,7 @@ export default function EditPaymentComponents() {
     if (!payments.loading && !payments.error && payments.response === "202") {
       Swal.fire({
         title: "Success",
-        text: "Successfully updated brand data",
+        text: "Successfully updated payment data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

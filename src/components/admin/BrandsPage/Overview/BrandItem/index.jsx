@@ -57,7 +57,7 @@ export default function BrandItem({ id, no, name, thumbnail }) {
     if (!brands.loading && !brands.error && brands.response === "200-d") {
       Swal.fire({
         title: "Deleted!",
-        text: "Successfully remove selected category data",
+        text: "Successfully remove selected brand data",
         allowEscapeKey: false,
         allowOutsideClick: false,
         confirmButtonText: "OK!",

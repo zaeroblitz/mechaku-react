@@ -1,9 +1,15 @@
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { deleteTransactionStatusData } from "apis/transactionStatus";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  cleanAfterSuccessRemove,
+  removeSelectedTransactionStatus,
+} from "features/transactionStatus/transactionStatusSlice";
 
 export default function TransactionStatusItem({ id, no, name }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const transactionStatus = useSelector((state) => state.transactionStatus);
 
   const handleEditButton = (e) => {
     e.preventDefault();
@@ -11,45 +17,84 @@ export default function TransactionStatusItem({ id, no, name }) {
     navigate(`/admin/transaction-status/edit/${id}`);
   };
 
-  const handleDeleteButton = async (e) => {
+  const handleDeleteButton = (e) => {
     e.preventDefault();
 
-    const response = await deleteTransactionStatusData(id);
+    dispatch(removeSelectedTransactionStatus(id));
+  };
 
-    if (response.status === "success") {
+  const showDeletedAlert = () => {
+    // Loading
+    if (
+      transactionStatus.loading &&
+      !transactionStatus.error &&
+      transactionStatus.response === "loading"
+    ) {
       Swal.fire({
-        title: "Success!",
-        text: response.message,
-        icon: "success",
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (
+      !transactionStatus.loading &&
+      !transactionStatus.error &&
+      transactionStatus.response === "200-d"
+    ) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Successfully remove selected transaction status data",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
         confirmButtonText: "OK!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate(0);
+          dispatch(cleanAfterSuccessRemove());
         }
+      });
+    }
+
+    // Error
+    if (
+      !transactionStatus.loading &&
+      transactionStatus.error &&
+      transactionStatus.response === "error"
+    ) {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong",
+        confirmButtonText: "OK!",
       });
     }
   };
 
   return (
-    <tr className="align-middle">
-      <td>{no}</td>
-      <td>{name}</td>
-      <td>
-        <div className="d-flex justify-content-center align-items-center">
-          <button
-            className="btn btn-warning btn-edit me-4"
-            onClick={handleEditButton}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger btn-delete"
-            onClick={handleDeleteButton}
-          >
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
+    <>
+      {showDeletedAlert()}
+      <tr className="align-middle">
+        <td>{no}</td>
+        <td>{name}</td>
+        <td>
+          <div className="d-flex justify-content-center align-items-center">
+            <button
+              className="btn btn-warning btn-edit me-4"
+              onClick={handleEditButton}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger btn-delete"
+              onClick={handleDeleteButton}
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </>
   );
 }

@@ -102,7 +102,7 @@ export default function EditGradeComponents() {
     if (!grades.loading && !grades.error && grades.response === "202") {
       Swal.fire({
         title: "Success",
-        text: "Successfully updated brand data",
+        text: "Successfully updated grade data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

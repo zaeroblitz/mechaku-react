@@ -60,7 +60,7 @@ export default function CreateGradeComponents() {
     if (!grades.loading && !grades.error && grades.response === "201") {
       Swal.fire({
         title: "Success!",
-        text: "Successfully add a new grade data",
+        text: "Successfully added a new grade data",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,

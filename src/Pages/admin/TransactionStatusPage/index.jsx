@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllTransactionStatus } from "apis/transactionStatus";
 import TransactionStatusOverview from "components/admin/TransactionStatusPage/Overview";
+import { fetchTransactionStatusData } from "features/transactionStatus/transactionStatusSlice";
 
 export default function AdminTransactionStatusPage() {
-  const [transactionStatusData, setTransactionStatusData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchTransactionStatusData());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const getTransactionStatusData = useCallback(async () => {
-    const response = await getAllTransactionStatus();
-
-    setTransactionStatusData(response.data);
-  }, []);
-
-  useEffect(() => {
-    getTransactionStatusData();
-  }, [getTransactionStatusData]);
-
-  const handleNewCourierButton = (e) => {
-    e.preventDefault();
-
+  const handleNewCourierButton = () => {
     navigate("/admin/transaction-status/create");
   };
 
@@ -52,9 +34,7 @@ export default function AdminTransactionStatusPage() {
         <button className="btn btn-add" onClick={handleNewCourierButton}>
           Add New Payment
         </button>
-        <TransactionStatusOverview
-          transactionStatusData={transactionStatusData}
-        />
+        <TransactionStatusOverview />
       </main>
     </>
   );

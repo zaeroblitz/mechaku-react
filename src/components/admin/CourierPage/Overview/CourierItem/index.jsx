@@ -52,7 +52,7 @@ export default function CourierItem({ id, no, name, thumbnail }) {
     if (!couriers.loading && !couriers.error && couriers.response === "200-d") {
       Swal.fire({
         title: "Deleted!",
-        text: "Successfully remove selected grade data",
+        text: "Successfully remove selected courier data",
         allowEscapeKey: false,
         allowOutsideClick: false,
         confirmButtonText: "OK!",

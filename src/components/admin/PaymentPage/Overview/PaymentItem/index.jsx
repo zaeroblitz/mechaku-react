@@ -52,7 +52,7 @@ export default function PaymentItem({ id, no, name, thumbnail }) {
     if (!payments.loading && !payments.error && payments.response === "200-d") {
       Swal.fire({
         title: "Deleted!",
-        text: "Successfully remove selected grade data",
+        text: "Successfully remove selected payment data",
         allowEscapeKey: false,
         allowOutsideClick: false,
         confirmButtonText: "OK!",
