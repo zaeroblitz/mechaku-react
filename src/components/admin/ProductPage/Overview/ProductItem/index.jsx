@@ -1,7 +1,11 @@
 import Swal from "sweetalert2";
 import NumberFormat from "react-number-format";
 import { useNavigate } from "react-router-dom";
-import { deleteProductData } from "apis/products";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  cleanedUpAfterRemove,
+  removeSelectedProduct,
+} from "features/product/productSlice";
 
 export default function ProductItem({
   id,
@@ -11,32 +15,18 @@ export default function ProductItem({
   category,
   price,
 }) {
-  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const products = useSelector((state) => state.products);
+  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
 
-  const handleEditButton = (e) => {
-    e.preventDefault();
-
+  const handleEditButton = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleDeleteButton = async (e) => {
+  const handleDeleteButton = (e) => {
     e.preventDefault();
-
-    const response = await deleteProductData(id);
-
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success!",
-        text: response.message,
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload();
-        }
-      });
-    }
+    dispatch(removeSelectedProduct(id));
   };
 
   const showProductThumbnail = () => {
@@ -51,35 +41,80 @@ export default function ProductItem({
     }
   };
 
+  const showDeletedAlert = () => {
+    // Loading
+    if (
+      products.loading &&
+      !products.error &&
+      products.response === "loading"
+    ) {
+      Swal.fire({
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!products.loading && !products.error && products.response === "200-d") {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Successfully remove selected product data",
+        icon: "success",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "OK!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(cleanedUpAfterRemove());
+        }
+      });
+    }
+
+    // Error
+    if (!products.loading && products.error && products.response === "error") {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong",
+        confirmButtonText: "OK!",
+      });
+    }
+  };
+
   return (
-    <tr className="align-middle">
-      <td>{no}</td>
-      <td>
-        <div className="d-flex align-items-center">
-          {showProductThumbnail()}
-          <p className="mb-0 ms-2">{name}</p>
-        </div>
-      </td>
-      <td>{category}</td>
-      <td>
-        <NumberFormat
-          value={price}
-          prefix="Rp. "
-          displayType="text"
-          decimalSeparator=","
-          thousandSeparator="."
-        />
-      </td>
-      <td>
-        <div className="d-flex justify-content-center align-items-center">
-          <button className="btn btn-edit me-4" onClick={handleEditButton}>
-            Edit
-          </button>
-          <button className="btn btn-delete" onClick={handleDeleteButton}>
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
+    <>
+      {showDeletedAlert()}
+      <tr className="align-middle">
+        <td>{no}</td>
+        <td>
+          <div className="d-flex align-items-center">
+            {showProductThumbnail()}
+            <p className="mb-0 ms-2">{name}</p>
+          </div>
+        </td>
+        <td>{category}</td>
+        <td>
+          <NumberFormat
+            value={price}
+            prefix="Rp. "
+            displayType="text"
+            decimalSeparator=","
+            thousandSeparator="."
+          />
+        </td>
+        <td>
+          <div className="d-flex justify-content-center align-items-center">
+            <button className="btn btn-edit me-4" onClick={handleEditButton}>
+              Edit
+            </button>
+            <button className="btn btn-delete" onClick={handleDeleteButton}>
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </>
   );
 }

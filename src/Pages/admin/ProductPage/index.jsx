@@ -1,44 +1,26 @@
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
-import { getAllProducts } from "apis/products";
 import ProductsOverview from "components/admin/ProductPage/Overview";
+import { fetchAllProducts } from "features/product/productSlice";
 
 export default function AdminProductPage() {
-  const [productsData, setProductsData] = useState([]);
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchAllProducts());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const getProductsData = useCallback(async () => {
-    const response = await getAllProducts();
-
-    setProductsData(response.data);
-  }, []);
-
-  useEffect(() => {
-    getProductsData();
-  }, [getProductsData]);
-
-  const handleNewCourierButton = (e) => {
-    e.preventDefault();
-
+  const handleNewCourierButton = () => {
     navigate("/admin/products/create");
   };
 
@@ -52,7 +34,7 @@ export default function AdminProductPage() {
         <button className="btn btn-add" onClick={handleNewCourierButton}>
           Add New Product
         </button>
-        <ProductsOverview productsData={productsData} />
+        <ProductsOverview />
       </main>
     </>
   );

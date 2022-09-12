@@ -1,32 +1,30 @@
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import "components/admin/styles.scss";
 import CreateProductComponents from "components/admin/ProductPage/Create";
+import { fetchBrandsData } from "features/brand/brandSlice";
+import { fetchGradesData } from "features/grade/gradeSlice";
+import { fetchCategoriesData } from "features/category/categorySlice";
 
 export default function AdminCreateProductPage() {
   const navigate = useNavigate();
-  const tokenBase64 = Cookies.get("token");
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (tokenBase64) {
-      const token = atob(tokenBase64);
-      const jwt = jwtDecode(token);
-
-      if (jwt.user.role !== "ADMIN") {
-        navigate("/");
-      }
-    } else {
+    if (auth.user.role !== "ADMIN") {
       navigate("/");
+    } else {
+      dispatch(fetchBrandsData());
+      dispatch(fetchGradesData());
+      dispatch(fetchCategoriesData());
     }
-  }, [tokenBase64, navigate]);
+  }, [auth, navigate, dispatch]);
 
-  const handleBackButton = (e) => {
-    e.preventDefault();
-
+  const handleBackButton = () => {
     navigate("/admin/products");
   };
 

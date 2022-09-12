@@ -5,7 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
 import EditGradeComponents from "components/admin/GradesPage/Edit";
-import { fetchSelectedGrade } from "features/grade/selectedGradeSlice";
+import {
+  cleanedUp,
+  fetchSelectedGrade,
+} from "features/grade/selectedGradeSlice";
 
 export default function AdminEditGradePage() {
   const { id } = useParams();
@@ -19,6 +22,10 @@ export default function AdminEditGradePage() {
     } else {
       dispatch(fetchSelectedGrade(id));
     }
+
+    return () => {
+      dispatch(cleanedUp());
+    };
   }, [auth, navigate, dispatch, id]);
 
   const handleBackButton = () => {

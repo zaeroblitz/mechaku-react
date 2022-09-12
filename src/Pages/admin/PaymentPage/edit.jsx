@@ -5,7 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "components/admin/styles.scss";
 import EditPaymentComponents from "components/admin/PaymentPage/Edit";
-import { fetchSelectedPayment } from "features/payment/selectedPaymentSlice";
+import {
+  cleanedUp,
+  fetchSelectedPayment,
+} from "features/payment/selectedPaymentSlice";
 
 export default function AdminEditPaymentPage() {
   const { id } = useParams();
@@ -19,6 +22,10 @@ export default function AdminEditPaymentPage() {
     } else {
       dispatch(fetchSelectedPayment(id));
     }
+
+    return () => {
+      dispatch(cleanedUp());
+    };
   }, [auth, navigate, dispatch, id]);
 
   const handleBackButton = () => {

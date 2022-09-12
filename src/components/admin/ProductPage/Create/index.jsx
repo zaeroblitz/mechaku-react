@@ -1,44 +1,20 @@
 import Swal from "sweetalert2";
+import { useState } from "react";
 import NumberFormat from "react-number-format";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getBrands } from "apis/brands";
-import { getAllGrades } from "apis/grades";
-import { postProductData } from "apis/products";
-import { getAllCategories } from "apis/category";
+import { createNewProduct } from "features/product/productSlice";
 
 export default function CreateProductComponents() {
   const [data, setData] = useState("");
-  const [brands, setBrands] = useState([]);
-  const [grades, setGrades] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const getCategoriesData = useCallback(async () => {
-    const response = await getAllCategories();
-
-    setCategories(response.data);
-  }, []);
-
-  const getBrandsData = useCallback(async () => {
-    const response = await getBrands();
-
-    setBrands(response.data);
-  }, []);
-
-  const getGradesData = useCallback(async () => {
-    const response = await getAllGrades();
-
-    setGrades(response.data);
-  }, []);
-
-  useEffect(() => {
-    getCategoriesData();
-    getBrandsData();
-    getGradesData();
-  }, [getCategoriesData, getBrandsData, getGradesData]);
+  const products = useSelector((state) => state.products);
+  const categories = useSelector((state) => state.categories);
+  const brands = useSelector((state) => state.brands);
+  const grades = useSelector((state) => state.grades);
 
   const handleNameChange = (e) => {
     setData({
@@ -123,44 +99,37 @@ export default function CreateProductComponents() {
       formData.append("images", image);
     });
 
-    const response = await postProductData(formData);
-
-    if (response.status === "success") {
-      Swal.fire({
-        title: "Success!",
-        text: response.message,
-        icon: "success",
-        confirmButtonText: "OK!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/admin/products");
-        }
-      });
-    }
+    dispatch(createNewProduct(formData));
   };
 
   const renderedCategoriesOption = () => {
-    return categories.map((category) => (
-      <option key={category._id} value={category._id}>
-        {category.name}
-      </option>
-    ));
+    if (categories.data.length) {
+      return categories.data.map((category) => (
+        <option key={category._id} value={category._id}>
+          {category.name}
+        </option>
+      ));
+    }
   };
 
   const renderedBrandsOption = () => {
-    return brands.map((brand) => (
-      <option key={brand._id} value={brand._id}>
-        {brand.name}
-      </option>
-    ));
+    if (brands.data.length) {
+      return brands.data.map((brand) => (
+        <option key={brand._id} value={brand._id}>
+          {brand.name}
+        </option>
+      ));
+    }
   };
 
   const renderedGradesOption = () => {
-    return grades.map((grade) => (
-      <option key={grade._id} value={grade._id}>
-        {grade.name}
-      </option>
-    ));
+    if (grades.data.length) {
+      return grades.data.map((grade) => (
+        <option key={grade._id} value={grade._id}>
+          {grade.name}
+        </option>
+      ));
+    }
   };
 
   const renderedImagesPreview = () => {
@@ -176,145 +145,191 @@ export default function CreateProductComponents() {
     }
   };
 
+  const showSweetAlert = () => {
+    // Loading
+    if (
+      products.loading &&
+      !products.error &&
+      products.response === "loading"
+    ) {
+      Swal.fire({
+        title: "Loading...",
+        text: "Please wait a moment",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+      });
+    }
+
+    // Success
+    if (!products.loading && !products.error && products.response === "201") {
+      Swal.fire({
+        title: "Success!",
+        text: "Successfully added a new product data",
+        icon: "success",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        confirmButtonText: "OK!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/admin/products");
+        }
+      });
+    }
+
+    // Error
+    if (!products.loading && products.error && products.response === "error") {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "OK!",
+      });
+    }
+  };
+
   return (
-    <section className="data-container">
-      <form onSubmit={handleSubmit}>
-        {/* Name  */}
-        <div className="form-group mb-4">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Enter product name..."
-            className="form-control"
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-
-        {/* Categories */}
-        <div className="form-group mb-4">
-          <label htmlFor="categories" className="form-label">
-            Category
-          </label>
-          <select
-            id="categories"
-            className="form-select"
-            defaultValue={"default"}
-            onChange={handleCategoriesChange}
-            required
-          >
-            <option value={"default"} disabled>
-              Select Category
-            </option>
-            {renderedCategoriesOption()}
-          </select>
-        </div>
-
-        {/* Brands */}
-        <div className="form-group mb-4">
-          <label htmlFor="brands" className="form-label">
-            Brand
-          </label>
-          <select
-            id="brands"
-            className="form-select"
-            defaultValue={"default"}
-            onChange={handleBrandsChange}
-            required
-          >
-            <option value={"default"} disabled>
-              Select Brand
-            </option>
-            {renderedBrandsOption()}
-          </select>
-        </div>
-
-        {/* Grades */}
-        <div className="form-group mb-4">
-          <label htmlFor="grades" className="form-label">
-            Grade
-          </label>
-          <select
-            id="grades"
-            className="form-select"
-            defaultValue={"default"}
-            onChange={handleGradesChange}
-            required
-          >
-            <option value={"default"} disabled>
-              Select Brand
-            </option>
-            {renderedGradesOption()}
-          </select>
-        </div>
-
-        {/* Description */}
-        <div className="form-group mb-4">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            id="description"
-            rows="3"
-            placeholder="Enter product description..."
-            className="form-control"
-            onChange={handleDescriptionChange}
-            required
-          ></textarea>
-        </div>
-
-        {/* Price  */}
-        <div className="form-group mb-4">
-          <label htmlFor="price" className="form-label">
-            Price
-          </label>
-          <NumberFormat
-            prefix="Rp. "
-            decimalSeparator=","
-            thousandSeparator="."
-            className="form-control"
-            onValueChange={handlePriceChange}
-          />
-        </div>
-
-        {/* Quantity  */}
-        <div className="form-group mb-4">
-          <label htmlFor="quantity" className="form-label">
-            Quantity
-          </label>
-          <input
-            type="number"
-            id="quantity"
-            placeholder="Enter product quantity..."
-            className="form-control"
-            onChange={handleQuantityChange}
-            required
-          />
-        </div>
-
-        {/* Images  */}
-        <div className="form-group mb-4">
-          <label htmlFor="images" className="form-label">
-            Images
-          </label>
-          <div className="d-flex align-items-center">
-            {renderedImagesPreview()}
+    <>
+      {showSweetAlert()}
+      <section className="data-container">
+        <form onSubmit={handleSubmit}>
+          {/* Name  */}
+          <div className="form-group mb-4">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter product name..."
+              className="form-control"
+              onChange={handleNameChange}
+              required
+            />
           </div>
-          <input
-            type="file"
-            id="images"
-            className="form-control"
-            onChange={handleImagesChange}
-            multiple
-            required
-          />
-        </div>
 
-        <button className="btn btn-add">Submit</button>
-      </form>
-    </section>
+          {/* Categories */}
+          <div className="form-group mb-4">
+            <label htmlFor="categories" className="form-label">
+              Category
+            </label>
+            <select
+              id="categories"
+              className="form-select"
+              defaultValue={"default"}
+              onChange={handleCategoriesChange}
+              required
+            >
+              <option value={"default"} disabled>
+                Select Category
+              </option>
+              {renderedCategoriesOption()}
+            </select>
+          </div>
+
+          {/* Brands */}
+          <div className="form-group mb-4">
+            <label htmlFor="brands" className="form-label">
+              Brand
+            </label>
+            <select
+              id="brands"
+              className="form-select"
+              defaultValue={"default"}
+              onChange={handleBrandsChange}
+              required
+            >
+              <option value={"default"} disabled>
+                Select Brand
+              </option>
+              {renderedBrandsOption()}
+            </select>
+          </div>
+
+          {/* Grades */}
+          <div className="form-group mb-4">
+            <label htmlFor="grades" className="form-label">
+              Grade
+            </label>
+            <select
+              id="grades"
+              className="form-select"
+              defaultValue={"default"}
+              onChange={handleGradesChange}
+              required
+            >
+              <option value={"default"} disabled>
+                Select Brand
+              </option>
+              {renderedGradesOption()}
+            </select>
+          </div>
+
+          {/* Description */}
+          <div className="form-group mb-4">
+            <label htmlFor="description" className="form-label">
+              Description
+            </label>
+            <textarea
+              id="description"
+              rows="3"
+              placeholder="Enter product description..."
+              className="form-control"
+              onChange={handleDescriptionChange}
+              required
+            ></textarea>
+          </div>
+
+          {/* Price  */}
+          <div className="form-group mb-4">
+            <label htmlFor="price" className="form-label">
+              Price
+            </label>
+            <NumberFormat
+              prefix="Rp. "
+              decimalSeparator=","
+              thousandSeparator="."
+              className="form-control"
+              onValueChange={handlePriceChange}
+            />
+          </div>
+
+          {/* Quantity  */}
+          <div className="form-group mb-4">
+            <label htmlFor="quantity" className="form-label">
+              Quantity
+            </label>
+            <input
+              type="number"
+              id="quantity"
+              placeholder="Enter product quantity..."
+              className="form-control"
+              onChange={handleQuantityChange}
+              required
+            />
+          </div>
+
+          {/* Images  */}
+          <div className="form-group mb-4">
+            <label htmlFor="images" className="form-label">
+              Images
+            </label>
+            <div className="d-flex align-items-center">
+              {renderedImagesPreview()}
+            </div>
+            <input
+              type="file"
+              id="images"
+              className="form-control"
+              onChange={handleImagesChange}
+              multiple
+              required
+            />
+          </div>
+
+          <button className="btn btn-add">Submit</button>
+        </form>
+      </section>
+    </>
   );
 }
