@@ -26,8 +26,14 @@ const cartTotalSlice = createSlice({
       state.tax -= tax;
       state.grandTotal -= price + tax;
     },
+    cleanedUpItemCart: (state) => {
+      state.total = 0;
+      state.tax = 0;
+      state.grandTotal = 0;
+    },
   },
 });
 
 export default cartTotalSlice.reducer;
-export const { checkedItemCart, uncheckedItemCart } = cartTotalSlice.actions;
+export const { checkedItemCart, uncheckedItemCart, cleanedUpItemCart } =
+  cartTotalSlice.actions;

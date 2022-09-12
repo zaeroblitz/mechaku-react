@@ -1,10 +1,35 @@
-import "./styles.scss";
-import SampleThumbnail1 from "assets/images/featured-1.jpg";
-import SampleThumbnail2 from "assets/images/featured-2.jpg";
-import SampleThumbnail3 from "assets/images/featured-3.jpg";
+import { useSelector } from "react-redux";
 import ProductOrderedItem from "./Item";
+import "./styles.scss";
 
 export default function CartItems() {
+  const selectedCarts = useSelector((state) => state.selectedCart.data);
+  const PRODUCT_THUMBAIL_URL = "http://localhost:8000/uploads/products";
+
+  const showProductOrderedItem = () => {
+    if (selectedCarts.length) {
+      return selectedCarts.map((item, index) => (
+        <ProductOrderedItem
+          key={item.itemId}
+          no={index + 1}
+          thumbnail={`${PRODUCT_THUMBAIL_URL}/${item.thumbnail}`}
+          name={item.name}
+          category={item.category}
+          price={item.price}
+          amount={item.amount}
+        />
+      ));
+    } else {
+      return (
+        <tr>
+          <td colSpan={5} className="text-center">
+            No Products Ordered
+          </td>
+        </tr>
+      );
+    }
+  };
+
   return (
     <section className="cart-items">
       <h2 className="title">Products Ordered</h2>
@@ -14,40 +39,12 @@ export default function CartItems() {
             <tr>
               <th>No.</th>
               <th>Product</th>
-              <th>Single Price</th>
-              <th>Amount</th>
-              <th>Total Price</th>
+              <th className="text-center">Single Price</th>
+              <th className="text-center">Amount</th>
+              <th className="text-center">Total Price</th>
             </tr>
           </thead>
-          <tbody>
-            <ProductOrderedItem
-              key={1}
-              no={1}
-              thumbnail={SampleThumbnail1}
-              name="Product A"
-              category="Gundam"
-              price={100000}
-              amount={5}
-            />
-            <ProductOrderedItem
-              key={2}
-              no={2}
-              thumbnail={SampleThumbnail2}
-              name="Product B"
-              category="Zoids"
-              price={200000}
-              amount={3}
-            />
-            <ProductOrderedItem
-              key={3}
-              no={3}
-              thumbnail={SampleThumbnail3}
-              name="Product C"
-              category="Gundam"
-              price={500000}
-              amount={2}
-            />
-          </tbody>
+          <tbody>{showProductOrderedItem()}</tbody>
         </table>
       </div>
     </section>

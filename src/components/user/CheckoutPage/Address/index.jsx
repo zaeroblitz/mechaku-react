@@ -1,6 +1,14 @@
+import { addAddress } from "features/checkout/checkoutSlice";
+import { useDispatch } from "react-redux";
 import "./styles.scss";
 
 export default function CheckoutAddress() {
+  const dispatch = useDispatch();
+
+  const handleAddressChange = (e) => {
+    dispatch(addAddress(e.target.value));
+  };
+
   return (
     <section className="checkout-address">
       <h2 className="title">Shipping Address</h2>
@@ -13,16 +21,17 @@ export default function CheckoutAddress() {
             </label>
             <textarea
               cols="30"
-              rows="2"
+              rows="3"
               id="address"
               placeholder="Enter your address..."
               className="form-control"
+              onChange={handleAddressChange}
               required
             ></textarea>
           </div>
 
           {/* Province & City */}
-          <div className="row">
+          {/* <div className="row">
             <div className="form-group col-md-6">
               <label htmlFor="Province" className="form-label">
                 Province
@@ -47,10 +56,10 @@ export default function CheckoutAddress() {
                 required
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Postal Code & Phone Number */}
-          <div className="row">
+          {/* <div className="row">
             <div className="form-group col-md-6">
               <label htmlFor="postal_code" className="form-label">
                 Postal Code
@@ -75,7 +84,7 @@ export default function CheckoutAddress() {
                 required
               />
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </section>

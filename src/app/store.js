@@ -9,6 +9,9 @@ import paymentReducer from "features/payment/paymentSlice";
 import productReducer from "features/product/productSlice";
 import cartTotalReducer from "features/cart/cartTotalSlice";
 import categoryReducer from "features/category/categorySlice";
+import checkoutReducer from "features/checkout/checkoutSlice";
+import selectedCartReducer from "features/cart/selectedCartSlice";
+import transactionReducer from "features/checkout/transactionSlice";
 import selectedBrandReducer from "features/brand/selectedBrandSlice";
 import selectedGradeReducer from "features/grade/selectedGradeSlice";
 import selectedCourierReducer from "features/courier/selectedCourierSlice";
@@ -30,7 +33,10 @@ const store = configureStore({
     couriers: courierReducer,
     payments: paymentReducer,
     products: productReducer,
+    checkout: checkoutReducer,
     categories: categoryReducer,
+    transaction: transactionReducer,
+    selectedCart: selectedCartReducer,
     selectedBrand: selectedBrandReducer,
     selectedGrade: selectedGradeReducer,
     selectedCourier: selectedCourierReducer,

@@ -14,6 +14,10 @@ import {
   checkedItemCart,
   uncheckedItemCart,
 } from "features/cart/cartTotalSlice";
+import {
+  addSelectedCart,
+  uncheckedSelectedCart,
+} from "features/cart/selectedCartSlice";
 
 export default function TableItem({
   itemId,
@@ -37,8 +41,19 @@ export default function TableItem({
   const handleCheckItem = (e) => {
     if (e.target.checked) {
       dispatch(checkedItemCart(parseInt(e.target.value)));
+      dispatch(
+        addSelectedCart({
+          itemId,
+          thumbnail,
+          name,
+          category,
+          amount,
+          price,
+        })
+      );
     } else {
       dispatch(uncheckedItemCart(parseFloat(e.target.value)));
+      dispatch(uncheckedSelectedCart(itemId));
     }
   };
 

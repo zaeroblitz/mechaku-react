@@ -20,7 +20,7 @@ export default function ProductOrderedItem({
           </div>
         </div>
       </td>
-      <td>
+      <td className="text-center">
         <NumberFormat
           displayType="text"
           prefix="Rp. "
@@ -30,9 +30,9 @@ export default function ProductOrderedItem({
         />
       </td>
       <td>
-        <p className="product-amount">{amount}</p>
+        <p className="product-amount mb-0 text-center">{amount}</p>
       </td>
-      <td>
+      <td className="text-center">
         <NumberFormat
           displayType="text"
           prefix="Rp. "

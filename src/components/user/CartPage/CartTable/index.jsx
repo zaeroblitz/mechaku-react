@@ -3,7 +3,7 @@ import { GridLoader } from "react-spinners";
 import TableItem from "./TableItem";
 import "./styles.scss";
 
-export default function CartTable({ onCheckItemChange, onPriceItemChange }) {
+export default function CartTable() {
   const carts = useSelector((state) => state.carts);
 
   const renderedCartItems = () => {
