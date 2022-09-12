@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "features/auth/authSlice";
+import userReducer from "features/user/userSlice";
 import cartReducer from "features/cart/cartSlice";
 import brandReducer from "features/brand/brandSlice";
 import gradeReducer from "features/grade/gradeSlice";
@@ -21,6 +22,7 @@ import selectedTransactionStatusReducer from "features/transactionStatus/selecte
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    user: userReducer,
     carts: cartReducer,
     cartTotal: cartTotalReducer,
     brands: brandReducer,
