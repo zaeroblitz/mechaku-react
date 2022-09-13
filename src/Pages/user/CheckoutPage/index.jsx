@@ -14,6 +14,7 @@ import ChoosePayment from "components/user/CheckoutPage/ChoosePayment";
 import CheckoutGrandTotal from "components/user/CheckoutPage/GrandTotal";
 import CompleteCheckoutButton from "components/user/CheckoutPage/CompleteCheckoutButton";
 import {
+  addCartItems,
   addProducts,
   addTax,
   addUser,
@@ -28,8 +29,6 @@ export default function CheckoutPage() {
   const cartTotal = useSelector((state) => state.cartTotal);
   const selectedCarts = useSelector((state) => state.selectedCart.data);
   const transaction = useSelector((state) => state.transaction);
-
-  console.log(transaction);
 
   useEffect(() => {
     dispatch(fetchCouriersData());
@@ -49,7 +48,8 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (selectedCarts.length) {
-      selectedCarts.map((item) => dispatch(addProducts(item.itemId)));
+      selectedCarts.map((item) => dispatch(addCartItems(item.itemId)));
+      selectedCarts.map((item) => dispatch(addProducts(item.productId)));
     }
   }, [selectedCarts, dispatch]);
 

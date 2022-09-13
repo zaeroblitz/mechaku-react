@@ -11,16 +11,19 @@ import {
   fetchRemoveCartItem,
 } from "features/cart/cartSlice";
 import {
-  checkedItemCart,
-  uncheckedItemCart,
+  incrementItemCart,
+  decrementItemCart,
 } from "features/cart/cartTotalSlice";
 import {
   addSelectedCart,
+  incrementAmount,
+  decrementAmount,
   uncheckedSelectedCart,
 } from "features/cart/selectedCartSlice";
 
 export default function TableItem({
   itemId,
+  productId,
   thumbnail,
   name,
   category,
@@ -28,6 +31,7 @@ export default function TableItem({
   price,
   stock,
 }) {
+  const [isChecked, setIsChecked] = useState(false);
   const [value, setValue] = useState(amount);
   const [itemPrice, setItemPrice] = useState(amount * price);
   const dispatch = useDispatch();
@@ -40,10 +44,12 @@ export default function TableItem({
 
   const handleCheckItem = (e) => {
     if (e.target.checked) {
-      dispatch(checkedItemCart(parseInt(e.target.value)));
+      setIsChecked(true);
+      dispatch(incrementItemCart(parseInt(itemPrice)));
       dispatch(
         addSelectedCart({
           itemId,
+          productId,
           thumbnail,
           name,
           category,
@@ -51,8 +57,10 @@ export default function TableItem({
           price,
         })
       );
-    } else {
-      dispatch(uncheckedItemCart(parseFloat(e.target.value)));
+    }
+    if (!e.target.checked) {
+      setIsChecked(false);
+      dispatch(decrementItemCart(parseInt(itemPrice)));
       dispatch(uncheckedSelectedCart(itemId));
     }
   };
@@ -63,6 +71,11 @@ export default function TableItem({
       setItemPrice((value - 1) * price);
 
       dispatch(fetchDecrementCartItem(data));
+
+      if (isChecked) {
+        dispatch(decrementItemCart(parseInt(price)));
+        dispatch(decrementAmount(itemId));
+      }
     }
   };
 
@@ -72,6 +85,11 @@ export default function TableItem({
       setItemPrice((value + 1) * price);
 
       dispatch(fetchIncrementCartItem(data));
+
+      if (isChecked) {
+        dispatch(incrementItemCart(parseInt(price)));
+        dispatch(incrementAmount(itemId));
+      }
     }
   };
 

@@ -13,6 +13,7 @@ export default function CartTable() {
         <TableItem
           key={item._id}
           itemId={item._id}
+          productId={item.product._id}
           amount={item.amount}
           name={item.product.name}
           category={item.product.category.name}

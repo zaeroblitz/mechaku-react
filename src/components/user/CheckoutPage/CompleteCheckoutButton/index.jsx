@@ -4,14 +4,14 @@ import "./styles.scss";
 
 export default function CompleteCheckoutButton() {
   const dispatch = useDispatch();
-  const { user, address, products, courier, payment, value, tax } = useSelector(
-    (state) => state.checkout
-  );
+  const { user, address, cartItems, products, courier, payment, value, tax } =
+    useSelector((state) => state.checkout);
 
   const handleButtonClick = () => {
     dispatch(
       createTransactionData({
         user,
+        cartItems,
         address,
         products,
         courier,

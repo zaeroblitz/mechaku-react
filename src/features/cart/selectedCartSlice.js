@@ -14,6 +14,22 @@ const selectedCartSlice = createSlice({
     uncheckedSelectedCart: (state, action) => {
       state.data = state.data.filter((item) => item.itemId !== action.payload);
     },
+    incrementAmount: (state, action) => {
+      const selectedCart = state.data.find(
+        (item) => item.itemId === action.payload
+      );
+      if (selectedCart) {
+        selectedCart.amount++;
+      }
+    },
+    decrementAmount: (state, action) => {
+      const selectedCart = state.data.find(
+        (item) => item.itemId === action.payload
+      );
+      if (selectedCart) {
+        selectedCart.amount--;
+      }
+    },
     cleanSelectedCart: (state) => {
       state.data = [];
     },
@@ -21,5 +37,10 @@ const selectedCartSlice = createSlice({
 });
 
 export default selectedCartSlice.reducer;
-export const { addSelectedCart, uncheckedSelectedCart, cleanSelectedCart } =
-  selectedCartSlice.actions;
+export const {
+  addSelectedCart,
+  uncheckedSelectedCart,
+  incrementAmount,
+  decrementAmount,
+  cleanSelectedCart,
+} = selectedCartSlice.actions;

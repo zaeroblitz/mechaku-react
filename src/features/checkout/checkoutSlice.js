@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: "",
   address: "",
+  cartItems: [],
   products: [],
   courier: "",
   payment: "",
@@ -19,6 +20,9 @@ const checkoutSlice = createSlice({
     },
     addAddress: (state, action) => {
       state.address = action.payload;
+    },
+    addCartItems: (state, action) => {
+      state.cartItems.push(action.payload);
     },
     addProducts: (state, action) => {
       state.products.push(action.payload);
@@ -41,6 +45,7 @@ const checkoutSlice = createSlice({
 export default checkoutSlice.reducer;
 export const {
   addUser,
+  addCartItems,
   addAddress,
   addProducts,
   addCourier,

@@ -25,7 +25,6 @@ export const fetchAddCartItem = createAsyncThunk(
   "cart/fetchAddCartItem",
   async ({ token, data }) => {
     const response = await addCartItem(token, data);
-    console.log(response.data);
     return response.data;
   }
 );

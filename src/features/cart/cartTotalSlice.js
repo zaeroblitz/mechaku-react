@@ -10,7 +10,7 @@ const cartTotalSlice = createSlice({
   name: "cartTotal",
   initialState,
   reducers: {
-    checkedItemCart: (state, action) => {
+    incrementItemCart: (state, action) => {
       const price = action.payload;
       const tax = 0.1 * price;
 
@@ -18,7 +18,7 @@ const cartTotalSlice = createSlice({
       state.tax += tax;
       state.grandTotal += price + tax;
     },
-    uncheckedItemCart: (state, action) => {
+    decrementItemCart: (state, action) => {
       const price = action.payload;
       const tax = 0.1 * price;
 
@@ -35,5 +35,5 @@ const cartTotalSlice = createSlice({
 });
 
 export default cartTotalSlice.reducer;
-export const { checkedItemCart, uncheckedItemCart, cleanedUpItemCart } =
+export const { incrementItemCart, decrementItemCart, cleanedUpItemCart } =
   cartTotalSlice.actions;
