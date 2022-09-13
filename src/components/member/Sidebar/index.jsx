@@ -55,7 +55,7 @@ export default function Sidebar() {
           <SidebarItem
             icon={<RiShoppingBag3Line className="icon" />}
             label="Transactions"
-            isActive={path === "/member/transactions"}
+            isActive={path.includes("/member/transactions")}
             href="transactions"
           />
           <SidebarItem

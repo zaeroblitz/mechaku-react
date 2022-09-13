@@ -10,8 +10,8 @@ import productReducer from "features/product/productSlice";
 import cartTotalReducer from "features/cart/cartTotalSlice";
 import categoryReducer from "features/category/categorySlice";
 import checkoutReducer from "features/checkout/checkoutSlice";
+import transactionReducer from "features/transaction/transactionSlice";
 import selectedCartReducer from "features/cart/selectedCartSlice";
-import transactionReducer from "features/checkout/transactionSlice";
 import selectedBrandReducer from "features/brand/selectedBrandSlice";
 import selectedGradeReducer from "features/grade/selectedGradeSlice";
 import selectedCourierReducer from "features/courier/selectedCourierSlice";
@@ -19,6 +19,8 @@ import selectedPaymentReducer from "features/payment/selectedPaymentSlice";
 import selectedProductReducer from "features/product/selectedProductSlice";
 import featuredProductReducer from "features/product/featuredProductSlice";
 import selectedCategoryReducer from "features/category/selectedCategorySlice";
+import selectedTransactionReducer from "features/transaction/selectedTransactionSlice";
+import createTransactionReducer from "features/checkout/createTransactionSlice";
 import transactionStatusReducer from "features/transactionStatus/transactionStatusSlice";
 import selectedTransactionStatusReducer from "features/transactionStatus/selectedTransactionStatusSlice";
 
@@ -35,7 +37,7 @@ const store = configureStore({
     products: productReducer,
     checkout: checkoutReducer,
     categories: categoryReducer,
-    transaction: transactionReducer,
+    transactions: transactionReducer,
     selectedCart: selectedCartReducer,
     selectedBrand: selectedBrandReducer,
     selectedGrade: selectedGradeReducer,
@@ -43,6 +45,8 @@ const store = configureStore({
     selectedPayment: selectedPaymentReducer,
     selectedProduct: selectedProductReducer,
     selectedCategory: selectedCategoryReducer,
+    selectedTransaction: selectedTransactionReducer,
+    createTransaction: createTransactionReducer,
     featuredProducts: featuredProductReducer,
     transactionStatus: transactionStatusReducer,
     selectedTransactionStatus: selectedTransactionStatusReducer,

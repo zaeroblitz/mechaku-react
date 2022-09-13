@@ -1,14 +1,16 @@
+import NumberFormat from "react-number-format";
+
 export default function TransactionItem({
   thumbnail,
   name,
   category,
   grade,
+  amount,
   price,
-  status,
 }) {
   return (
-    <tr className="align-middle table-item">
-      <td className="product-header">
+    <div className="transaction-item row justify-content-between align-items-center">
+      <section className="product-header col-md-4">
         <div className="d-flex align-items-center">
           <img
             className="product-thumbnail"
@@ -22,19 +24,23 @@ export default function TransactionItem({
             <p className="product-category">{category}</p>
           </div>
         </div>
-      </td>
-      <td className="product-grade">
+      </section>
+      <section className="product-grade col-md-2">
         <p>{grade}</p>
-      </td>
-      <td className="product-price">
-        <p>{price}</p>
-      </td>
-      <td className="product-status">
-        <div className="d-flex align-items-center">
-          <span className={`status-indicator ${status.toLowerCase()}`}></span>
-          <p className="status-label">{status}</p>
-        </div>
-      </td>
-    </tr>
+      </section>
+      <section className="product-amount col-md-2">
+        <p>{amount}</p>
+      </section>
+      <section className="product-price col-md-2 text-end">
+        <NumberFormat
+          displayType="text"
+          prefix="Rp. "
+          decimalSeparator=","
+          thousandSeparator="."
+          value={amount * price}
+          className="product-price"
+        />
+      </section>
+    </div>
   );
 }

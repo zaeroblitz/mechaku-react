@@ -1,60 +1,8 @@
 @import '../../../styles/_colors.scss';
 
-.overview-content {
-    margin: 0 30px 0 60px;
-
-    .overview-title {
-        color: $darkBlueColor;
-        font-weight: 700;
-        font-size: 36px;
-        line-height: 47px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    .overview-total-spent {
-        width: 360px;
-        background-color: $whiteColor;
-        padding: 30px;
-        border: none;
-        border-radius: 16px;
-        box-shadow: 0px 0px 25px rgba(51, 51, 51, 0.075);
-        margin-bottom: 50px;
-
-        .header {
-            margin-bottom: 24px;
-
-            img {
-                width: 60px;
-                height: 60px;
-                margin-right: 12px;
-            }
-
-            h4 {
-                color: #333333;
-                font-weight: 500;
-                font-size: 24px;
-                line-height: 31px;
-            }
-        }
-
-        .value {
-            p {
-                color: $greyColor;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 21px;
-                margin-bottom: 2px;
-            }
-
-            h4 {
-                color: $darkBlueColor;
-                font-weight: 500;
-                font-size: 22px;
-                line-height: 33px;
-            }
-        }
-    }
+.transactions-content {
+    margin-top: 60px;
+    margin-left: 40px;
 
     .overview-transactions {
         margin-bottom: 80px;
@@ -189,6 +137,50 @@
                         -webkit-box-orient: vertical;
                     }
                 }
+            }
+        }
+    }
+
+    .transactions-status-selector {
+        margin-bottom: 40px;
+
+        .status-selector {
+            background-color: #e7eaf5;
+            width: 120px;
+            margin-right: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            transition: all 0.4s;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #f3f3fd;
+                transition: all 0.4s;
+            }
+
+            p {
+                color: #0c145a;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 19px;
+                text-align: center;
+                margin-bottom: 0;
+            }
+        }
+
+        .status-selector-active {
+            background-color: #2b2467;
+            transition: all 0.4s;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #564d9c;
+                transition: all 0.4s;
+            }
+
+            p {
+                color: #fff;
             }
         }
     }

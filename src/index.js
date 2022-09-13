@@ -92,7 +92,7 @@ root.render(
           <Route path="settings" element={<SettingsPage />} />
           <Route path="transactions" element={<TransactionsPage />} />
           <Route
-            path="transactions/detail"
+            path="transactions/detail/:id"
             element={<TransactionDetailsPage />}
           />
         </Route>

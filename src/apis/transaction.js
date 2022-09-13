@@ -10,3 +10,21 @@ export async function postTransactionData(data) {
     console.log(err.message);
   }
 }
+
+export async function getTransactionDataByUser(userId) {
+  try {
+    const response = await axios.get(`${TRANSACTION_API}/user/${userId}`);
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+export async function getTransactionDataById(id) {
+  try {
+    const response = await axios.get(`${TRANSACTION_API}/${id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+}

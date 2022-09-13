@@ -1,7 +1,6 @@
-import React from "react";
-import "./styles.css";
 import TransactionDetailContent from "./TransactionDetailContent";
 import TransactionDetailHeader from "./TransactionDetailHeader";
+import "./styles.scss";
 
 export default function TransactionDetailComponents() {
   return (

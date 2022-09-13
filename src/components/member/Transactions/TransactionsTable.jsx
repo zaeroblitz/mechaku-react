@@ -1,79 +1,112 @@
-import React from "react";
-import ProductSample1 from "../../../assets/images/featured-1.jpg";
-import ProductSample2 from "../../../assets/images/featured-2.jpg";
-import ProductSample3 from "../../../assets/images/featured-3.jpg";
-import ProductSample4 from "../../../assets/images/featured-4.jpg";
-import ProductSample5 from "../../../assets/images/featured-5.jpg";
+import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { GridLoader } from "react-spinners";
 import TransactionItem from "./TransactionItem";
 
 export default function TransactionsTable() {
+  const navigate = useNavigate();
+  const userTransactions = useSelector((state) => state.transactions);
+  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+
+  const handleTransactionCardClick = (id) => {
+    navigate(`/member/transactions/detail/${id}`);
+  };
+
+  const showTransactionItems = () => {
+    if (!userTransactions.loading && userTransactions.data.length) {
+      return userTransactions.data.map((transaction) => {
+        return (
+          <div
+            className="transactions-list"
+            key={transaction._id}
+            onClick={() => handleTransactionCardClick(transaction._id)}
+          >
+            {transaction.products.map((product, index) => {
+              return (
+                <TransactionItem
+                  key={product._id}
+                  thumbnail={`${PRODUCT_THUMBNAIL_URL}/${product.details.images[0]}`}
+                  name={product.name}
+                  category={product.category.name}
+                  grade={product.grade.name}
+                  amount={transaction.cartItems[index].amount}
+                  price={product.details.price}
+                />
+              );
+            })}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <p className="transaction-label mb-0">Status</p>
+              <div className="transaction-status d-flex align-items-center">
+                <span
+                  className={`status-indicator ${transaction.transactionStatus.name.toLowerCase()}`}
+                ></span>
+                <p className="status-label mb-0">
+                  {transaction.transactionStatus.name}
+                </p>
+              </div>
+            </div>
+            <div className="d-flex justify-content-between align-items-center">
+              <p className="transaction-label mb-2">Total</p>
+              <p className="transaction-value mb-2">
+                <NumberFormat
+                  displayType="text"
+                  prefix="Rp. "
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  value={transaction.value}
+                />
+              </p>
+            </div>
+            <div className="d-flex justify-content-between align-items-center">
+              <p className="transaction-label mb-2">Tax</p>
+              <p className="transaction-value mb-2">
+                <NumberFormat
+                  displayType="text"
+                  prefix="Rp. "
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  value={transaction.tax}
+                />
+              </p>
+            </div>
+            <div className="d-flex justify-content-between align-items-center">
+              <p className="transaction-label mb-2">Grand Total</p>
+              <p className="transaction-grand-total mb-2">
+                <NumberFormat
+                  displayType="text"
+                  prefix="Rp. "
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  value={transaction.value + transaction.tax}
+                />
+              </p>
+            </div>
+          </div>
+        );
+      });
+    }
+  };
+
+  const showLoadingSpinner = () => {
+    if (userTransactions.loading && userTransactions.response === "loading") {
+      return (
+        <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+          <GridLoader color="#333333" />
+        </div>
+      );
+    }
+  };
+
   return (
-    <div className="overview-transactions">
+    <section className="overview-transactions">
       <h2>Latest Transactions</h2>
-      <div className="overview-transactions-table">
-        <table className="table table-borderless table-hover">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Grade</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Product Sample 1 */}
-            <TransactionItem
-              thumbnail={ProductSample1}
-              name="Astray Red Frame Kai"
-              category="Gundam"
-              grade="High Grade (HG)"
-              price="Rp. 290.000"
-              status="Pending"
-            />
-
-            {/* Product Sample 2 */}
-            <TransactionItem
-              thumbnail={ProductSample2}
-              name="Zoids Berserk Fuhrer"
-              category="Zoids"
-              grade="Perfect Grade (PG)"
-              price="Rp 1.137.000"
-              status="Success"
-            />
-
-            {/* Product Sample 3 */}
-            <TransactionItem
-              thumbnail={ProductSample3}
-              name="Wargreymon Amplified"
-              category="Digimon"
-              grade="Master Grade (MG)"
-              price="Rp 590.000"
-              status="Success"
-            />
-
-            {/* Product Sample 4 */}
-            <TransactionItem
-              thumbnail={ProductSample4}
-              name="Victory Two Assault Buster"
-              category="Gundam"
-              grade="High Grade (HG)"
-              price="Rp 880.000"
-              status="Failed"
-            />
-
-            {/* Product Sample 5 */}
-            <TransactionItem
-              thumbnail={ProductSample5}
-              name="Epyon Ew"
-              category="Gundam"
-              grade="High Grade (HG)"
-              price="Rp 1.290.000"
-              status="Pending"
-            />
-          </tbody>
-        </table>
+      <div className="transactions-container">
+        {showLoadingSpinner()}
+        {!userTransactions.loading &&
+          userTransactions.data.length &&
+          showTransactionItems()}
       </div>
-    </div>
+    </section>
   );
 }

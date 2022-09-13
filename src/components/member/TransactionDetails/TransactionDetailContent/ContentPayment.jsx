@@ -1,29 +1,64 @@
-import React from "react";
+import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 
 export default function ContentPayment() {
+  const transaction = useSelector((state) => state.selectedTransaction);
+
   return (
-    <div className="content-payment">
-      <p className="content-payment-header">Payment Details</p>
-      <div className="content-payment-value d-flex justify-content-between">
-        <p className="label">Type</p>
-        <p className="value">Transfer</p>
-      </div>
-      <div className="content-payment-value d-flex justify-content-between">
-        <p className="label">Bank Name</p>
-        <p className="value">Bank XYZ</p>
-      </div>
-      <div className="content-payment-value d-flex justify-content-between">
-        <p className="label">Bank Account Name</p>
-        <p className="value">Zaero Blitz</p>
-      </div>
-      <div className="content-payment-value d-flex justify-content-between">
-        <p className="label">Bank Number</p>
-        <p className="value">1900-2022-1945</p>
-      </div>
-      <div className="content-payment-value d-flex justify-content-between">
-        <p className="label">Price</p>
-        <p className="value price">Rp 1.190.000</p>
-      </div>
-    </div>
+    <>
+      {!transaction.loading && Object.keys(transaction.data).length !== 0 && (
+        <div className="content-payment">
+          <p className="content-payment-header">Payment Details</p>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Type</p>
+            <p className="value">Transfer</p>
+          </div>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Payment Method</p>
+            <p className="value">{transaction.data.payment.name}</p>
+          </div>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Bank Account Name</p>
+            <p className="value">{transaction.data.user.name}</p>
+          </div>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Total Price</p>
+            <p className="value">
+              <NumberFormat
+                displayType="text"
+                prefix="Rp. "
+                decimalSeparator=","
+                thousandSeparator="."
+                value={transaction.data.value}
+              />
+            </p>
+          </div>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Tax</p>
+            <p className="value">
+              <NumberFormat
+                displayType="text"
+                prefix="Rp. "
+                decimalSeparator=","
+                thousandSeparator="."
+                value={transaction.data.tax}
+              />
+            </p>
+          </div>
+          <div className="content-payment-value d-flex justify-content-between">
+            <p className="label">Grand Total</p>
+            <p className="value price">
+              <NumberFormat
+                displayType="text"
+                prefix="Rp. "
+                decimalSeparator=","
+                thousandSeparator="."
+                value={transaction.data.value + transaction.data.tax}
+              />
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

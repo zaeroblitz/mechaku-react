@@ -1,13 +1,30 @@
-import React from "react";
-import Sidebar from "components/member/Sidebar";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import TransactionDetailComponents from "components/member/TransactionDetails";
-import "./styles.css";
+import { fetchSelectedTransaction } from "features/transaction/selectedTransactionSlice";
 
 export default function TransactionDetailsPage() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!auth.isLogin && !auth.token) {
+      navigate("/");
+    } else {
+      dispatch(fetchSelectedTransaction(id));
+    }
+  }, [auth, navigate, dispatch, id]);
+
   return (
-    <div className="member-transaction-details w-100 h-100 d-flex">
-      <Sidebar currentPage="transactions" />
+    <>
+      <Helmet>
+        <title>Mechaku Member | Settings</title>
+      </Helmet>
       <TransactionDetailComponents />
-    </div>
+    </>
   );
 }

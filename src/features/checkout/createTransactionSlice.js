@@ -8,15 +8,15 @@ const initialState = {
 };
 
 export const createTransactionData = createAsyncThunk(
-  "trannsaction/createTransactionData",
+  "createTransaction/createTransactionData",
   async (data) => {
     const response = await postTransactionData(data);
     return response.data;
   }
 );
 
-const transactionSlice = createSlice({
-  name: "transaction",
+const createTransactionSlice = createSlice({
+  name: "createTransaction",
   initialState,
   extraReducers: (builder) => {
     builder.addCase(createTransactionData.pending, (state) => {
@@ -35,4 +35,4 @@ const transactionSlice = createSlice({
   },
 });
 
-export default transactionSlice.reducer;
+export default createTransactionSlice.reducer;

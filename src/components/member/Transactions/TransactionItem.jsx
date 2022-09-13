@@ -1,49 +1,46 @@
-import React from "react";
+import NumberFormat from "react-number-format";
 
 export default function TransactionItem({
   thumbnail,
   name,
   category,
   grade,
+  amount,
   price,
-  status,
 }) {
   return (
-    <tr className="align-middle">
-      <td>
+    <div className="transaction-item row justify-content-between align-items-center">
+      <section className="product-header col-md-4">
         <div className="d-flex align-items-center">
           <img
-            className="overview-transactions-thumbnail"
+            className="product-thumbnail"
             src={thumbnail}
             width="60"
             height="60"
             alt=""
           />
-          <div className="overview-transactions-product">
+          <div className="product-header-label">
             <p className="product-name">{name}</p>
             <p className="product-category">{category}</p>
           </div>
         </div>
-      </td>
-      <td>
-        <p className="product-grade">{grade}</p>
-      </td>
-      <td>
-        <p className="product-price">{price}</p>
-      </td>
-      <td>
-        <div className="product-status d-flex align-items-center">
-          <span
-            className={`product-status-indicator ${status.toLowerCase()}`}
-          ></span>
-          <p className="product-status-text">{status}</p>
-        </div>
-      </td>
-      <td>
-        <a className="btn btn-detail-transactions" href="member">
-          Details
-        </a>
-      </td>
-    </tr>
+      </section>
+      <section className="product-grade col-md-2">
+        <p>{grade}</p>
+      </section>
+      <section className="product-amount col-md-2">
+        <p>{amount}</p>
+      </section>
+      <section className="product-price col-md-2 text-end">
+        <NumberFormat
+          displayType="text"
+          prefix="Rp. "
+          decimalSeparator=","
+          thousandSeparator="."
+          value={amount * price}
+          className="product-price"
+        />
+      </section>
+    </div>
   );
 }

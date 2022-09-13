@@ -28,7 +28,7 @@ export default function CheckoutPage() {
   const auth = useSelector((state) => state.auth);
   const cartTotal = useSelector((state) => state.cartTotal);
   const selectedCarts = useSelector((state) => state.selectedCart.data);
-  const transaction = useSelector((state) => state.transaction);
+  const createTransaction = useSelector((state) => state.createTransaction);
 
   useEffect(() => {
     dispatch(fetchCouriersData());
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
 
   const showSweetAlert = () => {
     // Loading
-    if (transaction.loading && !transaction.error) {
+    if (createTransaction.loading && !createTransaction.error) {
       Swal.fire({
         title: "Loading...",
         text: "Please wait a moment",
@@ -74,13 +74,13 @@ export default function CheckoutPage() {
 
     // Success
     if (
-      !transaction.loading &&
-      !transaction.error &&
-      transaction.data.length !== 0
+      !createTransaction.loading &&
+      !createTransaction.error &&
+      createTransaction.data.length !== 0
     ) {
       Swal.fire({
         title: "Success!",
-        text: "Successfully made a transaction",
+        text: "Successfully made a createTransaction",
         icon: "success",
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
     }
 
     // Error
-    if (!transaction.loading && transaction.error) {
+    if (!createTransaction.loading && createTransaction.error) {
       Swal.fire({
         title: "Error",
         text: "Something went wrong",

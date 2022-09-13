@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createTransactionData } from "features/checkout/transactionSlice";
+import { createTransactionData } from "features/checkout/createTransactionSlice";
 import "./styles.scss";
 
 export default function CompleteCheckoutButton() {

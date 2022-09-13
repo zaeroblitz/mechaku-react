@@ -1,8 +1,19 @@
-import React from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import SuccessIcon from "assets/icons/success-icon.png";
 import "./styles.css";
 
 export default function SuccessCheckoutPage() {
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!auth.isLogin && !auth.token) {
+      navigate("/");
+    }
+  }, [auth, navigate]);
+
   return (
     <div className="success-container">
       <div className="success-content">
@@ -19,7 +30,7 @@ export default function SuccessCheckoutPage() {
         </div>
         <div className="success-content-buttons">
           <div className="d-flex flex-column justify-content-center align-items-center">
-            <a className="btn btn-dashboard" href="/">
+            <a className="btn btn-dashboard" href="/member">
               My Dashboard
             </a>
             <a className="btn btn-shop" href="/shop">
