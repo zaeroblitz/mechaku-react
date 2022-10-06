@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GRADE_URL = "http://localhost:8000/api/grade";
+const GRADE_URL = "https://mechaku-server.zaerodev.my.id/api/grade";
 
 export async function getAllGrades() {
   try {

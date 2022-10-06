@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PRODUCT_URL = "http://localhost:8000/api/product";
+const PRODUCT_URL = "https://mechaku-server.zaerodev.my.id/api/product";
 
 export async function getAllProducts() {
   try {

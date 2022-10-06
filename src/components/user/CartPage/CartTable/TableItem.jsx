@@ -35,7 +35,8 @@ export default function TableItem({
   const [value, setValue] = useState(amount);
   const [itemPrice, setItemPrice] = useState(amount * price);
   const dispatch = useDispatch();
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
   const auth = useSelector((state) => state.auth);
   const data = {
     token: auth.token,

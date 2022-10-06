@@ -6,7 +6,8 @@ import "./styles.scss";
 export default function ChooseCourier() {
   const dispatch = useDispatch();
   const couriers = useSelector((state) => state.couriers);
-  const COURIER_THUMBNAIL_URL = "http://localhost:8000/uploads/couriers";
+  const COURIER_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/couriers";
 
   const handleRadioChecked = (e) => {
     if (e.target.checked) {

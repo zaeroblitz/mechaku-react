@@ -71,7 +71,7 @@ export default function EditBrand() {
     } else if (data.thumbnail) {
       return (
         <img
-          src={`http://localhost:8000/uploads/brands/${data.thumbnail}`}
+          src={`https://mechaku-server.zaerodev.my.id/uploads/brands/${data.thumbnail}`}
           alt=""
           className="preview-thumbnail"
         />

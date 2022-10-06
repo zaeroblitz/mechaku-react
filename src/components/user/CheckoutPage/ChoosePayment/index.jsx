@@ -6,7 +6,8 @@ import "./styles.scss";
 export default function ChoosePayment() {
   const dispatch = useDispatch();
   const payments = useSelector((state) => state.payments);
-  const PAYMENT_THUMNAIL_URL = "http://localhost:8000/uploads/payments";
+  const PAYMENT_THUMNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/payments";
 
   const handleRadioChecked = (e) => {
     if (e.target.checked) {

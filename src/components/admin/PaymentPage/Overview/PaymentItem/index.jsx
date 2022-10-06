@@ -10,7 +10,8 @@ export default function PaymentItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const payments = useSelector((state) => state.payments);
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/payments";
+  const THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/payments";
 
   const handleEditButton = () => {
     navigate(`/admin/payments/edit/${id}`);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const USER_URL = "http://localhost:8000/api/user";
-const AUTH_URL = "http://localhost:8000/auth/sign-in";
+const USER_URL = "https://mechaku-server.zaerodev.my.id/api/user";
+const AUTH_URL = "https://mechaku-server.zaerodev.my.id/auth/sign-in";
 
 export async function setSignIn(data) {
   try {

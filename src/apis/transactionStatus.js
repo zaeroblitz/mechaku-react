@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const TRANSACTION_STATUS_API = "http://localhost:8000/api/transaction-status";
+const TRANSACTION_STATUS_API =
+  "https://mechaku-server.zaerodev.my.id/api/transaction-status";
 
 export async function getAllTransactionStatus() {
   try {

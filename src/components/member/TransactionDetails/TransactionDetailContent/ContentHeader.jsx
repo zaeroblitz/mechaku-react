@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 
 export default function ContentHeader() {
   const transaction = useSelector((state) => state.selectedTransaction);
-  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const PRODUCT_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   return (
     <>

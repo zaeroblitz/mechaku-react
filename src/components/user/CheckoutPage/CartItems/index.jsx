@@ -4,7 +4,8 @@ import "./styles.scss";
 
 export default function CartItems() {
   const selectedCarts = useSelector((state) => state.selectedCart.data);
-  const PRODUCT_THUMBAIL_URL = "http://localhost:8000/uploads/products";
+  const PRODUCT_THUMBAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   const showProductOrderedItem = () => {
     if (selectedCarts.length) {

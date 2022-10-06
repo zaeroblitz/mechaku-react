@@ -18,7 +18,8 @@ export default function ProductItem({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products);
-  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const PRODUCT_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   const handleEditButton = () => {
     navigate(`/admin/products/edit/${id}`);

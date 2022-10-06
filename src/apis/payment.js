@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PAYMENT_API = "http://localhost:8000/api/payment";
+const PAYMENT_API = "https://mechaku-server.zaerodev.my.id/api/payment";
 
 export async function getAllPayments() {
   try {

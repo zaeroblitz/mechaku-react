@@ -11,7 +11,7 @@ export default function SettingsComponent() {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const AVATAR_URL = "http://localhost:8000/uploads/users";
+  const AVATAR_URL = "https://mechaku-server.zaerodev.my.id/uploads/users";
 
   useEffect(() => {
     if (auth.isLogin && auth.token && Object.keys(auth.user).length) {

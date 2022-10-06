@@ -16,7 +16,8 @@ export default function EditGradeComponents() {
   const navigate = useNavigate();
   const grades = useSelector((state) => state.grades);
   const selectedGrade = useSelector((state) => state.selectedGrade);
-  const GRADE_THUMBNAIL_URL = "http://localhost:8000/uploads/grades";
+  const GRADE_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/grades";
 
   useEffect(() => {
     if (

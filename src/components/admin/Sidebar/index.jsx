@@ -24,7 +24,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
   const tokenBase64 = Cookies.get("token");
-  const AVATAR_URL = "http://localhost:8000/uploads/users";
+  const AVATAR_URL = "https://mechaku-server.zaerodev.my.id/uploads/users";
 
   useEffect(() => {
     if (tokenBase64) {

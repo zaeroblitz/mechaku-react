@@ -1,5 +1,5 @@
 import axios from "axios";
-const TRANSACTION_API = "http://localhost:8000/api/transaction";
+const TRANSACTION_API = "https://mechaku-server.zaerodev.my.id/api/transaction";
 
 export async function postTransactionData(data) {
   try {

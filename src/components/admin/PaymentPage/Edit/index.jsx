@@ -16,7 +16,7 @@ export default function EditPaymentComponents() {
   const navigate = useNavigate();
   const payments = useSelector((state) => state.payments);
   const selectedPayment = useSelector((state) => state.selectedPayment);
-  const THUMBNAIL_URL = `http://localhost:8000/uploads/payments/${data.thumbnail}`;
+  const THUMBNAIL_URL = `https://mechaku-server.zaerodev.my.id/uploads/payments/${data.thumbnail}`;
 
   useEffect(() => {
     if (

@@ -6,7 +6,7 @@ import { cleanedUp } from "features/auth/authSlice";
 export default function Auth() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const AVATAR_URL = "http://localhost:8000/uploads/users";
+  const AVATAR_URL = "https://mechaku-server.zaerodev.my.id/uploads/users";
   const userData = useSelector((state) => state.auth);
   const cartData = useSelector((state) => state.carts);
 

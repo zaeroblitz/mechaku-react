@@ -3,7 +3,7 @@ import GalleryItem from "./GalleryItem";
 import "./styles.scss";
 
 export default function Thumbnail({ images }) {
-  const IMAGE_URL = "http://localhost:8000/uploads/products";
+  const IMAGE_URL = "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   const gallery = images.map((image) => {
     return `${IMAGE_URL}/${image}`;

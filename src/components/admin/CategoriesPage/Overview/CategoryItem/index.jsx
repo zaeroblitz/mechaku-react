@@ -9,7 +9,8 @@ import {
 export default function CategoryItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/categories";
+  const THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/categories";
   const categories = useSelector((state) => state.categories);
 
   const handleEditButton = () => {

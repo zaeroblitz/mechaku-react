@@ -7,7 +7,8 @@ export default function BrandItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const brands = useSelector((state) => state.brands);
-  const BRAND_THUMBNAIL = "http://localhost:8000/uploads/brands";
+  const BRAND_THUMBNAIL =
+    "https://mechaku-server.zaerodev.my.id/uploads/brands";
 
   const handleEditButton = () => {
     navigate(`/admin/brands/edit/${id}`);

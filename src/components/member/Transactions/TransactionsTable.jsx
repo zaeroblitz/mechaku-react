@@ -7,7 +7,8 @@ import TransactionItem from "./TransactionItem";
 export default function TransactionsTable() {
   const navigate = useNavigate();
   const userTransactions = useSelector((state) => state.transactions);
-  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const PRODUCT_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   const handleTransactionCardClick = (id) => {
     navigate(`/member/transactions/detail/${id}`);

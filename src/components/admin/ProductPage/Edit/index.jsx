@@ -17,7 +17,8 @@ export default function EditProductComponents() {
   const categories = useSelector((state) => state.categories);
   const brands = useSelector((state) => state.brands);
   const grades = useSelector((state) => state.grades);
-  const PRODUCT_THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const PRODUCT_THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   const handleNameChange = (e) => {
     setNewData({

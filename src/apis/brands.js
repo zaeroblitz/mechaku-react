@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BRAND_API = "http://localhost:8000/api/brand";
+const BRAND_API = "https://mechaku-server.zaerodev.my.id/api/brand";
 
 export async function createBrand(data) {
   try {

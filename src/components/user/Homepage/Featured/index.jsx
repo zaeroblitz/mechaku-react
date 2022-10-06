@@ -8,7 +8,8 @@ import "./styles.scss";
 export default function Featured() {
   const dispatch = useDispatch();
   const featuredProducts = useSelector((state) => state.featuredProducts);
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/products";
+  const THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   useEffect(() => {
     dispatch(fetchFeaturedProducts());

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const COURIER_API = "http://localhost:8000/api/courier";
+const COURIER_API = "https://mechaku-server.zaerodev.my.id/api/courier";
 
 export async function getAllCouriersData() {
   try {

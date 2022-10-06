@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CATEGORY_URL = "http://localhost:8000/api/category";
+const CATEGORY_URL = "https://mechaku-server.zaerodev.my.id/api/category";
 
 export async function getAllCategories() {
   try {

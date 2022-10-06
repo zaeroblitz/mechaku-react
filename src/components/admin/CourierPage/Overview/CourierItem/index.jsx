@@ -10,7 +10,8 @@ export default function CourierItem({ id, no, name, thumbnail }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const couriers = useSelector((state) => state.couriers);
-  const THUMBNAIL_URL = "http://localhost:8000/uploads/couriers";
+  const THUMBNAIL_URL =
+    "https://mechaku-server.zaerodev.my.id/uploads/couriers";
 
   const handleEditButton = () => {
     navigate(`/admin/couriers/edit/${id}`);

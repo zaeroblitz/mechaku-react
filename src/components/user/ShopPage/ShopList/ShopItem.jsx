@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 
 export default function ShopItem({ id, name, thumbnail, price }) {
   const navigate = useNavigate();
-  const THUMBAIL_URL = "http://localhost:8000/uploads/products";
+  const THUMBAIL_URL = "https://mechaku-server.zaerodev.my.id/uploads/products";
 
   return (
     <div

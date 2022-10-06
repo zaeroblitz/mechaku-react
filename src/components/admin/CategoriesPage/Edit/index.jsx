@@ -16,7 +16,7 @@ export default function EditCategory() {
   const navigate = useNavigate();
   const categories = useSelector((state) => state.categories);
   const selectedCategory = useSelector((state) => state.selectedCategory);
-  const THUMBNAIL_URL = `http://localhost:8000/uploads/categories/${data.thumbnail}`;
+  const THUMBNAIL_URL = `https://mechaku-server.zaerodev.my.id/uploads/categories/${data.thumbnail}`;
 
   useEffect(() => {
     if (

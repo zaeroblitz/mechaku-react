@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CART_API = "http://localhost:8000/api/carts";
+const CART_API = "https://mechaku-server.zaerodev.my.id/api/carts";
 
 export async function addCartItem(token, data) {
   try {

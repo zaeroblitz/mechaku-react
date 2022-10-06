@@ -16,7 +16,7 @@ export default function EditCourierComponents() {
   const navigate = useNavigate();
   const couriers = useSelector((state) => state.couriers);
   const selectedCourier = useSelector((state) => state.selectedCourier);
-  const THUMBNAIL_URL = `http://localhost:8000/uploads/couriers/${data.thumbnail}`;
+  const THUMBNAIL_URL = `https://mechaku-server.zaerodev.my.id/uploads/couriers/${data.thumbnail}`;
 
   useEffect(() => {
     if (
